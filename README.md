@@ -1,2 +1,2 @@
-# JustClean
-Web application to hire cleaners
+# JustClean-React
+Front end web application to hire cleaners
