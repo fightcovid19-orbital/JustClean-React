@@ -21,7 +21,8 @@ class home extends Component {
             .catch(err => console.log(err))
     }
     render() {
-        let recentCleanersMarkup = this.state.cleaners ? (this.state.cleaners.map(cleaner => <Cleaner cleaner={cleaner} />))
+        let recentCleanersMarkup = this.state.cleaners
+            ? (this.state.cleaners.map(cleaner => <Cleaner key={cleaner.cleanerId} cleaner={cleaner} />))
             : <p>Loading...</p>
         return (
             <Grid container spacing={16}>

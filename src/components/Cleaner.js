@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import withStyle from '@material-ui/core/styles/withStyles'
-import Link from 'react-router-dom/Link'
+import { Link } from 'react-router-dom'
+// import dayjs from 'dayjs'
+// import relativeTime from 'dayjs/plugin/relativeTime'
 
 // MUI stuff
 import Card from '@material-ui/core/Card'
@@ -24,6 +26,7 @@ const style = {
 
 class Cleaner extends Component {
     render() {
+
         const { classes, cleaner: { imageUrl, cleanerName, likeCount, unlikeCount, hiredCount } } = this.props
         return (
             <Card className={classes.card}>

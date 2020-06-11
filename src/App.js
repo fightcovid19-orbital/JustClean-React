@@ -15,15 +15,15 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       light: '#33c9dc',
-      main: '#ff9800',
+      main: '#ff9800', // orange colour Navbar
       dark: '#008394',
-      contrastText: '#fff', // white colour font
+      contrastText: '#000', // black colour font
     },
     secondary: {
       light: '#ff6333',
       main: '#ff3d00',
       dark: '#b22a00',
-      contrastText: '#fff',
+      contrastText: '#fff', // white colour font
     },
   },
   typography: {
