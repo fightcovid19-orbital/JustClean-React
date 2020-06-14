@@ -29,7 +29,7 @@ export const getCustomerData = () => dispatch => {
         .catch(err => console.log(err));
 };
 
-export const signupUser = (newUserData, history) => dispatch => {
+export const signupUser = (newUserData, history) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios.post('/signup', newUserData)
         .then(res => {
