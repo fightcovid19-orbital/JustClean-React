@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Cleaner from '../components/Cleaner'
+import Profile from '../components/Profile'
 
 // MUI stuff
 import Grid from '@material-ui/core/Grid'
@@ -27,7 +28,7 @@ class home extends Component {
         return (
             <Grid container spacing={16}>
                 <Grid item sm={4} xs={12}>
-                    Profile...
+                    <Profile />
                 </Grid>
                 <Grid item sm={8} xs={12}>
                     {recentCleanersMarkup}

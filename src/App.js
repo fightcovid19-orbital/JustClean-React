@@ -27,11 +27,11 @@ if (token) {
   console.log(decodedToken);
   if (decodedToken.exp * 1000 < Date.now()) { // inside decodedtoken has exp as expired time
     window.location.href = '/login';
-    store.dispatch(logoutUser);
+    store.dispatch(logoutUser());
   } else {
     store.dispatch({ type: SET_AUTHENTICATED });
     axios.defaults.headers.common['Authorization'] = token;
-    store.dispatch(getCustomerData); // not yet for cleaner app interface
+    store.dispatch(getCustomerData()); // not yet for cleaner app interface
   }
 }
 function App() {
