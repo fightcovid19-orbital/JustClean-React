@@ -23,10 +23,9 @@ const style = {
         objectFit: 'cover'
     }
 }
-
+// show image, name, location, likecount, unlikecount and hiredcount
 class Cleaner extends Component {
     render() {
-
         const { classes, cleaner: { imageUrl, cleanerName, likeCount, unlikeCount, hiredCount } } = this.props
         return (
             <Card className={classes.card}>
