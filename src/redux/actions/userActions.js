@@ -66,4 +66,13 @@ export const uploadImage = (formData) => (dispatch) => {
             dispatch(getCustomerData())
         })
         .catch(err => console.log(err))
+};
+
+export const editUserDetails = (userDetails) => (dispatch) => {
+    dispatch({ type: LOADING_USER });
+    axios.post('/customer', userDetails)
+        .then(() => {
+            dispatch(getCustomerData());
+        })
+        .catch(err => console.log(err));
 }
