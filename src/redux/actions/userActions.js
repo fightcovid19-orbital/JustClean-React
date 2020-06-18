@@ -7,6 +7,8 @@ export const loginUser = (userData, history) => dispatch => {
         .then(res => {
             setAuthorizationHeader(res.data.token);
             dispatch(getCustomerData()); // to get only customer data: lack for getting cleaner data for cleaner app interface
+            // rough idea: if userData.type === customer, getcustomerdata(); 
+            // if userData.type === cleaner, getCleanerdata()
             dispatch({ type: CLEAR_ERRORS })
             history.push('/'); // redirect to home page
         })

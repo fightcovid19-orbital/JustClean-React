@@ -15,8 +15,6 @@ import Button from '@material-ui/core/Button';
 // Icons
 import EditIcon from '@material-ui/icons/Edit'
 
-
-
 const styles = (theme) => ({
     ...theme.spreadThis,
     button: {

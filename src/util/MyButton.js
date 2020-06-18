@@ -1,4 +1,4 @@
-// all tooltip change to this button
+// all tooltips change to MyButton
 
 import React from 'react'
 

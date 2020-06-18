@@ -3,27 +3,21 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Cleaner from '../components/Cleaner'
 import Profile from '../components/Profile'
-
+import PropTypes from 'prop-types'
 // MUI stuff
 import Grid from '@material-ui/core/Grid'
+// Redux 
+import { connect } from 'react-redux'
+import { getCleaners } from '../redux/actions/dataActions'
 
 class home extends Component {
-    state = {
-        cleaners: null
-    }
     componentDidMount() {
-        axios.get('/cleaners')
-            .then(res => {
-                console.log(res.data)
-                this.setState({
-                    cleaners: res.data
-                })
-            })
-            .catch(err => console.log(err))
+        this.props.getCleaners();
     }
     render() {
-        let recentCleanersMarkup = this.state.cleaners
-            ? (this.state.cleaners.map(cleaner => <Cleaner key={cleaner.cleanerId} cleaner={cleaner} />))
+        const { cleaners, loading } = this.props.data;
+        let recentCleanersMarkup = !loading
+            ? cleaners.map(cleaner => <Cleaner key={cleaner.cleanerId} cleaner={cleaner} />)
             : <p>Loading...</p>
         return (
             <Grid container spacing={16}>
@@ -39,4 +33,13 @@ class home extends Component {
     }
 }
 
-export default home
+home.propTypes = {
+    getCleaners: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    data: state.data
+})
+
+export default connect(mapStateToProps, { getCleaners })(home)
