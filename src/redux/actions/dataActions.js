@@ -1,4 +1,5 @@
 import { SET_CLEANER, SET_CLEANERS, LIKE_CLEANER, CANCELLIKE_CLEANER, LOADING_DATA } from '../types'
+import { getCustomerData } from './userActions'
 import axios from 'axios'
 
 // Get all cleaners
@@ -23,6 +24,8 @@ export const getCleaners = () => (dispatch) => {
 export const likeCleaner = (cleanerId) => (dispatch) => {
     axios.get(`/like/${cleanerId}`)
         .then(res => {
+            dispatch(getCustomerData()) // for checking authenticated for likebutton
+            dispatch(getCleaners()) // refresh to cleaner's likecount for home.js
             dispatch({
                 type: LIKE_CLEANER,
                 payload: res.data
@@ -34,6 +37,8 @@ export const likeCleaner = (cleanerId) => (dispatch) => {
 export const cancelLikeCleaner = (cleanerId) => (dispatch) => {
     axios.get(`/cancelLike/${cleanerId}`)
         .then(res => {
+            dispatch(getCustomerData())
+            dispatch(getCleaners())
             dispatch({
                 type: CANCELLIKE_CLEANER,
                 payload: res.data

@@ -46,6 +46,7 @@ class Cleaner extends Component {
     cancelLikeCleaner = () => {
         this.props.cancelLikeCleaner(this.props.cleaner.cleanerId);
     }
+
     render() {
         const { classes, cleaner: { imageUrl, cleanerName, likeCount, unlikeCount, hiredCount },
             user: { authenticated } } = this.props
@@ -88,7 +89,7 @@ Cleaner.propTypes = {
     user: PropTypes.object.isRequired,
     likeCleaner: PropTypes.func.isRequired,
     cancelLikeCleaner: PropTypes.func.isRequired,
-    cleaner: PropTypes.object.isRequired, // Passed from home
+    cleaner: PropTypes.object.isRequired, // Passed from home, which is the initial cleaner state
     classes: PropTypes.object.isRequired
 }
 
