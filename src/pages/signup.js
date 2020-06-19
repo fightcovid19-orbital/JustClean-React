@@ -46,7 +46,8 @@ class signup extends Component {
             password: this.state.password,
             confirmPassword: this.state.confirmPassword,
             userName: this.state.userName,
-            type: this.state.type
+            type: this.state.type,
+            location: this.state.location
         }
         this.props.signupUser(newUserData, this.props.history);
     }
@@ -71,8 +72,7 @@ class signup extends Component {
                             value={this.state.email} onChange={this.handleChange} fullWidth
                             helperText={errors.email} error={errors.email ? true : false} />
                         
-                        <TextField id='userName' name='userName' type='text' label='Username'
-                            className={classes.textField}
+                        <TextField id='userName' name='userName' type='text' label='Username' className={classes.textField}
                             value={this.state.userName} onChange={this.handleChange} fullWidth
                             helperText={errors.userName} error={errors.userName ? true : false} />
                         
@@ -81,7 +81,7 @@ class signup extends Component {
                             value={this.state.type} onChange={this.handleChange} fullWidth
                             helperText={errors.type} error={errors.type ? true : false} />
 
-                        <TextField id='location' name='location' type='text' label="Location, e.g 'Clementi' "
+                        <TextField id='location' name='location' type='text' label="Location, e.g 'Clementi' " 
                             className={classes.textField}
                             value={this.state.location} onChange={this.handleChange} fullWidth
                             helperText={errors.location} error={errors.location ? true : false} />
