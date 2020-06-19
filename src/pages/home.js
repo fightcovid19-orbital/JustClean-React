@@ -20,7 +20,7 @@ class home extends Component {
             ? cleaners.map(cleaner => <Cleaner key={cleaner.cleanerId} cleaner={cleaner} />)
             : <p>Loading...</p>
         return (
-            <Grid container spacing={16}>
+            <Grid container spacing={2}>
                 <Grid item sm={4} xs={12}>
                     <Profile />
                 </Grid>
