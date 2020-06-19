@@ -28,6 +28,7 @@ class signup extends Component {
             confirmPassword: '',
             userName: '',
             type: '',
+            location: '',
             errors: {}
         }
     }
@@ -69,6 +70,22 @@ class signup extends Component {
                         <TextField id='email' name='email' type='email' label='Email' className={classes.textField}
                             value={this.state.email} onChange={this.handleChange} fullWidth
                             helperText={errors.email} error={errors.email ? true : false} />
+                        
+                        <TextField id='userName' name='userName' type='text' label='Username'
+                            className={classes.textField}
+                            value={this.state.userName} onChange={this.handleChange} fullWidth
+                            helperText={errors.userName} error={errors.userName ? true : false} />
+                        
+                        <TextField id='type' name='type' type='text' label="Type, e.g 'cleaner' or 'customer' "
+                            className={classes.textField}
+                            value={this.state.type} onChange={this.handleChange} fullWidth
+                            helperText={errors.type} error={errors.type ? true : false} />
+
+                        <TextField id='location' name='location' type='text' label="Location, e.g 'Clementi' "
+                            className={classes.textField}
+                            value={this.state.location} onChange={this.handleChange} fullWidth
+                            helperText={errors.location} error={errors.location ? true : false} />
+
                         <TextField id='password' name='password' type='password' label='Password' className={classes.textField}
                             value={this.state.password} onChange={this.handleChange} fullWidth
                             helperText={errors.password} error={errors.password ? true : false} />
@@ -77,14 +94,6 @@ class signup extends Component {
                             className={classes.textField}
                             value={this.state.confirmPassword} onChange={this.handleChange} fullWidth
                             helperText={errors.confirmPassword} error={errors.confirmPassword ? true : false} />
-                        <TextField id='type' name='type' type='text' label="Type, e.g 'cleaner' or 'customer' "
-                            className={classes.textField}
-                            value={this.state.type} onChange={this.handleChange} fullWidth
-                            helperText={errors.type} error={errors.type ? true : false} />
-                        <TextField id='userName' name='userName' type='text' label='Username'
-                            className={classes.textField}
-                            value={this.state.userName} onChange={this.handleChange} fullWidth
-                            helperText={errors.userName} error={errors.userName ? true : false} />
 
                         {errors.general && <Typography variant='body2' className={classes.customError}>
                             {errors.general}
