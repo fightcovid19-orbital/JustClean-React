@@ -11,6 +11,7 @@ import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+
 // Icons
 import ChatIcon from '@material-ui/icons/Chat'
 import FavouriteIcon from '@material-ui/icons/Favorite'
@@ -25,7 +26,12 @@ const style = {
         marginBottom: 20
     },
     image: {
-        minWidth: 200
+        width: 100,
+        height: 100,
+        objectFit: 'cover',
+        maxWidth: '100%',
+        borderRadius: '50%',
+        margin:15
     },
     content: {
         padding: 25,
@@ -69,11 +75,12 @@ class Cleaner extends Component {
             )
         return (
             <Card className={classes.card}>
-                <CardMedia image={imageUrl} title="Profile Image" className={classes.image} />
+                <img src={imageUrl} title="Profile Image" className={classes.image} />
                 <CardContent className={classes.content}>
                     <Typography variant="h5" component={Link} to={`/cleaners/${cleanerName}`} color='primary'>
                         {cleanerName}
                     </Typography>
+                    <br/>
                     {likeButton}
                     <span>{likeCount} Likes</span>
                     <MyButton tip='comments'>

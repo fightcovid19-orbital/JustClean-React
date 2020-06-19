@@ -106,7 +106,7 @@ class Profile extends Component {
                     <hr />
                     <div className="profile-details">
                         <MuiLink component={Link} to={`/customer/${customerName}`} color='primary' variant='h5'>
-                            @{customerName}
+                            {customerName}
                         </MuiLink>
                         <hr />
                         {bio && <Typography variant='body2'>{bio}</Typography>}
@@ -116,15 +116,6 @@ class Profile extends Component {
                             <hr />
                         </Fragment>) // fragment doesn't render anything, is to wrap something
                         }
-                        {website && (
-                            <Fragment>
-                                <LinkIcon color='primary' />
-                                <a href={website} target='_blank' rel='noopener noreferrer'>
-                                    {' '}{website}
-                                </a>
-                                <hr />
-                            </Fragment>
-                        )}
                         <CalendarToday color='primary' />{' '}
                         <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
                     </div>
