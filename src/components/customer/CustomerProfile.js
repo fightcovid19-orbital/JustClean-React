@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
-import EditDetails from './EditDetails'
-import MyButton from '../util/MyButton';
+import EditDetails from '../EditDetails'
+import MyButton from '../../util/MyButton';
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { logoutUser, uploadImage } from '../redux/actions/userActions'
+import { logoutUser, uploadImage } from '../../redux/actions/userActions'
 
 // MUI stuff
 import Button from '@material-ui/core/Button'
@@ -80,13 +80,16 @@ class Profile extends Component {
         formData.append('image', image, image.name);
         this.props.uploadImage(formData);
     }
+    
     handleEditPicture = () => {
         const fileInput = document.getElementById('imageInput');
         fileInput.click();
     }
+    
     handleLogout = () => {
         this.props.logoutUser();
     }
+
     render() {
         const { classes,
             user: { credentials: { customerName, createdAt, imageUrl, bio, website, location },
@@ -105,9 +108,9 @@ class Profile extends Component {
                     </div>
                     <hr />
                     <div className="profile-details">
-                        <MuiLink component={Link} to={`/customer/${customerName}`} color='primary' variant='h5'>
+                        <Typography variant='h5'>
                             {customerName}
-                        </MuiLink>
+                        </Typography>
                         <hr />
                         {bio && <Typography variant='body2'>{bio}</Typography>}
                         <hr />

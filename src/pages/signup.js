@@ -32,6 +32,7 @@ class signup extends Component {
             errors: {}
         }
     }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.UI.errors) {
             this.setState({
@@ -39,6 +40,7 @@ class signup extends Component {
             })
         }
     }
+
     handleSubmit = (event) => {
         event.preventDefault();
         const newUserData = {
@@ -51,11 +53,13 @@ class signup extends Component {
         }
         this.props.signupUser(newUserData, this.props.history);
     }
+
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         })
     }
+    
     render() {
         const { classes, UI: { loading } } = this.props;
         const { errors } = this.state;

@@ -14,7 +14,7 @@ import { logoutUser, getCustomerData } from './redux/actions/userActions'
 import Navbar from './components/Navbar';
 import AuthRoute from './util/AuthRoute'
 // Pages
-import home from './pages/home';
+import customer from './pages/customer';
 import login from './pages/login';
 import signup from './pages/signup';
 import cleaner from './pages/cleaner';
@@ -35,6 +35,7 @@ if (token) {
     store.dispatch(getCustomerData()); // not yet for cleaner app interface
   }
 }
+
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
@@ -44,7 +45,7 @@ function App() {
           <Navbar />
           <div className="container">
             <Switch>
-              <Route exact path='/' component={home} />
+              <Route exact path='/' component={customer} />
               <AuthRoute exact path='/login' component={login} />
               <AuthRoute exact path='/signup' component={signup} />
               <AuthRoute exact path='/cleaner' component={cleaner} />

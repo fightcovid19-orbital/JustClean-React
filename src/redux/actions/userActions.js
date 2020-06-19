@@ -17,7 +17,7 @@ export const loginUser = (userData, history) => dispatch => {
                 type: SET_ERRORS,
                 payload: err.response.data
             });
-        })
+        });
 };
 
 export const getCustomerData = () => dispatch => {
@@ -46,7 +46,7 @@ export const signupUser = (newUserData, history) => (dispatch) => {
                 type: SET_ERRORS,
                 payload: err.response.data
             });
-        })
+        });
 };
 
 export const logoutUser = () => (dispatch) => {

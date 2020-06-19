@@ -33,6 +33,7 @@ export const likeCleaner = (cleanerId) => (dispatch) => {
         })
         .catch(err => console.log(err))
 }
+
 // unlike a cleaner
 export const cancelLikeCleaner = (cleanerId) => (dispatch) => {
     axios.get(`/cancelLike/${cleanerId}`)

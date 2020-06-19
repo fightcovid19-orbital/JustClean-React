@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
+
 // Redux stuff
 import { connect } from 'react-redux';
 import { loginUser } from '../redux/actions/userActions'
@@ -29,6 +30,7 @@ class login extends Component {
             errors: {}
         }
     }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.UI.errors) {
             this.setState({
@@ -36,6 +38,7 @@ class login extends Component {
             })
         }
     }
+
     handleSubmit = (event) => {
         event.preventDefault();
         const userData = {
@@ -45,11 +48,13 @@ class login extends Component {
         }
         this.props.loginUser(userData, this.props.history);
     }
+
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         })
     }
+    
     render() {
         const { classes, UI: { loading } } = this.props;
         const { errors } = this.state;

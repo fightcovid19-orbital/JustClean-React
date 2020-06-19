@@ -2,9 +2,11 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles'
 import MyButton from '../util/MyButton';
+
 // Redux
 import { connect } from 'react-redux'
 import { editUserDetails } from '../redux/actions/userActions'
+
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -12,6 +14,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
 // Icons
 import EditIcon from '@material-ui/icons/Edit'
 
@@ -28,24 +31,29 @@ class EditDetails extends Component {
         location: '',
         open: false
     }
+
     mapUserDetailsToState = (credentials) => {
         this.setState({
             bio: credentials.bio ? credentials.bio : '',
             location: credentials.location ? credentials.location : '',
         })
     }
+
     handleOpen = () => {
         this.setState({ open: true })
         this.mapUserDetailsToState(this.props.credentials);
     }
+
     handleClose = () => {
         this.setState({ open: false });
     }
+
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         })
     }
+
     handleSubmit = () => {
         const userDetails = {
             bio: this.state.bio,
@@ -55,10 +63,12 @@ class EditDetails extends Component {
         this.props.editUserDetails(userDetails);
         this.handleClose();
     }
+
     componentDidMount() {
         const { credentials } = this.props;
         this.mapUserDetailsToState(credentials);
     }
+
     render() {
         const { classes } = this.props;
         return (
