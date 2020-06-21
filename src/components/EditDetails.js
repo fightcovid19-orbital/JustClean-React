@@ -5,7 +5,7 @@ import MyButton from '../util/MyButton';
 
 // Redux
 import { connect } from 'react-redux'
-import { editUserDetails } from '../redux/actions/userActions'
+import { editCustomerDetails, editCleanerDetails } from '../redux/actions/userActions'
 
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog';
@@ -57,10 +57,15 @@ class EditDetails extends Component {
     handleSubmit = () => {
         const userDetails = {
             bio: this.state.bio,
-            location: this.state.location,
-            website: this.state.website
+            location: this.state.location
         }
-        this.props.editUserDetails(userDetails);
+
+        const { type } = this.props.credentials;
+        if (type === 'customer') {
+            this.props.editCustomerDetails(userDetails);
+        } else {
+            this.props.editCleanerDetails(userDetails);
+        }
         this.handleClose();
     }
 
@@ -108,7 +113,9 @@ const mapStateToProps = (state) => ({
 
 EditDetails.propTypes = {
     classes: PropTypes.object.isRequired,
-    editUserDetails: PropTypes.func.isRequired
+    credentials: PropTypes.object.isRequired,
+    editCustomerDetails: PropTypes.func.isRequired,
+    editCleanerDetails: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, { editUserDetails })(withStyles(styles)(EditDetails));
+export default connect(mapStateToProps, { editCustomerDetails, editCleanerDetails })(withStyles(styles)(EditDetails));

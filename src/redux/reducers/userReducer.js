@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
                         userHandle: state.credentials.customerName,
                         cleanerName: action.payload.cleanerName
                     }
-                    // cleanerId based on tut24
+                    // if cleanerName is not unique, can change to cleanerId
                 ]
             }
         case CANCELLIKE_CLEANER:

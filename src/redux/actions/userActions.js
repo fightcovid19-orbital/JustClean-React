@@ -6,9 +6,11 @@ export const loginUser = (userData, history) => dispatch => {
     axios.post('/login', userData)
         .then(res => {
             setAuthorizationHeader(res.data.token);
-            dispatch(getCustomerData()); // to get only customer data: lack for getting cleaner data for cleaner app interface
-            // rough idea: if userData.type === customer, getcustomerdata(); 
-            // if userData.type === cleaner, getCleanerdata()
+            if (userData.type === 'customer') {
+                dispatch(getCustomerData());
+            } else {
+                dispatch(getCleanerData())
+            }
             dispatch({ type: CLEAR_ERRORS })
             history.push('/'); // redirect to home page
         })
@@ -20,6 +22,17 @@ export const loginUser = (userData, history) => dispatch => {
         });
 };
 
+export const getCleanerData = () => dispatch => {
+    dispatch({ type: LOADING_USER })
+    axios.get('/cleaner')  // login and get cleaner data
+        .then(res => {
+            dispatch({
+                type: SET_USER,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err));
+};
 export const getCustomerData = () => dispatch => {
     dispatch({ type: LOADING_USER })
     axios.get('/customer')  // login and get customer data
@@ -37,7 +50,11 @@ export const signupUser = (newUserData, history) => (dispatch) => {
     axios.post('/signup', newUserData)
         .then(res => {
             setAuthorizationHeader(res.data.token);
-            dispatch(getCustomerData()); // to get only customer data: lack for getting cleaner data for cleaner app interface
+            if (newUserData.type === 'customer') {
+                dispatch(getCustomerData());
+            } else {
+                dispatch(getCleanerData())
+            }
             dispatch({ type: CLEAR_ERRORS })
             history.push('/'); // redirect to home page
         })
@@ -51,6 +68,7 @@ export const signupUser = (newUserData, history) => (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
     localStorage.removeItem('FBIdToken');
+    localStorage.removeItem('state');
     delete axios.defaults.headers.common['Authorization'];
     dispatch({ type: SET_UNAUTHENTICATED });
 }
@@ -61,7 +79,7 @@ const setAuthorizationHeader = (token) => {
     axios.defaults.headers.common['Authorization'] = FBIdToken;
 }
 
-export const uploadImage = (formData) => (dispatch) => {
+export const uploadCustomerImage = (formData) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios.post('/customer/image', formData)
         .then(() => {
@@ -69,12 +87,29 @@ export const uploadImage = (formData) => (dispatch) => {
         })
         .catch(err => console.log(err))
 };
+export const uploadCleanerImage = (formData) => (dispatch) => {
+    dispatch({ type: LOADING_USER });
+    axios.post('/cleaner/image', formData)
+        .then(() => {
+            dispatch(getCleanerData())
+        })
+        .catch(err => console.log(err))
+};
 
-export const editUserDetails = (userDetails) => (dispatch) => {
+// for profile site 
+export const editCustomerDetails = (userDetails) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios.post('/customer', userDetails)
         .then(() => {
             dispatch(getCustomerData());
+        })
+        .catch(err => console.log(err));
+}
+export const editCleanerDetails = (userDetails) => (dispatch) => {
+    dispatch({ type: LOADING_USER });
+    axios.post('/cleaner', userDetails)
+        .then(() => {
+            dispatch(getCleanerData());
         })
         .catch(err => console.log(err));
 }

@@ -24,8 +24,8 @@ export const getCleaners = () => (dispatch) => {
 export const likeCleaner = (cleanerId) => (dispatch) => {
     axios.get(`/like/${cleanerId}`)
         .then(res => {
-            dispatch(getCustomerData()) // for checking authenticated for likebutton
-            dispatch(getCleaners()) // refresh to cleaner's likecount for home.js
+            dispatch(getCustomerData()) // to refresh 
+            dispatch(getCleaners())
             dispatch({
                 type: LIKE_CLEANER,
                 payload: res.data

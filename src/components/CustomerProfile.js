@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
-import EditDetails from '../EditDetails'
-import MyButton from '../../util/MyButton';
+import EditDetails from './EditDetails'
+import MyButton from '../util/MyButton';
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { logoutUser, uploadImage } from '../../redux/actions/userActions'
+import { logoutUser, uploadCustomerImage } from '../redux/actions/userActions'
 
 // MUI stuff
 import Button from '@material-ui/core/Button'
@@ -22,7 +22,6 @@ import LinkIcon from '@material-ui/icons/Link'
 import CalendarToday from '@material-ui/icons/CalendarToday'
 import EditIcon from '@material-ui/icons/Edit'
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn'
-
 
 const styles = theme => ({
     paper: {
@@ -73,29 +72,30 @@ const styles = theme => ({
     }
 })
 
-class Profile extends Component {
+class CustomerProfile extends Component {
     handleImageChange = (event) => {
         const image = event.target.files[0];
         const formData = new FormData();
         formData.append('image', image, image.name);
         this.props.uploadImage(formData);
     }
-    
+
     handleEditPicture = () => {
         const fileInput = document.getElementById('imageInput');
         fileInput.click();
     }
-    
+
     handleLogout = () => {
         this.props.logoutUser();
     }
 
     render() {
-        const { classes,
+        const {
+            classes,
             user: { credentials: { customerName, createdAt, imageUrl, bio, website, location },
-                loading, authenticated
-            }
-        } = this.props
+                loading, authenticated }
+        } = this.props;
+
         let profileMarkup = !loading ? (authenticated ? (
             <Paper className={classes.paper}>
                 <div className={classes.profile}>
@@ -117,7 +117,7 @@ class Profile extends Component {
                         {location && (<Fragment>
                             <LocationOn color='primary' /> <span>{location}</span>
                             <hr />
-                        </Fragment>) // fragment doesn't render anything, is to wrap something
+                        </Fragment>)
                         }
                         <CalendarToday color='primary' />{' '}
                         <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
@@ -143,13 +143,13 @@ const mapStateToProps = (state) => ({
     user: state.user
 });
 
-const mapActionsToProps = { logoutUser, uploadImage }
+const mapActionsToProps = { logoutUser, uploadCustomerImage }
 
-Profile.propTypes = {
+CustomerProfile.propTypes = {
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     logoutUser: PropTypes.func.isRequired,
     uploadImage: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(Profile))
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(CustomerProfile))

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import withStyle from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import MyButton from '../../util/MyButton'
+import MyButton from '../util/MyButton'
 
 // MUI stuff
 import Card from '@material-ui/core/Card'
@@ -16,7 +16,7 @@ import FavouriteBorder from '@material-ui/icons/FavoriteBorder'
 
 // Redux
 import { connect } from 'react-redux'
-import { likeCleaner, cancelLikeCleaner } from '../../redux/actions/dataActions'
+import { likeCleaner, cancelLikeCleaner } from '../redux/actions/dataActions'
 
 const style = {
     card: {
@@ -29,7 +29,7 @@ const style = {
         objectFit: 'cover',
         maxWidth: '100%',
         borderRadius: '50%',
-        margin:15
+        margin: 15
     },
     content: {
         padding: 25,
@@ -38,7 +38,7 @@ const style = {
 }
 
 // show image, name, location, likecount, unlikecount and hiredcount
-class Cleaner extends Component {
+class CleanerCard extends Component {
     likedCleaner = () => {
         if (this.props.user.likes && this.props.user.likes.find((like) => like.cleanerName === this.props.cleaner.cleanerName))
             // if doens't find one, condition is false
@@ -79,7 +79,7 @@ class Cleaner extends Component {
                     <Typography variant="h5" component={Link} to={`/cleaners/${cleanerName}`} color='primary'>
                         {cleanerName}
                     </Typography>
-                    <br/>
+                    <br />
                     {likeButton}
                     <span>{likeCount} Likes</span>
                     <MyButton tip='comments'>
@@ -91,7 +91,7 @@ class Cleaner extends Component {
     }
 }
 
-Cleaner.propTypes = {
+CleanerCard.propTypes = {
     user: PropTypes.object.isRequired,
     likeCleaner: PropTypes.func.isRequired,
     cancelLikeCleaner: PropTypes.func.isRequired,
@@ -106,4 +106,4 @@ const mapStateToProps = (state) => ({
 const mapActionsToProps = {
     likeCleaner, cancelLikeCleaner
 }
-export default connect(mapStateToProps, mapActionsToProps)(withStyle(style)(Cleaner))
+export default connect(mapStateToProps, mapActionsToProps)(withStyle(style)(CleanerCard))

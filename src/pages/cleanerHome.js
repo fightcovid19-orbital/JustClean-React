@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
- 
+
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 
-import Comment from '../components/cleaner/Comment'
-import CleanerProfile from '../components/cleaner/CleanerProfile'
- 
-class cleaner extends Component {
+import Comment from '../components/CommentCard'
+import CleanerProfile from '../components/CleanerProfile'
+
+class cleanerHome extends Component {
     state = {
         comments: null
     }
-    
-    componentDidMount(){
+
+    componentDidMount() {
         axios.get('/comments')
             .then(res => {
                 this.setState({
@@ -23,13 +23,13 @@ class cleaner extends Component {
 
     render() {
         let recentCommentsMarkup = this.state.comments ? (
-            this.state.comments.map(comment => <Comment comment={comment}/>)
+            this.state.comments.map(comment => <Comment comment={comment} />)
         ) : <p>Loading...</p>
 
         return (
             <Grid container spacing={2}>
                 <Grid item sm={4} xs={12}>
-                    <CleanerProfile/>
+                    <CleanerProfile />
                 </Grid>
                 <Grid item sm={8} xs={12}>
                     {recentCommentsMarkup}
@@ -38,6 +38,5 @@ class cleaner extends Component {
         );
     }
 }
- 
- export default cleaner
- 
+
+export default cleanerHome
