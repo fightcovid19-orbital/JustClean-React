@@ -18,11 +18,12 @@ import Typography from '@material-ui/core/Typography';
 
 // Icons
 import LocationOn from '@material-ui/icons/LocationOn'
-import LinkIcon from '@material-ui/icons/Link'
 import CalendarToday from '@material-ui/icons/CalendarToday'
 import EditIcon from '@material-ui/icons/Edit'
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn'
-import FavouriteBorder from '@material-ui/icons/FavoriteBorder'
+import SatisfiedIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined'
+import DissatisfiedIcon from '@material-ui/icons/SentimentDissatisfiedOutlined'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 const styles = theme => ({
     paper: {
@@ -129,25 +130,28 @@ class CleanerProfile extends Component {
                                 <hr />
                                 {bio && <Typography variant="body2"> {bio}</Typography>}
                                 <hr />
+
                                 <Fragment>
                                     <LocationOn color="primary" />
                                     <span>{location}</span>
                                     <hr />
                                 </Fragment>
+
                                 <Fragment>
                                     <CalendarToday color="primary" />
                                     {' '}
                                     <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
                                     <hr />
                                 </Fragment>
-                                <Fragment>
-                                    <span>{hiredCount}</span>
-                                    <hr />
-                                </Fragment>
-                                <Fragment>
-                                    <FavouriteBorder color="primary" /><span>{likeCount}</span>
-                                    <span>{unlikeCount}</span>
-                                </Fragment>
+
+                                <SatisfiedIcon color="primary" /><span>{" " + likeCount + " likes"}</span>
+                                <hr />
+                                
+                                <DissatisfiedIcon color="primary" /><span>{" " + unlikeCount + " unlikes"}</span>
+                                <hr />
+                                
+                                <AccountCircleIcon color="primary" /><span>{" " + hiredCount + " hired"}</span>
+
                             </div>
                             <MyButton tip='Logout' onClick={this.handleLogout} >
                                 <KeyboardReturn color='primary' />

@@ -11,8 +11,10 @@ import Typography from '@material-ui/core/Typography'
 
 // Icons
 import ChatIcon from '@material-ui/icons/Chat'
-import FavouriteIcon from '@material-ui/icons/Favorite'
-import FavouriteBorder from '@material-ui/icons/FavoriteBorder'
+import SatisfiedIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined'
+import SatisfiedTwoTone from '@material-ui/icons/SentimentSatisfiedAltTwoTone'
+import DissatisfiedIcon from '@material-ui/icons/SentimentDissatisfiedOutlined'
+import DissatisfiedTwoTone from '@material-ui/icons/SentimentDissatisfiedTwoTone'
 
 // Redux
 import { connect } from 'react-redux'
@@ -58,17 +60,17 @@ class CleanerCard extends Component {
         const likeButton = !authenticated ? (
             <MyButton tip='Like'>
                 <Link to='/login'>
-                    <FavouriteBorder color='primary' />
+                    <SatisfiedIcon color='primary' />
                 </Link>
             </MyButton>
         ) : (
                 this.likedCleaner() ? (
                     <MyButton tip='Undo like' onClick={this.cancelLikeCleaner}>
-                        <FavouriteIcon color='primary' />
+                        <SatisfiedTwoTone color='primary' />
                     </MyButton>
                 ) : (
                         <MyButton tip='Like' onClick={this.likeCleaner}>
-                            <FavouriteBorder color='primary' />
+                            <SatisfiedIcon color='primary' />
                         </MyButton>
                     )
             )
