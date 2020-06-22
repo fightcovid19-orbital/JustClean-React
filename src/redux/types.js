@@ -13,3 +13,5 @@ export const SET_CLEANERS = 'SET_CLEANERS';
 export const SET_CLEANER = 'SET_CLEANER';
 export const LIKE_CLEANER = 'LIKE_CLEANER';
 export const CANCELLIKE_CLEANER = 'CANCELLIKE_CLEANER';
+export const SET_COMMENTS = 'SET_COMMENTS';
+export const SET_COMMENT = 'SET_COMMENT';

@@ -29,11 +29,6 @@ if (token) {
     window.location.href = '/login';
     store.dispatch(logoutUser());
   }
-  // else {
-  //   store.dispatch({ type: SET_AUTHENTICATED });
-  //   axios.defaults.headers.common['Authorization'] = token;
-  //    store.dispatch(getCustomerData()); 
-  // }
 }
 
 function App() {

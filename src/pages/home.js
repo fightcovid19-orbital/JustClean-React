@@ -11,27 +11,38 @@ import Grid from '@material-ui/core/Grid'
 
 // Redux 
 import { connect } from 'react-redux'
-import { getCleaners } from '../redux/actions/dataActions' // import action from cleanerProfile
+import { getCleaners, getComments } from '../redux/actions/dataActions'
 
 
 class home extends Component {
+    saveCleaners = () => {
+        if (this.props.user.credentials.type === 'customer') {
+            this.props.getCleaners();
+        }
+    }
+    saveComments = () => {
+        if (this.props.user.credentials.cleanerName && this.props.user.credentials.type === 'cleaner') {
+            this.props.getComments(this.props.user.credentials.cleanerName);
+        }
+    }
     componentDidMount() {
-        this.props.getCleaners();
-        // action from cleanerProfile
+        this.saveCleaners();
+        this.saveComments();
     }
 
     render() {
-        const { cleaners, loading } = this.props.data;
+        const { cleaners, loading, comments } = this.props.data;
         const { credentials: { type } } = this.props.user;
 
-        let recentCleanersMarkup = !loading
-            ? cleaners.map(cleaner => <CleanerCard key={cleaner.cleanerId} cleaner={cleaner} />)
-            : <p>Loading...</p>
-        let recentCommentsMarkup = !loading
-            ? <p>Comments...</p>
-            : <p>Loading...</p>
+        let recentCleanersMarkup = (!loading && cleaners)
+            ? cleaners.map((cleaner) => <CleanerCard key={cleaner.cleanerId} cleaner={cleaner} />)
+            : <p>Loading...</p>;
+        let recentCommentsMarkup = (!loading && comments)
+            ? comments.map((comment) => <CommentCard key={comment.commentId} comment={comment} />)
+            : <p>Loading...</p>;
         let feed = (type === 'cleaner') ? recentCommentsMarkup : recentCleanersMarkup;
         let profile = (type === 'customer') ? <CustomerProfile /> : <CleanerProfile />;
+
 
         return (
             <Grid container spacing={2}>
@@ -48,6 +59,7 @@ class home extends Component {
 
 home.propTypes = {
     getCleaners: PropTypes.func.isRequired,
+    getComments: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired
 }
@@ -57,4 +69,4 @@ const mapStateToProps = (state) => ({
     data: state.data
 })
 
-export default connect(mapStateToProps, { getCleaners })(home)
+export default connect(mapStateToProps, { getCleaners, getComments })(home)

@@ -1,8 +1,10 @@
-import { SET_CLEANERS, LIKE_CLEANER, CANCELLIKE_CLEANER, LOADING_DATA } from '../types'
+import { SET_CLEANERS, LIKE_CLEANER, CANCELLIKE_CLEANER, LOADING_DATA, SET_COMMENTS } from '../types'
 
 const initialState = {
     cleaners: [],
     cleaner: {},
+    comments: [],
+    comment: {},
     loading: false
 };
 
@@ -28,6 +30,12 @@ export default function (state = initialState, action) {
             // }
             return {
                 ...state
+            };
+        case SET_COMMENTS:
+            return {
+                ...state,
+                comments: action.payload,
+                loading: false
             };
         default:
             return state;
