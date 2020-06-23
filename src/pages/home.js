@@ -5,6 +5,8 @@ import CleanerCard from '../components/CleanerCard'
 import CommentCard from '../components/CommentCard'
 import CustomerProfile from '../components/CustomerProfile'
 import CleanerProfile from '../components/CleanerProfile'
+import CleanerSkeleton from '../util/CleanerSkeleton'
+import CommentSkeleton from '../util/CommentSkeleton'
 
 // MUI stuff
 import Grid from '@material-ui/core/Grid'
@@ -36,10 +38,10 @@ class home extends Component {
 
         let recentCleanersMarkup = (!loading && cleaners)
             ? cleaners.map((cleaner) => <CleanerCard key={cleaner.cleanerId} cleaner={cleaner} />)
-            : <p>Loading...</p>;
+            : <CleanerSkeleton />;
         let recentCommentsMarkup = (!loading && comments)
             ? comments.map((comment) => <CommentCard key={comment.commentId} comment={comment} />)
-            : <p>Loading...</p>;
+            : <CommentSkeleton />;
         let feed = (type === 'cleaner') ? recentCommentsMarkup : recentCleanersMarkup;
         let profile = (type === 'customer') ? <CustomerProfile /> : <CleanerProfile />;
 
