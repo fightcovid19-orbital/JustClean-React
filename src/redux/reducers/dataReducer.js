@@ -1,4 +1,7 @@
-import { SET_CLEANERS, LIKE_CLEANER, CANCELLIKE_CLEANER, LOADING_DATA, UNLIKE_CLEANER, CANCELUNLIKE_CLEANER, SET_COMMENTS } from '../types'
+import {
+    SET_CLEANERS, LIKE_CLEANER, CANCELLIKE_CLEANER, LOADING_DATA, UNLIKE_CLEANER, CANCELUNLIKE_CLEANER,
+    SET_COMMENTS, SET_CLEANER
+} from '../types'
 
 const initialState = {
     cleaners: [],
@@ -21,25 +24,32 @@ export default function (state = initialState, action) {
                 cleaners: action.payload,
                 loading: false
             };
+        case SET_CLEANER:
+            return {
+                ...state,
+                cleaner: action.payload
+            };
         case LIKE_CLEANER:
         case CANCELLIKE_CLEANER:
             let like_index = state.cleaners.findIndex((cleaner) => cleaner.cleanerName === action.payload.cleanerName);
             state.cleaners[like_index] = action.payload;
             if (state.cleaner.cleanerName === action.payload.cleanerName) {
-               state.cleaner = action.payload;
+                state.cleaner = action.payload;
             }
             return {
-                ...state
+                ...state,
+                loading: false
             };
         case UNLIKE_CLEANER:
         case CANCELUNLIKE_CLEANER:
             let unlike_index = state.cleaners.findIndex((cleaner) => cleaner.cleanerName === action.payload.cleanerName);
             state.cleaners[unlike_index] = action.payload;
             if (state.cleaner.cleanerName === action.payload.cleanerName) {
-                 state.cleaner = action.payload;
+                state.cleaner = action.payload;
             }
             return {
-                ...state
+                ...state,
+                loading: false
             };
         case SET_COMMENTS:
             return {

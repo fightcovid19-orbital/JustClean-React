@@ -39,7 +39,7 @@ class CommentCard extends Component {
                     <Typography variant="h5" color='primary'>
                         {userHandle}
                     </Typography>
-                    <Typography variant="body2" color="secondary">
+                    <Typography variant="body2" color="textSecondary">
                         {dayjs(createdAt).fromNow()}
                     </Typography>
                     <Typography variant="body1">

@@ -3,6 +3,7 @@ import withStyle from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import MyButton from '../util/MyButton'
+import CleanerDialog from './CleanerDialog'
 
 // MUI stuff
 import Card from '@material-ui/core/Card'
@@ -78,24 +79,24 @@ class CleanerCard extends Component {
                 </Link>
             </MyButton>
         ) : (
-            this.likedCleaner() ? (
-                <MyButton tip='Undo like' onClick={this.cancelLikeCleaner}>
-                    <SatisfiedTwoTone color='primary' />
-                </MyButton>
-            ) : (
-                    <MyButton tip='Like' onClick={this.likeCleaner}>
-                        <SatisfiedIcon color='primary' />
+                this.likedCleaner() ? (
+                    <MyButton tip='Undo like' onClick={this.cancelLikeCleaner}>
+                        <SatisfiedTwoTone color='primary' />
                     </MyButton>
-                )
+                ) : (
+                        <MyButton tip='Like' onClick={this.likeCleaner}>
+                            <SatisfiedIcon color='primary' />
+                        </MyButton>
+                    )
             )
-        
+
         const unlikeButton = !authenticated ? (
-                <MyButton tip='Unlike'>
-                    <Link to='/login'>
-                        <DissatisfiedIcon color='primary' />
-                    </Link>
-                </MyButton>
-            ) : (
+            <MyButton tip='Unlike'>
+                <Link to='/login'>
+                    <DissatisfiedIcon color='primary' />
+                </Link>
+            </MyButton>
+        ) : (
                 this.unlikedCleaner() ? (
                     <MyButton tip='Undo unlike' onClick={this.cancelUnlikeCleaner}>
                         <DissatisfiedTwoTone color='primary' />
@@ -106,7 +107,7 @@ class CleanerCard extends Component {
                         </MyButton>
                     )
             )
-        
+
         return (
             <Card className={classes.card}>
                 <img src={imageUrl} title="Profile Image" className={classes.image} />
@@ -126,6 +127,7 @@ class CleanerCard extends Component {
                     <MyButton tip='comments'>
                         <ChatIcon color='primary' />
                     </MyButton>
+                    <CleanerDialog cleanerName={cleanerName} />
                 </CardContent>
             </Card>
         )
