@@ -1,4 +1,4 @@
-import { SET_CLEANER, SET_CLEANERS, LIKE_CLEANER, CANCELLIKE_CLEANER, LOADING_DATA } from '../types'
+import { SET_CLEANER, SET_CLEANERS, LIKE_CLEANER, CANCELLIKE_CLEANER, LOADING_DATA, UNLIKE_CLEANER, CANCELUNLIKE_CLEANER } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
 
@@ -21,8 +21,8 @@ export const getCleaners = () => (dispatch) => {
 }
 
 // like a cleaner
-export const likeCleaner = (cleanerId) => (dispatch) => {
-    axios.get(`/like/${cleanerId}`)
+export const likeCleaner = (cleanerName) => (dispatch) => {
+    axios.get(`/like/${cleanerName}`)
         .then(res => {
             dispatch(getCustomerData()) // to refresh 
             dispatch(getCleaners())
@@ -34,14 +34,42 @@ export const likeCleaner = (cleanerId) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-// unlike a cleaner
-export const cancelLikeCleaner = (cleanerId) => (dispatch) => {
-    axios.get(`/cancelLike/${cleanerId}`)
+// cancel like a cleaner
+export const cancelLikeCleaner = (cleanerName) => (dispatch) => {
+    axios.get(`/cancelLike/${cleanerName}`)
         .then(res => {
             dispatch(getCustomerData())
             dispatch(getCleaners())
             dispatch({
                 type: CANCELLIKE_CLEANER,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
+}
+
+// unlike a cleaner
+export const unlikeCleaner = (cleanerName) => (dispatch) => {
+    axios.get(`/unlike/${cleanerName}`)
+        .then(res => {
+            dispatch(getCustomerData())
+            dispatch(getCleaners())
+            dispatch({
+                type: UNLIKE_CLEANER,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
+}
+
+// cancel unlike a cleaner
+export const cancelUnlikeCleaner = (cleanerName) => (dispatch) => {
+    axios.get(`/cancelUnlike/${cleanerName}`)
+        .then(res => {
+            dispatch(getCustomerData())
+            dispatch(getCleaners())
+            dispatch({
+                type: CANCELUNLIKE_CLEANER,
                 payload: res.data
             })
         })

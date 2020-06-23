@@ -1,4 +1,4 @@
-import { SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, LIKE_CLEANER, CANCELLIKE_CLEANER } from '../types';
+import { SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, LIKE_CLEANER, CANCELLIKE_CLEANER, CANCELUNLIKE_CLEANER, UNLIKE_CLEANER } from '../types';
 
 const initialState = {
     authenticated: false,
@@ -44,6 +44,22 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 likes: state.likes.filter((like) => like.cleanerName !== action.payload.cleanerName)
+            }
+        case UNLIKE_CLEANER:
+            return {
+                ...state,
+                unlikes: [
+                    ...state.unlikes,
+                    {
+                        userHandle: state.credentials.customerName,
+                        cleanerName: action.payload.cleanerName
+                    }
+                ]
+            }
+        case CANCELUNLIKE_CLEANER:
+            return {
+                ...state,
+                unlikes: state.likes.filter((unlike) => unlike.cleanerName !== action.payload.cleanerName)
             }
         default:
             return state;

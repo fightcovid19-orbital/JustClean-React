@@ -18,7 +18,7 @@ import DissatisfiedTwoTone from '@material-ui/icons/SentimentDissatisfiedTwoTone
 
 // Redux
 import { connect } from 'react-redux'
-import { likeCleaner, cancelLikeCleaner } from '../redux/actions/dataActions'
+import { likeCleaner, cancelLikeCleaner, unlikeCleaner, cancelUnlikeCleaner } from '../redux/actions/dataActions'
 
 const style = {
     card: {
@@ -48,10 +48,23 @@ class CleanerCard extends Component {
         else return false;
     };
     likeCleaner = () => {
-        this.props.likeCleaner(this.props.cleaner.cleanerId);
+        this.props.likeCleaner(this.props.cleaner.cleanerName);
     }
     cancelLikeCleaner = () => {
-        this.props.cancelLikeCleaner(this.props.cleaner.cleanerId);
+        this.props.cancelLikeCleaner(this.props.cleaner.cleanerName);
+    }
+
+    unlikedCleaner = () => {
+        if (this.props.user.unlikes && this.props.user.unlikes.find((unlike) => unlike.cleanerName === this.props.cleaner.cleanerName))
+            // if doens't find one, condition is false
+            return true;
+        else return false;
+    };
+    unlikeCleaner = () => {
+        this.props.unlikeCleaner(this.props.cleaner.cleanerName);
+    }
+    cancelUnlikeCleaner = () => {
+        this.props.cancelUnlikeCleaner(this.props.cleaner.cleanerName);
     }
 
     render() {
@@ -64,16 +77,35 @@ class CleanerCard extends Component {
                 </Link>
             </MyButton>
         ) : (
-                this.likedCleaner() ? (
-                    <MyButton tip='Undo like' onClick={this.cancelLikeCleaner}>
-                        <SatisfiedTwoTone color='primary' />
+            this.likedCleaner() ? (
+                <MyButton tip='Undo like' onClick={this.cancelLikeCleaner}>
+                    <SatisfiedTwoTone color='primary' />
+                </MyButton>
+            ) : (
+                    <MyButton tip='Like' onClick={this.likeCleaner}>
+                        <SatisfiedIcon color='primary' />
+                    </MyButton>
+                )
+            )
+        
+        const unlikeButton = !authenticated ? (
+                <MyButton tip='Unlike'>
+                    <Link to='/login'>
+                        <DissatisfiedIcon color='primary' />
+                    </Link>
+                </MyButton>
+            ) : (
+                this.unlikedCleaner() ? (
+                    <MyButton tip='Undo unlike' onClick={this.cancelUnlikeCleaner}>
+                        <DissatisfiedTwoTone color='primary' />
                     </MyButton>
                 ) : (
-                        <MyButton tip='Like' onClick={this.likeCleaner}>
-                            <SatisfiedIcon color='primary' />
+                        <MyButton tip='Unlike' onClick={this.unlikeCleaner}>
+                            <DissatisfiedIcon color='primary' />
                         </MyButton>
                     )
             )
+        
         return (
             <Card className={classes.card}>
                 <img src={imageUrl} title="Profile Image" className={classes.image} />
@@ -84,6 +116,8 @@ class CleanerCard extends Component {
                     <br />
                     {likeButton}
                     <span>{likeCount} Likes</span>
+                    {unlikeButton}
+                    <span>{unlikeCount} Unlikes</span>
                     <MyButton tip='comments'>
                         <ChatIcon color='primary' />
                     </MyButton>
@@ -97,6 +131,8 @@ CleanerCard.propTypes = {
     user: PropTypes.object.isRequired,
     likeCleaner: PropTypes.func.isRequired,
     cancelLikeCleaner: PropTypes.func.isRequired,
+    unlikeCleaner: PropTypes.func.isRequired,
+    cancelUnlikeCleaner: PropTypes.func.isRequired,
     cleaner: PropTypes.object.isRequired, // Passed from home, which is the initial cleaner state
     classes: PropTypes.object.isRequired
 }
@@ -106,6 +142,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionsToProps = {
-    likeCleaner, cancelLikeCleaner
+    likeCleaner, cancelLikeCleaner, unlikeCleaner, cancelUnlikeCleaner
 }
 export default connect(mapStateToProps, mapActionsToProps)(withStyle(style)(CleanerCard))
