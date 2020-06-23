@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import PropTypes from 'prop-types'
 
 // MUI Stuff
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -19,7 +20,7 @@ const styles = {
         objectFit: 'cover',
         maxWidth: '100%',
         borderRadius: '50%',
-        margin:15
+        margin: 15
     },
     content: {
         padding: 25,
@@ -27,30 +28,31 @@ const styles = {
     }
 };
 
-class Comment extends Component {
+class CommentCard extends Component {
     render() {
         dayjs.extend(relativeTime);
-        const { classes, comment : {body, createdAt, userImage, userHandle} } = this.props;
+        const { classes, comment: { body, createdAt, userImage, userHandle, replyCount } } = this.props;
         return (
             <Card className={classes.card}>
-                <img src={userImage} title={"Profile image"} className={classes.image}/>
-                <CardContent class={classes.content}>
-                    <Typography varient="h5">
+                <img src={userImage} title="Profile image" className={classes.image} />
+                <CardContent className={classes.content}>
+                    <Typography variant="h5" color='primary'>
                         {userHandle}
                     </Typography>
-
-                    <Typography varient="body2" color="textSecondary">
+                    <Typography variant="body2" color="secondary">
                         {dayjs(createdAt).fromNow()}
                     </Typography>
-
-                    <Typography varient="body1">
+                    <Typography variant="body1">
                         {body}
                     </Typography>
-
                 </CardContent>
             </Card>
         )
     }
 }
+CommentCard.propTypes = {
+    classes: PropTypes.object.isRequired,
+    comment: PropTypes.object.isRequired
+}
 
-export default withStyles(styles)(Comment)
+export default withStyles(styles)(CommentCard)

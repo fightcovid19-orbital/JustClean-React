@@ -1,4 +1,4 @@
-import { SET_CLEANER, SET_CLEANERS, LIKE_CLEANER, CANCELLIKE_CLEANER, LOADING_DATA, UNLIKE_CLEANER, CANCELUNLIKE_CLEANER } from '../types'
+import { SET_CLEANER, SET_CLEANERS, LIKE_CLEANER, CANCELLIKE_CLEANER, LOADING_DATA, UNLIKE_CLEANER, CANCELUNLIKE_CLEANER, SET_COMMENTS } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
 
@@ -74,4 +74,21 @@ export const cancelUnlikeCleaner = (cleanerName) => (dispatch) => {
             })
         })
         .catch(err => console.log(err))
+
+// get all the comments for one cleaner
+export const getComments = (cleanerName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.get(`/comments/${cleanerName}`)
+        .then(res => {
+            dispatch({
+                type: SET_COMMENTS,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_COMMENTS,
+                payload: []
+            })
+        })
 }
