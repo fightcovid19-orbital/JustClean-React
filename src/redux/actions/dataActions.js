@@ -74,6 +74,7 @@ export const cancelUnlikeCleaner = (cleanerName) => (dispatch) => {
             })
         })
         .catch(err => console.log(err))
+    }
 
 // get all the comments for one cleaner
 export const getComments = (cleanerName) => (dispatch) => {
@@ -91,4 +92,4 @@ export const getComments = (cleanerName) => (dispatch) => {
                 payload: []
             })
         })
-}
+    }

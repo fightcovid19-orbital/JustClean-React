@@ -15,6 +15,7 @@ import SatisfiedIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined'
 import SatisfiedTwoTone from '@material-ui/icons/SentimentSatisfiedAltTwoTone'
 import DissatisfiedIcon from '@material-ui/icons/SentimentDissatisfiedOutlined'
 import DissatisfiedTwoTone from '@material-ui/icons/SentimentDissatisfiedTwoTone'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 // Redux
 import { connect } from 'react-redux'
@@ -118,6 +119,10 @@ class CleanerCard extends Component {
                     <span>{likeCount} Likes</span>
                     {unlikeButton}
                     <span>{unlikeCount} Unlikes</span>
+                    <MyButton tip="Number of times being hired">
+                        <AccountCircleIcon color="primary" />
+                    </MyButton>
+                    <span>{hiredCount} Hired</span>
                     <MyButton tip='comments'>
                         <ChatIcon color='primary' />
                     </MyButton>
