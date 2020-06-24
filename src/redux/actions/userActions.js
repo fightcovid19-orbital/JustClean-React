@@ -1,4 +1,12 @@
-import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI, SET_UNAUTHENTICATED, LOADING_USER } from '../types';
+import { 
+    SET_USER, 
+    SET_ERRORS, 
+    CLEAR_ERRORS, 
+    LOADING_UI, 
+    SET_UNAUTHENTICATED, 
+    LOADING_USER,
+    DELETE_CLEANER
+} from '../types';
 import axios from 'axios';
 
 export const loginUser = (userData, history) => dispatch => {
@@ -87,6 +95,7 @@ export const uploadCustomerImage = (formData) => (dispatch) => {
         })
         .catch(err => console.log(err))
 };
+
 export const uploadCleanerImage = (formData) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios.post('/cleaner/image', formData)
@@ -105,11 +114,20 @@ export const editCustomerDetails = (userDetails) => (dispatch) => {
         })
         .catch(err => console.log(err));
 }
+
 export const editCleanerDetails = (userDetails) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios.post('/cleaner', userDetails)
         .then(() => {
             dispatch(getCleanerData());
+        })
+        .catch(err => console.log(err));
+}
+
+export const deleteCleaner = () => dispatch => {
+    axios.delete('/deleteCleaner')
+        .then(() => {
+            dispatch({type: DELETE_CLEANER})
         })
         .catch(err => console.log(err));
 }
