@@ -25,7 +25,7 @@ const style = (theme) => ({
     ...theme.spreadThis,
     invisibleSeparator: {
         border: 'none',
-        margin: 4
+        margin: 1
     },
     profileImage: {
         maxWidth: 200,
@@ -63,7 +63,7 @@ class CleanerDialog extends Component {
         this.setState({ open: false })
     }
     render() {
-        const { classes, cleaner: { cleanerName, createdAt, likeCount, unlikeCount, imageUrl },
+        const { classes, cleaner: { user: { cleanerName, createdAt, likeCount, unlikeCount, imageUrl, bio, location } },
             UI: { loading }
         } = this.props;
 
@@ -82,11 +82,30 @@ class CleanerDialog extends Component {
                             @{cleanerName}
                         </Typography>
                         <hr className={classes.invisibleSeparator} />
-                        <Typography variant='body2' color='textSecondary'>
+                        <Typography variant='caption' color='textSecondary'>
                             {dayjs(createdAt).format('MMMM DD YYYY')}
                         </Typography>
                         <hr className={classes.invisibleSeparator} />
-
+                        <Typography variant='h5' color='primary'>
+                            Bio: {bio}
+                        </Typography>
+                        <hr className={classes.invisibleSeparator} />
+                        <Typography variant='h5' color='primary'>
+                            Location: {location}
+                        </Typography>
+                        <hr className={classes.invisibleSeparator} />
+                        <Typography variant='h5' color='primary'>
+                            {unlikeCount} hired
+                        </Typography>
+                        <hr className={classes.invisibleSeparator} />
+                        <Typography variant='h5' color='primary'>
+                            {likeCount} likes
+                        </Typography>
+                        <hr className={classes.invisibleSeparator} />
+                        <Typography variant='h5' color='primary'>
+                            {unlikeCount} unlikes
+                        </Typography>
+                        <hr className={classes.invisibleSeparator} />
                     </Grid>
                 </Grid>
             )
