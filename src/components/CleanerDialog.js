@@ -4,11 +4,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import MyButton from '../util/MyButton';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs'
+import LikeButton from './LikeButton';
+import UnlikeButton from './UnlikeButton';
 
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -16,6 +17,7 @@ import Typography from '@material-ui/core/Typography'
 // Icons
 import CloseIcon from '@material-ui/icons/Close'
 import UnfoldMore from '@material-ui/icons/UnfoldMore'
+import ChatIcon from '@material-ui/icons/Chat'
 
 // Redux stuff
 import { connect } from 'react-redux'
@@ -34,7 +36,8 @@ const style = (theme) => ({
         objectFit: 'cover'
     },
     dialogContent: {
-        padding: 20
+        padding: 20,
+        textAlign: 'center'
     },
     closeButton: {
         position: 'absolute',
@@ -63,7 +66,7 @@ class CleanerDialog extends Component {
         this.setState({ open: false })
     }
     render() {
-        const { classes, cleaner: { user: { cleanerName, createdAt, likeCount, unlikeCount, imageUrl, bio, location } },
+        const { classes, cleaner: { user: { cleanerName, createdAt, likeCount, unlikeCount, imageUrl, bio, location, hiredCount } },
             UI: { loading }
         } = this.props;
 
@@ -82,7 +85,7 @@ class CleanerDialog extends Component {
                             @{cleanerName}
                         </Typography>
                         <hr className={classes.invisibleSeparator} />
-                        <Typography variant='caption' color='textSecondary'>
+                        <Typography variant='body2' color='textSecondary'>
                             {dayjs(createdAt).format('MMMM DD YYYY')}
                         </Typography>
                         <hr className={classes.invisibleSeparator} />
@@ -94,18 +97,17 @@ class CleanerDialog extends Component {
                             Location: {location}
                         </Typography>
                         <hr className={classes.invisibleSeparator} />
-                        <Typography variant='h5' color='primary'>
-                            {unlikeCount} hired
+                        <Typography variant='h5' color='textSecondary'>
+                            {hiredCount} hired
                         </Typography>
-                        <hr className={classes.invisibleSeparator} />
-                        <Typography variant='h5' color='primary'>
-                            {likeCount} likes
-                        </Typography>
-                        <hr className={classes.invisibleSeparator} />
-                        <Typography variant='h5' color='primary'>
-                            {unlikeCount} unlikes
-                        </Typography>
-                        <hr className={classes.invisibleSeparator} />
+
+                        <LikeButton cleanerName={cleanerName} />
+                        <span>{likeCount} likes</span>
+                        <UnlikeButton cleanerName={cleanerName} />
+                        <span>{unlikeCount} unlikes</span>
+                        <MyButton tip='comments'>
+                            <ChatIcon color='primary' />
+                        </MyButton>
                     </Grid>
                 </Grid>
             )
