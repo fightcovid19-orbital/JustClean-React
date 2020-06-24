@@ -6,6 +6,7 @@ import dayjs from 'dayjs'
 import EditDetails from './EditDetails'
 import MyButton from '../util/MyButton'
 import ProfileSkeleton from '../util/ProfleSkeleton'
+import DeleteCleaner from './DeleteCleaner'
 
 // Redux stuff
 import { connect } from 'react-redux'
@@ -65,12 +66,16 @@ class CleanerProfile extends Component {
             }
         } = this.props;
 
+        const deleteButton = <DeleteCleaner cleanerName={cleanerName}/>
+
         let cleanerProfileMarkup = !loading
             ? (authenticated
                 ? (
                     <Paper className={classes.paper}>
+                        {deleteButton}
                         <div className={classes.profile}>
                             <div className="image-wrapper">
+                                <hr/>
                                 <img src={imageUrl} alt="profile" className='profile-image' />
                                 <input type='file' id='imageInput' hidden='hidden' onChange={this.handleImageChange} />
                                 <MyButton tip='Edit profile picture' onClick={this.handleEditPicture} btnClassName='button'>

@@ -1,4 +1,14 @@
-import { SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, LIKE_CLEANER, CANCELLIKE_CLEANER, CANCELUNLIKE_CLEANER, UNLIKE_CLEANER } from '../types';
+import { 
+    SET_USER, 
+    SET_AUTHENTICATED, 
+    SET_UNAUTHENTICATED, 
+    LOADING_USER, 
+    LIKE_CLEANER, 
+    CANCELLIKE_CLEANER, 
+    CANCELUNLIKE_CLEANER, 
+    UNLIKE_CLEANER,
+    DELETE_CLEANER
+} from '../types';
 
 const initialState = {
     authenticated: false,
@@ -15,6 +25,7 @@ export default function (state = initialState, action) {
                 ...state,
                 authenticated: true
             };
+        case DELETE_CLEANER:
         case SET_UNAUTHENTICATED:
             return initialState;
         case SET_USER:

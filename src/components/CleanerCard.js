@@ -110,7 +110,7 @@ class CleanerCard extends Component {
 
         return (
             <Card className={classes.card}>
-                <img src={imageUrl} title="Profile Image" className={classes.image} />
+                <img src={imageUrl} alt="Profile Image" className={classes.image} />
                 <CardContent className={classes.content}>
                     <Typography variant="h5" component={Link} to={`/cleaners/${cleanerName}`} color='primary'>
                         {cleanerName}
