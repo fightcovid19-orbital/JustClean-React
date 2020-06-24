@@ -9,37 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
-    card: {
-        display: 'flex',
-        marginBottom: 20
-    },
-    cardContent: {
-        width: '100%',
-        flexDirection: 'column',
-        padding: 25
-    },
-    cover: {
-        width: 100,
-        height: 100,
-        objectFit: 'cover',
-        maxWidth: '100%',
-        borderRadius: '50%',
-        margin: 15
-    },
-    handle: {
-        width: 100,
-        height: 20,
-        backgroundColor: theme.palette.primary.main,
-        marginBottom: 25,
-        marginTop: 15
-    },
-    fullLine: {
-        height: 15,
-        width: 500,
-        marginBottom: 10,
-        backgroundColor: 'rgba(0,0,0,0.6)'
-    }
-
+    ...theme.spreadThis
 })
 
 const CleanerSkeleton = props => {
