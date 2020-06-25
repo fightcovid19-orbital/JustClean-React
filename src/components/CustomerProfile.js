@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import EditDetails from './EditDetails'
 import MyButton from '../util/MyButton'
-import ProfileSekelton from '../util/ProfleSkeleton'
+import ProfileSekelton from '../util/ProfileSkeleton'
 
 // Redux stuff
 import { connect } from 'react-redux'

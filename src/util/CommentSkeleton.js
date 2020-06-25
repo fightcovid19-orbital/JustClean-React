@@ -15,7 +15,7 @@ const styles = theme => ({
 const CommentSkeleton = props => {
     const { classes } = props
     
-    const content = Array.from({ length: 5 }).map((item, index) => (
+    const content = Array.from({ length: 4 }).map((item, index) => (
         <Card className={classes.card} key={index}>
             <img src={noImg} alt="profile picture" className={classes.cover} />
             <CardContent classesName={classes.cardContent}>

@@ -9,8 +9,7 @@ import {
     SET_COMMENTS, 
     CLEAR_ERRORS, 
     STOP_LOADING_UI, 
-    LOADING_UI,
-    DELETE_CLEANER
+    LOADING_UI
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'

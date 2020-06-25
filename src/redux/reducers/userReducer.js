@@ -7,7 +7,8 @@ import {
     CANCELLIKE_CLEANER, 
     CANCELUNLIKE_CLEANER, 
     UNLIKE_CLEANER,
-    DELETE_CLEANER
+    DELETE_CLEANER,
+    MARK_NOTIFICATIONS_READ
 } from '../types';
 
 const initialState = {
@@ -71,6 +72,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 unlikes: state.likes.filter((unlike) => unlike.cleanerName !== action.payload.cleanerName)
+            }
+        case MARK_NOTIFICATIONS_READ:
+            state.notifications.forEach(not => {
+                not.read = true
+            });
+            return {
+                ...state
             }
         default:
             return state;

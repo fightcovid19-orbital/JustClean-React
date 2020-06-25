@@ -5,7 +5,8 @@ import {
     LOADING_UI, 
     SET_UNAUTHENTICATED, 
     LOADING_USER,
-    DELETE_CLEANER
+    DELETE_CLEANER,
+    MARK_NOTIFICATIONS_READ
 } from '../types';
 import axios from 'axios';
 
@@ -128,6 +129,16 @@ export const deleteCleaner = () => dispatch => {
     axios.delete('/deleteCleaner')
         .then(() => {
             dispatch({type: DELETE_CLEANER})
+        })
+        .catch(err => console.log(err));
+}
+
+export const markNotificationsRead = notificationIds => dispatch => {
+    axios.post('/notifications', notificationIds)
+        .then(res => {
+            dispatch({
+                type: MARK_NOTIFICATIONS_READ
+            })
         })
         .catch(err => console.log(err));
 }
