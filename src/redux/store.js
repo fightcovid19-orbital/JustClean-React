@@ -25,7 +25,7 @@ function loadFromLocalStorage() {
 }
 const persistedState = loadFromLocalStorage();
 
-const initialState = {};
+// const initialState = {};
 
 const middleware = [thunk];
 

@@ -61,14 +61,14 @@ class CleanerProfile extends Component {
                     unlikeCount,
                     hiredCount
                 },
-                loading,
+                loadingUser,
                 authenticated
             }
         } = this.props;
 
         const deleteButton = <DeleteCleaner cleanerName={cleanerName} />
 
-        let cleanerProfileMarkup = !loading
+        let cleanerProfileMarkup = !loadingUser
             ? (authenticated
                 ? (
                     <Paper className={classes.paper}>

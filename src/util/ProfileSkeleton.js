@@ -20,7 +20,7 @@ const styles = theme => ({
         height: 20,
         backgroundColor: theme.palette.primary.main,
         width: 60,
-        margin:  '0 auto 7px auto'
+        margin: '0 auto 7px auto'
     },
     fullLine: {
         height: 15,
@@ -37,45 +37,45 @@ const styles = theme => ({
 
 const ProfileSkeleton = props => {
     const { classes, type } = props
-    let profileDetail = (type == 'cleaner') 
-        ? 
+    let profileDetail = (type === 'cleaner')
+        ?
         (
             <div className="profile-details">
-                <div className={classes.handle}/>
-                <hr/>
-                <div className={classes.fullLine}/> 
-                <div className={classes.fullLine}/> 
+                <div className={classes.handle} />
+                <hr />
+                <div className={classes.fullLine} />
+                <div className={classes.fullLine} />
                 <LocationOn color="primary" /><span>Location</span>
-                <hr/>
-                <CalendarToday color="primary"/><span>Joined Date</span>
-                <hr/>
+                <hr />
+                <CalendarToday color="primary" /><span>Joined Date</span>
+                <hr />
                 <SatisfiedIcon color="primary" /><span> 0 likes</span>
-                <hr/>              
+                <hr />
                 <DissatisfiedIcon color="primary" /><span> 0 unlikes</span>
-                <hr/>
+                <hr />
                 <AccountCircleIcon color="primary" /><span> 0 hired</span>
             </div>
         )
-        : 
+        :
         (
             <div className="profile-details">
-                <div className={classes.handle}/>
-                <hr/>
-                <div className={classes.fullLine}/> 
-                <div className={classes.fullLine}/> 
+                <div className={classes.handle} />
+                <hr />
+                <div className={classes.fullLine} />
+                <div className={classes.fullLine} />
                 <LocationOn color="primary" /><span>Location</span>
-                <hr/>
-                <CalendarToday color="primary"/><span>Joined Date</span>
+                <hr />
+                <CalendarToday color="primary" /><span>Joined Date</span>
             </div>
         )
 
     return (
-        <Paper className = {classes.paper}>
+        <Paper className={classes.paper}>
             <div className={classes.profile}>
                 <div className={"image-wrapper"}>
                     <img src={noImg} alt="profile" className="profile-image" />
                 </div>
-                <hr/>
+                <hr />
                 {profileDetail}
             </div>
         </Paper>
@@ -83,7 +83,8 @@ const ProfileSkeleton = props => {
 }
 
 ProfileSkeleton.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    type: PropTypes.string.isRequired
 }
 
 export default withStyles(styles)(ProfileSkeleton)

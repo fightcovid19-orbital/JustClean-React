@@ -1,9 +1,9 @@
-import { 
-    SET_USER, 
-    SET_ERRORS, 
-    CLEAR_ERRORS, 
-    LOADING_UI, 
-    SET_UNAUTHENTICATED, 
+import {
+    SET_USER,
+    SET_ERRORS,
+    CLEAR_ERRORS,
+    LOADING_UI,
+    SET_UNAUTHENTICATED,
     LOADING_USER,
     DELETE_CLEANER,
     MARK_NOTIFICATIONS_READ
@@ -76,6 +76,8 @@ export const signupUser = (newUserData, history) => (dispatch) => {
 };
 
 export const logoutUser = () => (dispatch) => {
+    dispatch({ type: LOADING_USER })
+    window.location.href = '/login';
     localStorage.removeItem('FBIdToken');
     localStorage.removeItem('state');
     delete axios.defaults.headers.common['Authorization'];
@@ -128,7 +130,7 @@ export const editCleanerDetails = (userDetails) => (dispatch) => {
 export const deleteCleaner = () => dispatch => {
     axios.delete('/deleteCleaner')
         .then(() => {
-            dispatch({type: DELETE_CLEANER})
+            dispatch({ type: DELETE_CLEANER })
         })
         .catch(err => console.log(err));
 }

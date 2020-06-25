@@ -2,16 +2,12 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MyButton from '../../util/MyButton';
-import { Link } from 'react-router-dom';
 
 // MUI stuff
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
 
 // Icons
 import CloseIcon from '@material-ui/icons/Close'
@@ -59,7 +55,7 @@ class CommentDialog extends Component {
         if (nextProps.UI.errors) {
             this.setState({ errors: nextProps.UI.errors })
         }
-        if (!nextProps.UI.errors && !nextProps.UI.loading) { // maybe dont have loading 
+        if (!nextProps.UI.errors && !nextProps.UI.loadingUI) { // maybe dont have loadingUI
             this.setState({ body: '' })
         }
     }
@@ -78,8 +74,7 @@ class CommentDialog extends Component {
         this.props.submitComment(this.props.cleanerName, { body: this.state.body })
     }
     render() {
-        const { classes, cleaner: { user: { cleanerName, createdAt, likeCount, unlikeCount, imageUrl, bio, location, hiredCount } },
-            UI: { loading }, authenticated
+        const { classes, UI: { loadingUI }, authenticated
         } = this.props;
         const errors = this.state.errors
 

@@ -15,7 +15,7 @@ const initialState = {
     cleaner: {},
     comments: [],
     comment: {},
-    loading: false
+    loadingData: false
 };
 
 export default function (state = initialState, action) {
@@ -23,13 +23,13 @@ export default function (state = initialState, action) {
         case LOADING_DATA:
             return {
                 ...state,
-                loading: true
+                loadingData: true
             };
         case SET_CLEANERS:
             return {
                 ...state,
                 cleaners: action.payload,
-                loading: false
+                loadingData: false
             };
         case SET_CLEANER:
             return {
@@ -45,7 +45,7 @@ export default function (state = initialState, action) {
             }
             return {
                 ...state,
-                loading: false
+                loadingData: false
             };
         case UNLIKE_CLEANER:
         case CANCELUNLIKE_CLEANER:
@@ -56,13 +56,13 @@ export default function (state = initialState, action) {
             }
             return {
                 ...state,
-                loading: false
+                loadingData: false
             };
         case SET_COMMENTS:
             return {
                 ...state,
                 comments: action.payload,
-                loading: false
+                loadingData: false
             };
         case SUBMIT_COMMENT:
             return {

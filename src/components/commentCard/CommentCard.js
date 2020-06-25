@@ -34,7 +34,7 @@ class CommentCard extends Component {
         const { classes, comment: { body, createdAt, userImage, userHandle, replyCount } } = this.props;
         return (
             <Card className={classes.card}>
-                <img src={userImage} alt="Profile image" className={classes.image} />
+                <img src={userImage} alt="Customer Profile" className={classes.image} />
                 <CardContent className={classes.content}>
                     <Typography variant="h5" color='primary'>
                         {userHandle}

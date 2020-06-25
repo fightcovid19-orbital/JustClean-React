@@ -32,17 +32,19 @@ class home extends Component {
     }
 
     render() {
-        const { cleaners, loading, comments } = this.props.data;
-        const { credentials: { type } } = this.props.user;
+        const { cleaners, loadingData, comments } = this.props.data;
+        const { credentials: { type }, loadingUser } = this.props.user;
 
-        let recentCleanersMarkup = (!loading && cleaners)
+        let recentCleanersMarkup = (!loadingData && cleaners)
             ? cleaners.map((cleaner) => <CleanerCard key={cleaner.cleanerId} cleaner={cleaner} />)
             : <CleanerSkeleton />;
-        let recentCommentsMarkup = (!loading && comments)
+        let recentCommentsMarkup = (!loadingData && comments)
             ? comments.map((comment) => <CommentCard key={comment.commentId} comment={comment} />)
             : <CommentSkeleton />;
-        let feed = (type === 'cleaner') ? recentCommentsMarkup : recentCleanersMarkup;
-        let profile = (type === 'customer') ? <CustomerProfile /> : <CleanerProfile />;
+        let feed = loadingUser ? <p>Skeleton...</p> :
+            (type === 'customer') ? recentCleanersMarkup : (type === 'cleaner') ? recentCommentsMarkup : <p>User not found, please login.</p>
+        let profile = loadingUser ? <p>Skeleton...</p> :
+            (type === 'customer') ? <CustomerProfile /> : (type === 'cleaner') ? <CleanerProfile /> : <p>User not found, please login.</p>
 
 
         return (

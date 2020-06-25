@@ -62,7 +62,7 @@ class signup extends Component {
     }
 
     render() {
-        const { classes, UI: { loading } } = this.props;
+        const { classes, UI: { loadingUI } } = this.props;
         const { errors } = this.state;
         return (
             <Grid container className={classes.form}>
@@ -103,8 +103,8 @@ class signup extends Component {
                         {errors.general && <Typography variant='body2' className={classes.customError}>
                             {errors.general}
                         </Typography>}
-                        <Button type='submit' variant='contained' color='primary' disable={loading} className={classes.button}>
-                            Sign Up {loading && (<CircularProgress size={30} className={classes.progress} />)}
+                        <Button type='submit' variant='contained' color='primary' disable={loadingUI} className={classes.button}>
+                            Sign Up {loadingUI && (<CircularProgress size={30} className={classes.progress} />)}
                         </Button>
                         <br />
                         <small>Already have an account? Login <Link to='/login'>here</Link></small>

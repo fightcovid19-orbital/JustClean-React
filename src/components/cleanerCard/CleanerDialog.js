@@ -18,7 +18,6 @@ import Typography from '@material-ui/core/Typography'
 // Icons
 import CloseIcon from '@material-ui/icons/Close'
 import UnfoldMore from '@material-ui/icons/UnfoldMore'
-import ChatIcon from '@material-ui/icons/Chat'
 
 // Redux stuff
 import { connect } from 'react-redux'
@@ -68,10 +67,10 @@ class CleanerDialog extends Component {
     }
     render() {
         const { classes, cleaner: { user: { cleanerName, createdAt, likeCount, unlikeCount, imageUrl, bio, location, hiredCount } },
-            UI: { loading }
+            UI: { loadingUI }
         } = this.props;
 
-        let dialogMarkup = loading ? (
+        let dialogMarkup = loadingUI ? (
             <div className={classes.spinnerDiv}>
                 <CircularProgress size={200} thickness={2} />
             </div>
@@ -79,7 +78,7 @@ class CleanerDialog extends Component {
             : (
                 <Grid container spacing={12}>
                     <Grid item sm={5}>
-                        <img src={imageUrl} alt='Profile Image' className={classes.profileImage} />
+                        <img src={imageUrl} alt='Cleaner Profile' className={classes.profileImage} />
                     </Grid>
                     <Grid item sm={7}>
                         <Typography component={Link} to={`/cleaner/${cleanerName}`} color='primary' variant='h5' >

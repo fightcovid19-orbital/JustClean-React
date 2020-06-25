@@ -1,11 +1,11 @@
-import { 
-    SET_USER, 
-    SET_AUTHENTICATED, 
-    SET_UNAUTHENTICATED, 
-    LOADING_USER, 
-    LIKE_CLEANER, 
-    CANCELLIKE_CLEANER, 
-    CANCELUNLIKE_CLEANER, 
+import {
+    SET_USER,
+    SET_AUTHENTICATED,
+    SET_UNAUTHENTICATED,
+    LOADING_USER,
+    LIKE_CLEANER,
+    CANCELLIKE_CLEANER,
+    CANCELUNLIKE_CLEANER,
     UNLIKE_CLEANER,
     DELETE_CLEANER,
     MARK_NOTIFICATIONS_READ
@@ -13,7 +13,7 @@ import {
 
 const initialState = {
     authenticated: false,
-    loading: false,
+    loadingUser: false,
     credentials: {},
     likes: [],
     notifications: []
@@ -32,13 +32,13 @@ export default function (state = initialState, action) {
         case SET_USER:
             return {
                 authenticated: true,
-                loading: false,
+                loadingUser: false,
                 ...action.payload
             };
         case LOADING_USER:
             return {
                 ...state,
-                loading: true
+                loadingUser: true
             };
         case LIKE_CLEANER:
             return {
