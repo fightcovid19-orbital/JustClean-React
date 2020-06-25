@@ -122,6 +122,13 @@ export default {
             width: 500,
             marginBottom: 10,
             backgroundColor: 'rgba(0,0,0,0.6)'
+        },
+        invisibleSeparator: {
+            border: 'none',
+            margin: 1
+        },
+        visibleSeparator: {
+
         }
     }
 }

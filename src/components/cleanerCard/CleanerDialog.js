@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs'
 import LikeButton from './LikeButton';
 import UnlikeButton from './UnlikeButton';
+import CommentDialog from './CommentDialog'
 
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog'
@@ -21,7 +22,7 @@ import ChatIcon from '@material-ui/icons/Chat'
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { getCleaner } from '../redux/actions/dataActions'
+import { getCleaner } from '../../redux/actions/dataActions'
 
 const style = (theme) => ({
     ...theme.spreadThis,
@@ -76,7 +77,7 @@ class CleanerDialog extends Component {
             </div>
         )
             : (
-                <Grid container spacing={16}>
+                <Grid container spacing={12}>
                     <Grid item sm={5}>
                         <img src={imageUrl} alt='Profile Image' className={classes.profileImage} />
                     </Grid>
@@ -105,9 +106,7 @@ class CleanerDialog extends Component {
                         <span>{likeCount} likes</span>
                         <UnlikeButton cleanerName={cleanerName} />
                         <span>{unlikeCount} unlikes</span>
-                        <MyButton tip='comments'>
-                            <ChatIcon color='primary' />
-                        </MyButton>
+                        <CommentDialog cleanerName={cleanerName} />
                     </Grid>
                 </Grid>
             )
@@ -133,6 +132,7 @@ class CleanerDialog extends Component {
 CleanerDialog.propTypes = {
     getCleaner: PropTypes.func.isRequired,
     cleanerName: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
     cleaner: PropTypes.object.isRequired,
     UI: PropTypes.object.isRequired,
 }

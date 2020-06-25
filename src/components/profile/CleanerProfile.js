@@ -4,13 +4,13 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import EditDetails from './EditDetails'
-import MyButton from '../util/MyButton'
-import ProfileSkeleton from '../util/ProfileSkeleton'
-import DeleteCleaner from './DeleteCleaner'
+import MyButton from '../../util/MyButton'
+import ProfileSkeleton from '../../util/ProfileSkeleton'
+import DeleteCleaner from '../DeleteCleaner'
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { logoutUser, uploadCleanerImage } from '../redux/actions/userActions'
+import { logoutUser, uploadCleanerImage } from '../../redux/actions/userActions'
 
 // MUI stuff
 import Button from '@material-ui/core/Button'
@@ -35,7 +35,7 @@ class CleanerProfile extends Component {
         const image = event.target.files[0];
         const formData = new FormData();
         formData.append('image', image, image.name);
-        this.props.uploadImage(formData);
+        this.props.uploadCleanerImage(formData);
     }
 
     handleEditPicture = () => {
@@ -66,7 +66,7 @@ class CleanerProfile extends Component {
             }
         } = this.props;
 
-        const deleteButton = <DeleteCleaner cleanerName={cleanerName}/>
+        const deleteButton = <DeleteCleaner cleanerName={cleanerName} />
 
         let cleanerProfileMarkup = !loading
             ? (authenticated
@@ -75,7 +75,7 @@ class CleanerProfile extends Component {
                         {deleteButton}
                         <div className={classes.profile}>
                             <div className="image-wrapper">
-                                <hr/>
+                                <hr />
                                 <img src={imageUrl} alt="profile" className='profile-image' />
                                 <input type='file' id='imageInput' hidden='hidden' onChange={this.handleImageChange} />
                                 <MyButton tip='Edit profile picture' onClick={this.handleEditPicture} btnClassName='button'>
@@ -106,10 +106,10 @@ class CleanerProfile extends Component {
 
                                 <SatisfiedIcon color="primary" /><span>{" " + likeCount + " likes"}</span>
                                 <hr />
-                                
+
                                 <DissatisfiedIcon color="primary" /><span>{" " + unlikeCount + " unlikes"}</span>
                                 <hr />
-                                
+
                                 <AccountCircleIcon color="primary" /><span>{" " + hiredCount + " hired"}</span>
 
                             </div>
@@ -133,7 +133,7 @@ class CleanerProfile extends Component {
                             </Button>
                         </div>
                     </Paper>
-                )) : (<ProfileSkeleton type='cleaner'/>)
+                )) : (<ProfileSkeleton type='cleaner' />)
 
         return cleanerProfileMarkup;
     }

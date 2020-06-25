@@ -1,10 +1,10 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import CleanerCard from '../components/CleanerCard'
-import CommentCard from '../components/CommentCard'
-import CustomerProfile from '../components/CustomerProfile'
-import CleanerProfile from '../components/CleanerProfile'
+import CleanerCard from '../components/cleanerCard/CleanerCard'
+import CommentCard from '../components/commentCard/CommentCard'
+import CustomerProfile from '../components/profile/CustomerProfile'
+import CleanerProfile from '../components/profile/CleanerProfile'
 import CleanerSkeleton from '../util/CleanerSkeleton'
 import CommentSkeleton from '../util/CommentSkeleton'
 
@@ -14,7 +14,6 @@ import Grid from '@material-ui/core/Grid'
 // Redux 
 import { connect } from 'react-redux'
 import { getCleaners, getComments } from '../redux/actions/dataActions'
-
 
 class home extends Component {
     saveCleaners = () => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import MyButton from '../util/MyButton'
+import MyButton from '../../util/MyButton'
 
 // Icons
 import DissatisfiedIcon from '@material-ui/icons/SentimentDissatisfiedOutlined'
@@ -9,7 +9,7 @@ import DissatisfiedTwoTone from '@material-ui/icons/SentimentDissatisfiedTwoTone
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { unlikeCleaner, cancelUnlikeCleaner } from '../redux/actions/dataActions'
+import { unlikeCleaner, cancelUnlikeCleaner } from '../../redux/actions/dataActions'
 
 export class UnlikeButton extends Component {
     unlikedCleaner = () => {

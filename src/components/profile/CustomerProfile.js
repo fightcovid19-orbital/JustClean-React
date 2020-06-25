@@ -4,12 +4,12 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import EditDetails from './EditDetails'
-import MyButton from '../util/MyButton'
-import ProfileSekelton from '../util/ProfileSkeleton'
+import MyButton from '../../util/MyButton'
+import ProfileSekelton from '../../util/ProfileSkeleton'
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { logoutUser, uploadCustomerImage } from '../redux/actions/userActions'
+import { logoutUser, uploadCustomerImage } from '../../redux/actions/userActions'
 
 // MUI stuff
 import Button from '@material-ui/core/Button'
@@ -31,7 +31,7 @@ class CustomerProfile extends Component {
         const image = event.target.files[0];
         const formData = new FormData();
         formData.append('image', image, image.name);
-        this.props.uploadImage(formData);
+        this.props.uploadCustomerImage(formData);
     }
 
     handleEditPicture = () => {
@@ -46,16 +46,16 @@ class CustomerProfile extends Component {
     render() {
         const {
             classes,
-            user: { 
-                credentials: { 
-                    customerName, 
-                    createdAt, 
-                    imageUrl, 
-                    bio, 
-                    location, 
+            user: {
+                credentials: {
+                    customerName,
+                    createdAt,
+                    imageUrl,
+                    bio,
+                    location,
                 },
-                loading, 
-                authenticated 
+                loading,
+                authenticated
             }
         } = this.props;
 
@@ -97,7 +97,7 @@ class CustomerProfile extends Component {
                 <Button variant='contained' color='primary' component={Link} to='/login'>Login </Button>
                 <Button variant='contained' color='secondary' component={Link} to='/signup'>Signup </Button>
             </div>
-        </Paper>)) : (<ProfileSekelton type='customer'/>)
+        </Paper>)) : (<ProfileSekelton type='customer' />)
         return profileMarkup;
     }
 }

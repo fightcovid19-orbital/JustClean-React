@@ -1,15 +1,17 @@
 import {
-    SET_CLEANER, 
-    SET_CLEANERS, 
-    LIKE_CLEANER, 
-    CANCELLIKE_CLEANER, 
-    LOADING_DATA, 
-    UNLIKE_CLEANER, 
+    SET_CLEANER,
+    SET_CLEANERS,
+    LIKE_CLEANER,
+    CANCELLIKE_CLEANER,
+    UNLIKE_CLEANER,
     CANCELUNLIKE_CLEANER,
-    SET_COMMENTS, 
-    CLEAR_ERRORS, 
-    STOP_LOADING_UI, 
-    LOADING_UI
+    SET_COMMENTS,
+    SET_ERRORS,
+    CLEAR_ERRORS,
+    LOADING_DATA,
+    STOP_LOADING_UI,
+    LOADING_UI,
+    SUBMIT_COMMENT
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -104,6 +106,24 @@ export const cancelUnlikeCleaner = (cleanerName) => (dispatch) => {
             })
         })
         .catch(err => console.log(err))
+}
+
+// submit a comment
+export const submitComment = (cleanerName, commentData) => (dispatch) => {
+    axios.post(`/comment/${cleanerName}`, commentData)
+        .then(res => {
+            dispatch({
+                type: SUBMIT_COMMENT,
+                payload: res.data // when submit a comment, get a comment back
+            })
+            dispatch(clearErrors())
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_ERRORS,
+                payload: err.response.data
+            })
+        })
 }
 
 // get all the comments for one cleaner

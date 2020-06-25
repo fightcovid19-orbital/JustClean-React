@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import MyButton from '../util/MyButton'
+import MyButton from '../../util/MyButton'
 
 // Icons
 import SatisfiedIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined'
@@ -9,7 +9,7 @@ import SatisfiedTwoTone from '@material-ui/icons/SentimentSatisfiedAltTwoTone'
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { likeCleaner, cancelLikeCleaner } from '../redux/actions/dataActions'
+import { likeCleaner, cancelLikeCleaner } from '../../redux/actions/dataActions'
 
 export class LikeButton extends Component {
     likedCleaner = () => {

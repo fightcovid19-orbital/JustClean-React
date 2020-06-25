@@ -1,12 +1,13 @@
 import {
-    SET_CLEANERS, 
-    LIKE_CLEANER, 
-    CANCELLIKE_CLEANER, 
-    LOADING_DATA, 
-    UNLIKE_CLEANER, 
+    SET_CLEANERS,
+    LIKE_CLEANER,
+    CANCELLIKE_CLEANER,
+    LOADING_DATA,
+    UNLIKE_CLEANER,
     CANCELUNLIKE_CLEANER,
-    SET_COMMENTS, 
-    SET_CLEANER
+    SET_COMMENTS,
+    SET_CLEANER,
+    SUBMIT_COMMENT
 } from '../types'
 
 const initialState = {
@@ -62,6 +63,14 @@ export default function (state = initialState, action) {
                 ...state,
                 comments: action.payload,
                 loading: false
+            };
+        case SUBMIT_COMMENT:
+            return {
+                ...state,
+                cleaner: {
+                    ...state.cleaner,
+                    comments: [action.payload, ...state.cleaner.comments]
+                }
             };
         default:
             return state;
