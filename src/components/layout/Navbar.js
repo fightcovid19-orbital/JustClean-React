@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import MyButton from '../../util/MyButton'
-import Notifications from '../Notifications'
+import Notifications from './Notifications'
 
 // MUI stuff
 import AppBar from '@material-ui/core/AppBar'

@@ -7,6 +7,7 @@ import CustomerProfile from '../components/profile/CustomerProfile'
 import CleanerProfile from '../components/profile/CleanerProfile'
 import CleanerSkeleton from '../util/CleanerSkeleton'
 import CommentSkeleton from '../util/CommentSkeleton'
+import ProfileSkeleton from '../util/ProfileSkeleton'
 
 // MUI stuff
 import Grid from '@material-ui/core/Grid'
@@ -41,10 +42,27 @@ class home extends Component {
         let recentCommentsMarkup = (!loadingData && comments)
             ? comments.map((comment) => <CommentCard key={comment.commentId} comment={comment} />)
             : <CommentSkeleton />;
-        let feed = loadingUser ? <p>Skeleton...</p> :
-            (type === 'customer') ? recentCleanersMarkup : (type === 'cleaner') ? recentCommentsMarkup : <p>User not found, please login.</p>
-        let profile = loadingUser ? <p>Skeleton...</p> :
-            (type === 'customer') ? <CustomerProfile /> : (type === 'cleaner') ? <CleanerProfile /> : <p>User not found, please login.</p>
+        
+        let feed, profile
+        if(loadingData) {
+            feed = <CleanerSkeleton />
+        } else if (type === 'customer') {
+            feed = recentCleanersMarkup 
+        } else if (type === 'cleaner') {
+            feed = recentCommentsMarkup 
+        } else {
+            feed = <p>User not found, please login.</p>
+        }
+            
+        if(loadingUser) {
+            profile = <ProfileSkeleton type={type}/>
+        } else if (type === 'customer') {
+            profile = <CustomerProfile />
+        } else if (type === 'cleaner') {
+            profile = <CleanerProfile />
+        } else {
+            profile = <p>User not found, please login.</p>
+        }
 
 
         return (
