@@ -23,15 +23,15 @@ import { markNotificationsRead } from '../../redux/actions/userActions';
 
 class Notifications extends Component {
     state = {
-        anchoeE1: null
+        anchorEl: null
     }
 
     handleOpen = (event) => {
-        this.setState({ anchorE1: event.target });
+        this.setState({ anchorEl: event.target });
     }
 
-    handleClose = (event) => {
-        this.setState({ anchorE1: null });
+    handleClose = () => {
+        this.setState({ anchorEl: null });
     }
 
     onMenuOpened = () => {
@@ -43,24 +43,25 @@ class Notifications extends Component {
 
     render() {
         const notifications = this.props.notifications;
-        const anchorE1 = this.state.anchoeE1;
+        const anchorEl = this.state.anchoeE1;
 
         dayjs.extend(relativeTime)
         
-        let notificationIcon;
+        let notificationsIcon;
         if(notifications && notifications.length > 0) {
-            notifications.filter(not => not.read === false).length > 0
-                ? notificationIcon = (
+            if(notifications.filter(not => not.read === false).length > 0) {
+                notificationsIcon = (
                     <Badge
                         badgeContent = {notifications.filter(not => not.read === false).length}
                         color="secondary">
                             <NotificationsIcon />
                         </Badge>
-                ) : (
-                    notificationIcon = <NotificationsIcon />
                 )
+             } else { 
+                    notificationsIcon = <NotificationsIcon />
+             }
         } else {
-            notificationIcon = <NotificationsIcon />
+            notificationsIcon = <NotificationsIcon />
         }
 
         let notificationsMarkup = notifications && notifications.length > 0
@@ -68,8 +69,8 @@ class Notifications extends Component {
                 notifications.map(not => {
                     const verb = not.type === 'like' ? 'liked' : 'replied on'
                     const time = dayjs(not.createdAt).fromNow();
-                    const iconColor = not.read ? "primary" : "secondary"
-                    const icon = not.type === 'like' 
+                    const iconColor = not.read ? 'primary' : 'secondary'
+                    const icon = (not.type === 'like')
                         ? (<SatisfiedIcon color={iconColor} style={{marginRight: 10}}/>)
                         : (<ChatIcon color={iconColor} style={{marginRight: 10}}/>)
 
@@ -95,16 +96,16 @@ class Notifications extends Component {
             <Fragment>
                 <Tooltip placement="top" title="Notifications">
                     <IconButton 
-                        aria-owns={anchorE1 ? 'simple-menu' : undefined}
+                        aria-owns={anchorEl ? 'simple-menu' : undefined}
                         aria-haspopup="true"
                         onClick={this.handleOpen}
                     >
-                        {notificationIcon}
+                        {notificationsIcon}
                     </IconButton>
                 </Tooltip>
                 <Menu 
-                    anchorE1={anchorE1}
-                    open={Boolean(anchorE1)}
+                    anchorE1={anchorEl}
+                    open={Boolean(anchorEl)}
                     onClose={this.handleClose}
                     onEntered={this.onMenuOpened}
                 >
