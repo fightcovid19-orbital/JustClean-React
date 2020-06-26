@@ -81,19 +81,19 @@ class CleanerDialog extends Component {
                         <img src={imageUrl} alt='Cleaner Profile' className={classes.profileImage} />
                     </Grid>
                     <Grid item sm={7}>
-                        <Typography component={Link} to={`/cleaner/${cleanerName}`} color='primary' variant='h5' >
-                            @{cleanerName}
+                        <Typography component={Link} to={`/cleaner/${cleanerName}`} color='primary' variant='h5'>
+                            {cleanerName}
                         </Typography>
                         <hr className={classes.invisibleSeparator} />
-                        <Typography variant='body2' color='textSecondary'>
-                            {dayjs(createdAt).format('MMMM DD YYYY')}
+                        <Typography variant='body2'>
+                            CreatedAt: {dayjs(createdAt).format('DD MMMM YYYY')}
                         </Typography>
                         <hr className={classes.invisibleSeparator} />
-                        <Typography variant='h5' color='primary'>
+                        <Typography variant='body2'>
                             Bio: {bio}
                         </Typography>
                         <hr className={classes.invisibleSeparator} />
-                        <Typography variant='h5' color='primary'>
+                        <Typography variant='body2'>
                             Location: {location}
                         </Typography>
                         <hr className={classes.invisibleSeparator} />
