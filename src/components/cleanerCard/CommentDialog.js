@@ -57,6 +57,7 @@ class CommentDialog extends Component {
         }
         if (!nextProps.UI.errors && !nextProps.UI.loadingUI) { // maybe dont have loadingUI
             this.setState({ body: '' })
+            this.setState({ errors: {} })
         }
     }
     handleOpen = () => {
@@ -65,6 +66,7 @@ class CommentDialog extends Component {
     handleClose = () => {
         this.setState({ open: false });
         this.props.clearErrors();
+        this.setState({ errors: {} })
     }
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
@@ -82,9 +84,9 @@ class CommentDialog extends Component {
             <Fragment>
                 <form onSubmit={this.handleSubmit}>
                     <TextField name='body' type='text' label='Leave a comment on this cleaner'
-                        error={errors.comment ? true : false} helperText={errors.comment} value={this.state.body}
-                        onChange={this.handleChange} fullWidth className={classes.TextField} />
-                    <Button variant='contained' type='submit' onClick={this.handleClose} color='primary' className={classes.button}>Submit</Button>
+                        error={errors.body ? true : false} helperText={errors.body} value={this.state.body}
+                        onChange={this.handleChange} fullWidth className={classes.textField} />
+                    <Button variant='contained' type='submit' color='primary' className={classes.button}>Submit</Button>
                 </form>
             </Fragment>
         ) : null;
@@ -113,13 +115,11 @@ CommentDialog.propTypes = {
     authenticated: PropTypes.bool.isRequired,
     cleanerName: PropTypes.string.isRequired,
     classes: PropTypes.object.isRequired,
-    cleaner: PropTypes.object.isRequired,
-    UI: PropTypes.object.isRequired,
+    UI: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
     authenticated: state.user.authenticated,
-    cleaner: state.data.cleaner,
     UI: state.UI
 })
 

@@ -64,14 +64,9 @@ export default function (state = initialState, action) {
                 comments: action.payload,
                 loadingData: false
             };
-        case SUBMIT_COMMENT:
-            return {
-                ...state,
-                cleaner: {
-                    ...state.cleaner,
-                    comments: [action.payload, ...state.cleaner.comments]
-                }
-            };
+        // case SUBMIT_COMMENT:
+        //     return state;
+
         default:
             return state;
     }

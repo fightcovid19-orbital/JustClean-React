@@ -41,7 +41,7 @@ export const getCleaner = (cleanerName) => (dispatch) => {
         .then(res => {
             dispatch({
                 type: SET_CLEANER,
-                payload: res.data
+                payload: res.data.user
             })
             dispatch({ type: STOP_LOADING_UI })
         })
@@ -112,10 +112,10 @@ export const cancelUnlikeCleaner = (cleanerName) => (dispatch) => {
 export const submitComment = (cleanerName, commentData) => (dispatch) => {
     axios.post(`/comment/${cleanerName}`, commentData)
         .then(res => {
-            dispatch({
-                type: SUBMIT_COMMENT,
-                payload: res.data // when submit a comment, get a comment back
-            })
+            // dispatch({
+            //     type: SUBMIT_COMMENT,
+            //     payload: res.data // when submit a comment, get a comment back
+            // })
             dispatch(clearErrors())
         })
         .catch(err => {

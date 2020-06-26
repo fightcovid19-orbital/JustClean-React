@@ -9,6 +9,7 @@ import {
     MARK_NOTIFICATIONS_READ
 } from '../types';
 import axios from 'axios';
+import { getCleaners } from './dataActions'
 
 export const loginUser = (userData, history) => dispatch => {
     dispatch({ type: LOADING_UI });
@@ -16,9 +17,11 @@ export const loginUser = (userData, history) => dispatch => {
         .then(res => {
             setAuthorizationHeader(res.data.token);
             if (userData.type === 'customer') {
-                dispatch(getCustomerData());
+                dispatch(getCustomerData()); // after customer login, get all cleaners
+                dispatch(getCleaners())
             } else {
-                dispatch(getCleanerData())
+                dispatch(getCleanerData()) // after cleaner login, get all comments handled by home.js
+
             }
             dispatch({ type: CLEAR_ERRORS })
             history.push('/'); // redirect to home page
@@ -60,9 +63,10 @@ export const signupUser = (newUserData, history) => (dispatch) => {
         .then(res => {
             setAuthorizationHeader(res.data.token);
             if (newUserData.type === 'customer') {
-                dispatch(getCustomerData());
+                dispatch(getCustomerData()); // after customer login, get all cleaners
+                dispatch(getCleaners())
             } else {
-                dispatch(getCleanerData())
+                dispatch(getCleanerData()) // after cleaner login, get all comments handled by home.js
             }
             dispatch({ type: CLEAR_ERRORS })
             history.push('/'); // redirect to home page

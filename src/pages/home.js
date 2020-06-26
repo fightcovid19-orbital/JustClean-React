@@ -15,25 +15,19 @@ import Grid from '@material-ui/core/Grid'
 
 // Redux 
 import { connect } from 'react-redux'
-import { getCleaners, getComments } from '../redux/actions/dataActions'
+import { getComments } from '../redux/actions/dataActions'
 
 const styles = theme => ({
     ...theme.spreadThis
 })
 
 class home extends Component {
-    saveCleaners = () => {
-        if (this.props.user.credentials.type === 'customer') {
-            this.props.getCleaners();
-        }
-    }
     saveComments = () => {
         if (this.props.user.credentials.cleanerName && this.props.user.credentials.type === 'cleaner') {
             this.props.getComments(this.props.user.credentials.cleanerName);
         }
     }
     componentDidMount() {
-        this.saveCleaners();
         this.saveComments();
     }
 
@@ -48,20 +42,20 @@ class home extends Component {
         let recentCommentsMarkup = (comments)
             ? comments.map((comment) => <CommentCard key={comment.commentId} comment={comment} />)
             : <p>No comment on you yet</p>;
-        
+
         let feed, profile
-        if(loadingUser) {
+        if (loadingUser) {
             feed = <CardSkeleton />
         } else if (type === 'customer') {
-            feed = recentCleanersMarkup 
+            feed = recentCleanersMarkup
         } else if (type === 'cleaner') {
-            feed = recentCommentsMarkup 
+            feed = recentCommentsMarkup
         } else {
             feed = 'noUser'
         }
-            
-        if(loadingUser) {
-            profile = <ProfileSkeleton/>
+
+        if (loadingUser) {
+            profile = <ProfileSkeleton />
         } else if (type === 'customer') {
             profile = <CustomerProfile />
         } else if (type === 'cleaner') {
@@ -86,7 +80,7 @@ class home extends Component {
                     <Grid item sm={8} xs={12}>
                         {feed}
                     </Grid>
-                 </Grid>
+                </Grid>
 
             )
 
@@ -96,7 +90,6 @@ class home extends Component {
 }
 
 home.propTypes = {
-    getCleaners: PropTypes.func.isRequired,
     getComments: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired
@@ -107,4 +100,4 @@ const mapStateToProps = (state) => ({
     data: state.data
 })
 
-export default connect(mapStateToProps, { getCleaners, getComments })(withStyles(styles)(home))
+export default connect(mapStateToProps, { getComments })(withStyles(styles)(home))

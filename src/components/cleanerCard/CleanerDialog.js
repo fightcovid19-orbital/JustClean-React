@@ -66,7 +66,7 @@ class CleanerDialog extends Component {
         this.setState({ open: false })
     }
     render() {
-        const { classes, cleaner: { user: { cleanerName, createdAt, likeCount, unlikeCount, imageUrl, bio, location, hiredCount } },
+        const { classes, cleaner: { cleanerName, createdAt, likeCount, unlikeCount, imageUrl, bio, location, hiredCount },
             UI: { loadingUI }
         } = this.props;
 
