@@ -12,24 +12,29 @@ const styles = theme => ({
     ...theme.spreadThis
 })
 
-const CleanerSkeleton = props => {
-    const { classes } = props
+const CommentSkeleton = props => {
+    const { classes, type } = props
 
+    let cardContent = (
+            <CardContent classesName={classes.cardContent}>
+                <div className={classes.handle} />
+                <div className={classes.date} />
+                <div className={classes.fullLine} />
+            </CardContent>
+        )
+    
     const content = Array.from({ length: 4 }).map((item, index) => (
         <Card className={classes.card} key={index}>
             <img src={noImg} alt="profile picture" className={classes.cover} />
-            <CardContent className={classes.cardContent}>
-                <div className={classes.handle} />
-                <div className={classes.fullLine} />
-            </CardContent>
+            {cardContent}
         </Card>
     ))
 
     return <Fragment>{content}</Fragment>
 }
 
-CleanerSkeleton.propTypes = {
+CommentSkeleton.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(CleanerSkeleton);
+export default withStyles(styles)(CommentSkeleton);

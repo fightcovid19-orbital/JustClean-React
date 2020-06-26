@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import EditDetails from './EditDetails'
 import MyButton from '../../util/MyButton'
-import ProfileSkeleton from '../../util/ProfileSkeleton'
+import SmallLoginAndSignup from './SmallLoginAndSignup'
 
 // Redux stuff
 import { connect } from 'react-redux'
@@ -54,12 +54,11 @@ class CustomerProfile extends Component {
                     bio,
                     location,
                 },
-                loadingUser,
                 authenticated
             }
         } = this.props;
 
-        let profileMarkup = !loadingUser ? (authenticated ? (
+        let profileMarkup = authenticated ? (
             <Paper className={classes.paper}>
                 <div className={classes.profile}>
                     <div className="image-wrapper">
@@ -91,13 +90,9 @@ class CustomerProfile extends Component {
                     <EditDetails />
                 </div>
             </Paper >
-        ) : (<Paper className={classes.paper}>
-            <Typography variant='body2' align='center'>No profile found, please login again</Typography>
-            <div className={classes.buttons}>
-                <Button variant='contained' color='primary' component={Link} to='/login'>Login </Button>
-                <Button variant='contained' color='secondary' component={Link} to='/signup'>Signup </Button>
-            </div>
-        </Paper>)) : (<ProfileSkeleton type='customer' />)
+        ) : (
+            <SmallLoginAndSignup />
+        )
         return profileMarkup;
     }
 }

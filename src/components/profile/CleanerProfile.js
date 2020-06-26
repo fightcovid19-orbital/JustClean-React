@@ -1,19 +1,17 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
-import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import EditDetails from './EditDetails'
 import MyButton from '../../util/MyButton'
-import ProfileSkeleton from '../../util/ProfileSkeleton'
 import DeleteCleaner from './DeleteCleaner'
+import SmallLoginAndSignup from './SmallLoginAndSignup'
 
 // Redux stuff
 import { connect } from 'react-redux'
 import { logoutUser, uploadCleanerImage } from '../../redux/actions/userActions'
 
 // MUI stuff
-import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
@@ -61,15 +59,13 @@ class CleanerProfile extends Component {
                     unlikeCount,
                     hiredCount
                 },
-                loadingUser,
                 authenticated
             }
         } = this.props;
 
         const deleteButton = <DeleteCleaner cleanerName={cleanerName} />
 
-        let cleanerProfileMarkup = !loadingUser
-            ? (authenticated
+        let cleanerProfileMarkup = authenticated
                 ? (
                     <Paper className={classes.paper}>
                         {deleteButton}
@@ -120,20 +116,8 @@ class CleanerProfile extends Component {
                         </div>
                     </Paper>
                 ) : (
-                    <Paper className={classes.paper}>
-                        <Typography variant="body2" align="center">
-                            No profile found, please login again
-                        </Typography>
-                        <div className={classes.buttons}>
-                            <Button variant='contained' color='primary' component={Link} to='/login'>
-                                Login
-                            </Button>
-                            <Button variant='contained' color='secondary' component={Link} to='/signup'>
-                                Signup
-                            </Button>
-                        </div>
-                    </Paper>
-                )) : (<ProfileSkeleton type='cleaner' />)
+                    <SmallLoginAndSignup />
+                )
 
         return cleanerProfileMarkup;
     }

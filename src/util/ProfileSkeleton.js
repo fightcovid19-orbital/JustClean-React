@@ -5,13 +5,6 @@ import PropTypes from 'prop-types';
 // Mui
 import Paper from '@material-ui/core/Paper';
 
-//Icon
-import LocationOn from '@material-ui/icons/LocationOn'
-import CalendarToday from '@material-ui/icons/CalendarToday'
-import SatisfiedIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined'
-import DissatisfiedIcon from '@material-ui/icons/SentimentDissatisfiedOutlined'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
@@ -32,40 +25,27 @@ const styles = theme => ({
         height: 15,
         backgroundColor: 'rgba(0,0,0,0.6)',
         width: '10%',
+    },
+    halfLine: {
+        height: 20,
+        backgroundColor: 'rgba(0,0,0,0.4)',
+        width: '40%',
+        margin: '0 auto 7px auto'
     }
 })
 
 const ProfileSkeleton = props => {
-    const { classes, type } = props
-    let profileDetail = (type === 'cleaner')
-        ?
-        (
+    const { classes } = props
+    const profileDetail = (
             <div className="profile-details">
                 <div className={classes.handle} />
                 <hr />
                 <div className={classes.fullLine} />
                 <div className={classes.fullLine} />
-                <LocationOn color="primary" /><span>Location</span>
                 <hr />
-                <CalendarToday color="primary" /><span>Joined Date</span>
+                <div className={classes.halfLine} />
                 <hr />
-                <SatisfiedIcon color="primary" /><span> 0 likes</span>
-                <hr />
-                <DissatisfiedIcon color="primary" /><span> 0 unlikes</span>
-                <hr />
-                <AccountCircleIcon color="primary" /><span> 0 hired</span>
-            </div>
-        )
-        :
-        (
-            <div className="profile-details">
-                <div className={classes.handle} />
-                <hr />
-                <div className={classes.fullLine} />
-                <div className={classes.fullLine} />
-                <LocationOn color="primary" /><span>Location</span>
-                <hr />
-                <CalendarToday color="primary" /><span>Joined Date</span>
+                <div className={classes.halfLine} />
             </div>
         )
 
