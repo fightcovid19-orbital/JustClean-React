@@ -12,8 +12,8 @@ const styles = theme => ({
     ...theme.spreadThis
 })
 
-const CommentSkeleton = props => {
-    const { classes, type } = props
+const CardSkeleton = props => {
+    const { classes } = props
 
     let cardContent = (
             <CardContent classesName={classes.cardContent}>
@@ -33,8 +33,8 @@ const CommentSkeleton = props => {
     return <Fragment>{content}</Fragment>
 }
 
-CommentSkeleton.propTypes = {
+CardSkeleton.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(CommentSkeleton);
+export default withStyles(styles)(CardSkeleton);
