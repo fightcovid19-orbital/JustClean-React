@@ -37,7 +37,7 @@ export const loginUser = (userData, history) => dispatch => {
 
 export const getCleanerData = () => dispatch => {
     dispatch({ type: LOADING_USER })
-    axios.get('/cleaner')  // login and get cleaner data
+    axios.get('/cleaner')  // login and get cleaner data for cleaner user credentials
         .then(res => {
             dispatch({
                 type: SET_USER,
@@ -48,7 +48,7 @@ export const getCleanerData = () => dispatch => {
 };
 export const getCustomerData = () => dispatch => {
     dispatch({ type: LOADING_USER })
-    axios.get('/customer')  // login and get customer data
+    axios.get('/customer')  // login and get customer data for customer user credentials
         .then(res => {
             dispatch({
                 type: SET_USER,
@@ -141,7 +141,7 @@ export const deleteCleaner = () => dispatch => {
 }
 
 export const markNotificationsRead = notificationIds => dispatch => {
-    axios.post('/notifications', notificationIds)
+    axios.post('/cleanerNotifications', notificationIds)
         .then(res => {
             dispatch({
                 type: MARK_NOTIFICATIONS_READ

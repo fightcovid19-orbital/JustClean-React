@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import withStyles from '@material-ui/core/styles/withStyles'
 import dayjs from 'dayjs'
 import EditDetails from './EditDetails'
 import MyButton from '../../util/MyButton'
@@ -14,6 +13,7 @@ import { logoutUser, uploadCleanerImage } from '../../redux/actions/userActions'
 // MUI stuff
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+import withStyles from '@material-ui/core/styles/withStyles'
 
 // Icons
 import LocationOn from '@material-ui/icons/LocationOn'
@@ -66,58 +66,58 @@ class CleanerProfile extends Component {
         const deleteButton = <DeleteCleaner cleanerName={cleanerName} />
 
         let cleanerProfileMarkup = authenticated
-                ? (
-                    <Paper className={classes.paper}>
-                        {deleteButton}
-                        <div className={classes.profile}>
-                            <div className="image-wrapper">
-                                <hr />
-                                <img src={imageUrl} alt="profile" className='profile-image' />
-                                <input type='file' id='imageInput' hidden='hidden' onChange={this.handleImageChange} />
-                                <MyButton tip='Edit profile picture' onClick={this.handleEditPicture} btnClassName='button'>
-                                    <EditIcon color='primary' />
-                                </MyButton>
-                            </div>
+            ? (
+                <Paper className={classes.paper}>
+                    {deleteButton}
+                    <div className={classes.profile}>
+                        <div className="image-wrapper">
                             <hr />
-                            <div className="profile-details">
-                                <Typography variant="h5">
-                                    {cleanerName}
-                                </Typography>
-                                <hr />
-                                {bio && <Typography variant="body2"> {bio}</Typography>}
-                                <hr />
-
-                                <Fragment>
-                                    <LocationOn color="primary" />
-                                    <span>{location}</span>
-                                    <hr />
-                                </Fragment>
-
-                                <Fragment>
-                                    <CalendarToday color="primary" />
-                                    {' '}
-                                    <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
-                                    <hr />
-                                </Fragment>
-
-                                <SatisfiedIcon color="primary" /><span>{" " + likeCount + " likes"}</span>
-                                <hr />
-
-                                <DissatisfiedIcon color="primary" /><span>{" " + unlikeCount + " unlikes"}</span>
-                                <hr />
-
-                                <AccountCircleIcon color="primary" /><span>{" " + hiredCount + " hired"}</span>
-
-                            </div>
-                            <MyButton tip='Logout' onClick={this.handleLogout} >
-                                <KeyboardReturn color='primary' />
+                            <img src={imageUrl} alt="profile" className='profile-image' />
+                            <input type='file' id='imageInput' hidden='hidden' onChange={this.handleImageChange} />
+                            <MyButton tip='Edit profile picture' onClick={this.handleEditPicture} btnClassName='button'>
+                                <EditIcon color='primary' />
                             </MyButton>
-                            <EditDetails />
                         </div>
-                    </Paper>
-                ) : (
-                    <SmallLoginAndSignup />
-                )
+                        <hr />
+                        <div className="profile-details">
+                            <Typography variant="h5">
+                                {cleanerName}
+                            </Typography>
+                            <hr />
+                            {bio && <Typography variant="body2"> {bio}</Typography>}
+                            <hr />
+
+                            <Fragment>
+                                <LocationOn color="primary" />
+                                <span>{location}</span>
+                                <hr />
+                            </Fragment>
+
+                            <Fragment>
+                                <CalendarToday color="primary" />
+                                {' '}
+                                <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
+                                <hr />
+                            </Fragment>
+
+                            <SatisfiedIcon color="primary" /><span>{" " + likeCount + " likes"}</span>
+                            <hr />
+
+                            <DissatisfiedIcon color="primary" /><span>{" " + unlikeCount + " unlikes"}</span>
+                            <hr />
+
+                            <AccountCircleIcon color="primary" /><span>{" " + hiredCount + " hired"}</span>
+
+                        </div>
+                        <MyButton tip='Logout' onClick={this.handleLogout} >
+                            <KeyboardReturn color='primary' />
+                        </MyButton>
+                        <EditDetails />
+                    </div>
+                </Paper>
+            ) : (
+                <SmallLoginAndSignup />
+            )
 
         return cleanerProfileMarkup;
     }

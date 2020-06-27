@@ -36,7 +36,7 @@ export const getCleaners = () => (dispatch) => {
         })
 }
 
-// get a cleaner detail
+// get a cleaner detail for cleanerDialog
 export const getCleaner = (cleanerName) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios.get(`/cleaner/${cleanerName}`)
@@ -48,6 +48,24 @@ export const getCleaner = (cleanerName) => (dispatch) => {
             dispatch({ type: STOP_LOADING_UI })
         })
         .catch(err => console.log(err))
+}
+
+// get a cleaner's comment for route in cleanerPage
+export const getCleanerData = (cleanerName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA })
+    axios.get(`/cleaner/${cleanerName}`)
+        .then(res => {
+            dispatch({
+                type: SET_COMMENTS,
+                payload: res.data.comments
+            });
+        })
+        .catch(() => {
+            dispatch({
+                type: SET_COMMENTS,
+                payload: null
+            });
+        });
 }
 
 // like a cleaner
