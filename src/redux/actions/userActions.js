@@ -141,7 +141,7 @@ export const deleteCleaner = () => dispatch => {
 }
 
 export const markNotificationsRead = notificationIds => dispatch => {
-    axios.post('/notifications', notificationIds)
+    axios.post('/cleanerNotifications', notificationIds)
         .then(res => {
             dispatch({
                 type: MARK_NOTIFICATIONS_READ

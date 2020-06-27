@@ -1,4 +1,4 @@
-import  React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -37,29 +37,29 @@ class Notifications extends Component {
     onMenuOpened = () => {
         let unreadNotificationsIds = this.props.notifications
             .filter(not => !not.read)
-            .map(not => not.notificationId)
-        this.props.markNotificationsRead(unreadNotificationsIds)
+            .map(not => not.notificationId);
+        this.props.markNotificationsRead(unreadNotificationsIds);
     }
 
     render() {
         const notifications = this.props.notifications;
-        const anchorEl = this.state.anchoeE1;
+        const anchorEl = this.state.anchorEl;
 
-        dayjs.extend(relativeTime)
-        
+        dayjs.extend(relativeTime);
+
         let notificationsIcon;
-        if(notifications && notifications.length > 0) {
-            if(notifications.filter(not => not.read === false).length > 0) {
+        if (notifications && notifications.length > 0) {
+            if (notifications.filter(not => not.read === false).length > 0) {
                 notificationsIcon = (
                     <Badge
-                        badgeContent = {notifications.filter(not => not.read === false).length}
+                        badgeContent={notifications.filter(not => not.read === false).length}
                         color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
+                        <NotificationsIcon />
+                    </Badge>
                 )
-             } else { 
-                    notificationsIcon = <NotificationsIcon />
-             }
+            } else {
+                notificationsIcon = <NotificationsIcon />
+            }
         } else {
             notificationsIcon = <NotificationsIcon />
         }
@@ -67,35 +67,35 @@ class Notifications extends Component {
         let notificationsMarkup = notifications && notifications.length > 0
             ? (
                 notifications.map(not => {
-                    const verb = not.type === 'like' ? 'liked' : 'replied on'
+                    const verb = not.type === 'like' ? 'liked' : 'replied on' // still got unlike
                     const time = dayjs(not.createdAt).fromNow();
                     const iconColor = not.read ? 'primary' : 'secondary'
-                    const icon = (not.type === 'like')
-                        ? (<SatisfiedIcon color={iconColor} style={{marginRight: 10}}/>)
-                        : (<ChatIcon color={iconColor} style={{marginRight: 10}}/>)
+                    const icon = (not.type === 'like') // got how many type??
+                        ? (<SatisfiedIcon color={iconColor} style={{ marginRight: 10 }} />) // like notification
+                        : (<ChatIcon color={iconColor} style={{ marginRight: 10 }} />) // comment notification
 
                     return (
                         <MenuItem key={not.createdAt} onClick={this.handleClose}>
                             {icon}
-                            <Typography 
+                            <Typography
                                 color="default"
-                                varient="body1"
+                                variant="body1"
                             >
-                                {not.sender} {verb} {time}
+                                {not.sender} {verb} you on {time}
                             </Typography>
                         </MenuItem>
                     )
                 })
             ) : (
                 <MenuItem onClick={this.handleClose}>
-                    You have no notifications
+                    You have no notifications yet
                 </MenuItem>
             )
 
         return (
             <Fragment>
                 <Tooltip placement="top" title="Notifications">
-                    <IconButton 
+                    <IconButton
                         aria-owns={anchorEl ? 'simple-menu' : undefined}
                         aria-haspopup="true"
                         onClick={this.handleOpen}
@@ -103,8 +103,8 @@ class Notifications extends Component {
                         {notificationsIcon}
                     </IconButton>
                 </Tooltip>
-                <Menu 
-                    anchorE1={anchorEl}
+                <Menu
+                    anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
                     onClose={this.handleClose}
                     onEntered={this.onMenuOpened}

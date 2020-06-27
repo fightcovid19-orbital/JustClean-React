@@ -49,7 +49,7 @@ export const getCleaner = (cleanerName) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-// get a cleaner detail for route in cleanerPage
+// get a cleaner's comment for route in cleanerPage
 export const getCleanerData = (cleanerName) => (dispatch) => {
     dispatch({ type: LOADING_DATA })
     axios.get(`/cleaner/${cleanerName}`)
