@@ -9,7 +9,7 @@ import {
     MARK_NOTIFICATIONS_READ
 } from '../types';
 import axios from 'axios';
-import { getCleaners } from './dataActions'
+import { getCleaners, getHistories } from './dataActions'
 
 export const loginUser = (userData, history) => dispatch => {
     dispatch({ type: LOADING_UI });
@@ -18,7 +18,8 @@ export const loginUser = (userData, history) => dispatch => {
             setAuthorizationHeader(res.data.token);
             if (userData.type === 'customer') {
                 dispatch(getCustomerData()); // after customer login, get all cleaners
-                dispatch(getCleaners())
+                dispatch(getCleaners());
+                dispatch(getHistories());
             } else {
                 dispatch(getCleanerData()) // after cleaner login, get all comments handled by home.js
 
