@@ -11,7 +11,8 @@ import {
     LOADING_DATA,
     STOP_LOADING_UI,
     LOADING_UI,
-    SUBMIT_COMMENT
+    SUBMIT_COMMENT,
+    SET_HISTORIES
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -146,4 +147,22 @@ export const getComments = (cleanerName) => (dispatch) => {
 
 export const clearErrors = () => (dispatch) => {
     dispatch({ type: CLEAR_ERRORS })
+}
+
+// Get histories
+export const getHistories = () => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.get('/histories')
+        .then(res => {
+            dispatch({
+                type: SET_HISTORIES,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_HISTORIES,
+                payload: []
+            })
+        })
 }

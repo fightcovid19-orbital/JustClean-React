@@ -7,7 +7,8 @@ import {
     CANCELUNLIKE_CLEANER,
     SET_COMMENTS,
     SET_CLEANER,
-    SUBMIT_COMMENT
+    SUBMIT_COMMENT,
+    SET_HISTORIES
 } from '../types'
 
 const initialState = {
@@ -66,7 +67,12 @@ export default function (state = initialState, action) {
             };
         // case SUBMIT_COMMENT:
         //     return state;
-
+        case SET_HISTORIES: 
+            return {
+                ...state,
+                histories: action.payload,
+                loadingData: false
+            };
         default:
             return state;
     }
