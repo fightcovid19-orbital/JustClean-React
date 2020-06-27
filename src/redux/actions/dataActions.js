@@ -12,7 +12,8 @@ import {
     STOP_LOADING_UI,
     LOADING_UI,
     SUBMIT_COMMENT,
-    SET_HISTORIES
+    SET_HISTORIES,
+    SET_RESERVATIONS
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -162,6 +163,24 @@ export const getHistories = () => (dispatch) => {
         .catch(err => {
             dispatch({
                 type: SET_HISTORIES,
+                payload: []
+            })
+        })
+}
+
+// Get reservations
+export const getReservations = () => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.get('/reserves')
+        .then(res => {
+            dispatch({
+                type: SET_RESERVATIONS,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_RESERVATIONS,
                 payload: []
             })
         })

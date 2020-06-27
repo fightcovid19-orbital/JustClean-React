@@ -9,7 +9,8 @@ import CardSkeleton from '../util/CardSkeleton'
 import ProfileSkeleton from '../util/ProfileSkeleton'
 import SmallLoginAndSignup from '../components/profile/SmallLoginAndSignup'
 import withStyles from '@material-ui/core/styles/withStyles'
-import HistoryCard from '../components/HistoryCard'
+import HistoryCard from '../components/notes/HistoryCard'
+import ReserveCard from '../components/notes/ReserveCard'
 
 // MUI stuff
 import Grid from '@material-ui/core/Grid'
@@ -18,7 +19,7 @@ import Paper from '@material-ui/core/Paper'
 // Redux 
 import { connect } from 'react-redux'
 import { getComments } from '../redux/actions/dataActions'
-import axios from 'axios'
+import { Typography } from '@material-ui/core'
 
 const styles = theme => ({
     ...theme.spreadThis
@@ -35,7 +36,7 @@ class home extends Component {
     }
 
     render() {
-        const { cleaners, loadingData, comments, histories } = this.props.data;
+        const { cleaners, loadingData, comments, histories, reservations } = this.props.data;
         const { credentials: { type }, loadingUser } = this.props.user;
         const { classes } = this.props;
 
@@ -47,7 +48,10 @@ class home extends Component {
             : <p>No comment on you yet</p>;
         let recentHistoriesMarkup = (histories)
             ? histories.map(history => <HistoryCard key={history.historyId} history={history} />)
-            : <p>Have not hired anyone before</p>
+            : <p>Have not hired anyone before</p>;
+        let recentReservesMarkup = (reservations)
+            ? reservations.map(reserve => <ReserveCard key={reserve.customerName} reserve={reserve}/>)
+            : <p>No one reserve you yet</p>
 
         let feed, profile, notes
         if (loadingUser) {
@@ -57,11 +61,26 @@ class home extends Component {
         } else if (type === 'customer') {
             feed = recentCleanersMarkup
             profile = <CustomerProfile />
-            notes = recentHistoriesMarkup
+            notes = (
+                <Paper className={classes.paper} styles={{maxHeight:200, overflow:'auto'}}>
+                    <Typography variant="h5" color='primary'>
+                        <p>Histories</p>
+                    </Typography>
+                    {recentHistoriesMarkup}
+                </Paper>
+            )
         } else if (type === 'cleaner') {
             feed = recentCommentsMarkup
             profile = <CleanerProfile />
-            notes = <p>Reservation</p>
+            notes = (
+                <Paper className={classes.paper} styles={{maxHeight:200, overflow:'auto'}}>
+                    <Typography variant="h5" color='primary'>
+                        <p>Reservations</p>
+                    </Typography>
+                    {recentReservesMarkup}
+                </Paper>
+            )
+            
         } else {
             feed = 'noUser'
             profile = 'noUser'
@@ -81,9 +100,7 @@ class home extends Component {
                     <Grid item sm={4} xs={12}>
                         {profile}
                         <br />
-                        <Paper className={classes.paper} styles={{maxHeight:200, overflow:'auto'}}>
-                            {notes}
-                        </Paper>
+                        {notes}
                     </Grid>
                     <Grid item sm={8} xs={12}>
                         {feed}

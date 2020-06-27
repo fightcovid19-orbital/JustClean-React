@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import withStyle from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import LikeButton from './cleanerCard/LikeButton'
-import UnlikeButton from './cleanerCard/UnlikeButton'
-import CommentDialog from './cleanerCard/CommentDialog'
+import LikeButton from '../cleanerCard/LikeButton'
+import UnlikeButton from '../cleanerCard/UnlikeButton'
+import CommentDialog from '../cleanerCard/CommentDialog'
 import dayjs from 'dayjs'
 
 // MUI stuff
@@ -49,7 +49,7 @@ class HistoryCard extends Component {
                         {cleanerName}
                     </Typography>
                     <br />
-                    <Typography variant="body2" component={Link} to={`/cleaners/${cleanerName}`} color='textSecondary'>
+                    <Typography variant="body2" color='textSecondary'>
                         {dayjs(createdAt).format('DD MMMM YYYY')}
                     </Typography>
                     <br />

@@ -9,7 +9,7 @@ import {
     MARK_NOTIFICATIONS_READ
 } from '../types';
 import axios from 'axios';
-import { getCleaners, getHistories } from './dataActions'
+import { getCleaners, getHistories, getReservations } from './dataActions'
 
 export const loginUser = (userData, history) => dispatch => {
     dispatch({ type: LOADING_UI });
@@ -21,8 +21,8 @@ export const loginUser = (userData, history) => dispatch => {
                 dispatch(getCleaners());
                 dispatch(getHistories());
             } else {
-                dispatch(getCleanerData()) // after cleaner login, get all comments handled by home.js
-
+                dispatch(getCleanerData()); // after cleaner login, get all comments handled by home.js
+                dispatch(getReservations());
             }
             dispatch({ type: CLEAR_ERRORS })
             history.push('/'); // redirect to home page

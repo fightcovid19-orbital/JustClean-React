@@ -8,7 +8,8 @@ import {
     SET_COMMENTS,
     SET_CLEANER,
     SUBMIT_COMMENT,
-    SET_HISTORIES
+    SET_HISTORIES,
+    SET_RESERVATIONS
 } from '../types'
 
 const initialState = {
@@ -71,6 +72,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 histories: action.payload,
+                loadingData: false
+            };
+        case SET_RESERVATIONS: 
+            return {
+                ...state,
+                reservations: action.payload,
                 loadingData: false
             };
         default:
