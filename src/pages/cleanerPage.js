@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import CommentCard from '../components/commentCard/CommentCard'
 import StaticCleanerProfile from '../components/profile/StaticCleanerProfile'
+import ProfileSkeleton from '../util/ProfileSkeleton'
+import CardSkeleton from '../util/CardSkeleton'
 
 // MUI stuff
 import Grid from '@material-ui/core/Grid'
@@ -30,7 +32,7 @@ class cleanerPage extends Component {
         const { comments, loadingData } = this.props.data
 
         const commentsMarkup = loadingData ? (
-            <p>Loading...</p>
+            <CardSkeleton />
         ) : comments === null ? (
             <p>No comment on this cleaner</p>
         ) : (
@@ -40,7 +42,7 @@ class cleanerPage extends Component {
             <Grid container spacing={2}>
                 <Grid item sm={4} xs={12}>
                     {this.state.cleanerProfile === null ? (
-                        <p>Loading profile...</p>
+                        <ProfileSkeleton />
                     ) : (
                             <StaticCleanerProfile profile={this.state.cleanerProfile} />
                         )}
