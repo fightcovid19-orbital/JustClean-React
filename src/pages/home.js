@@ -7,6 +7,7 @@ import CustomerProfile from '../components/profile/CustomerProfile'
 import CleanerProfile from '../components/profile/CleanerProfile'
 import CardSkeleton from '../util/CardSkeleton'
 import ProfileSkeleton from '../util/ProfileSkeleton'
+import NoteSkeleton from '../util/NoteSkeleton'
 import SmallLoginAndSignup from '../components/profile/SmallLoginAndSignup'
 import withStyles from '@material-ui/core/styles/withStyles'
 import HistoryCard from '../components/notes/HistoryCard'
@@ -22,7 +23,10 @@ import { getComments } from '../redux/actions/dataActions'
 import { Typography } from '@material-ui/core'
 
 const styles = theme => ({
-    ...theme.spreadThis
+    ...theme.spreadThis,
+    title: {
+        marginLeft: 100
+    }
 })
 
 class home extends Component {
@@ -57,14 +61,14 @@ class home extends Component {
         if (loadingUser) {
             feed = <CardSkeleton />
             profile = <ProfileSkeleton />
-            notes = <p>Skeleton</p>
+            notes = <NoteSkeleton />
         } else if (type === 'customer') {
             feed = recentCleanersMarkup
             profile = <CustomerProfile />
             notes = (
                 <Paper className={classes.paper} styles={{maxHeight:200, overflow:'auto'}}>
-                    <Typography variant="h5" color='primary'>
-                        <p>Histories</p>
+                    <Typography variant="h5" color='primary' className={classes.title}>
+                        History
                     </Typography>
                     {recentHistoriesMarkup}
                 </Paper>
@@ -74,8 +78,8 @@ class home extends Component {
             profile = <CleanerProfile />
             notes = (
                 <Paper className={classes.paper} styles={{maxHeight:200, overflow:'auto'}}>
-                    <Typography variant="h5" color='primary'>
-                        <p>Reservations</p>
+                    <Typography variant="h5" color='primary' className={classes.title}>
+                        Reservations
                     </Typography>
                     {recentReservesMarkup}
                 </Paper>
