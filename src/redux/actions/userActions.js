@@ -140,6 +140,7 @@ export const deleteCleaner = () => dispatch => {
         .catch(err => console.log(err));
 }
 
+// mark notification read for cleaners profiile 
 export const markNotificationsRead = notificationIds => dispatch => {
     axios.post('/cleanerNotifications', notificationIds)
         .then(res => {
