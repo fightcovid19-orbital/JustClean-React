@@ -141,12 +141,23 @@ export const deleteCleaner = () => dispatch => {
 }
 
 // mark notification read for cleaners profiile 
-export const markNotificationsRead = notificationIds => dispatch => {
-    axios.post('/cleanerNotifications', notificationIds)
-        .then(res => {
-            dispatch({
-                type: MARK_NOTIFICATIONS_READ
+export const markNotificationsRead = (type, notificationIds) => dispatch => {
+    if (type === 'cleaner')  {
+        axios.post('/cleanerNotifications', notificationIds)
+            .then(res => {
+                dispatch({
+                    type: MARK_NOTIFICATIONS_READ
+                })
             })
-        })
-        .catch(err => console.log(err));
+            .catch(err => console.log(err));
+    } else {
+        axios.post('/custNotifications', notificationIds)
+            .then(res => {
+                dispatch({
+                    type: MARK_NOTIFICATIONS_READ
+                })
+            })
+            .catch(err => console.log(err));
+    }
+    
 }

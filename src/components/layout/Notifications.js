@@ -39,7 +39,7 @@ class Notifications extends Component {
         let unreadNotificationsIds = this.props.notifications
             .filter(not => !not.read)
             .map(not => not.notificationId);
-        this.props.markNotificationsRead(unreadNotificationsIds);
+        this.props.markNotificationsRead(this.props.type, unreadNotificationsIds);
     }
 
     render() {
