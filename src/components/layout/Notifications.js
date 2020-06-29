@@ -15,6 +15,7 @@ import Badge from '@material-ui/core/Badge'
 //icon
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import SatisfiedIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ChatIcon from '@material-ui/icons/Chat'
 
 //Redux
@@ -67,12 +68,25 @@ class Notifications extends Component {
         let notificationsMarkup = notifications && notifications.length > 0
             ? (
                 notifications.map(not => {
-                    const verb = not.type === 'like' ? 'liked' : 'replied on' // still got unlike
                     const time = dayjs(not.createdAt).fromNow();
                     const iconColor = not.read ? 'primary' : 'secondary'
-                    const icon = (not.type === 'like') // got how many type??
-                        ? (<SatisfiedIcon color={iconColor} style={{ marginRight: 10 }} />) // like notification
-                        : (<ChatIcon color={iconColor} style={{ marginRight: 10 }} />) // comment notification
+                    let verb, icon
+                    if (not.type === 'like') {
+                        verb = 'liked'
+                        icon = (<SatisfiedIcon color={iconColor} style={{ marginRight: 10 }} />)
+                    } else if (not.type === 'comment') {
+                        verb = 'commented on'
+                        icon = (<ChatIcon color={iconColor} style={{ marginRight: 10 }} />)
+                    } else if (not.type ==='reply') {
+                        verb = 'replied on'
+                        icon = (<ChatIcon color={iconColor} style={{ marginRight: 10 }} />)
+                    } else if (not.type === 'history'){
+                        verb = 'accept(reservation)'
+                        icon = (<AccountCircleIcon color={iconColor} style={{ marginRight: 10 }} />)
+                    } else {
+                        verb = 'reserve'
+                        icon = (<AccountCircleIcon color={iconColor} style={{ marginRight: 10 }} />)
+                    }
 
                     return (
                         <MenuItem key={not.createdAt} onClick={this.handleClose}>
