@@ -16,7 +16,7 @@ const CardSkeleton = props => {
     const { classes } = props
 
     let cardContent = (
-            <CardContent classesName={classes.cardContent}>
+            <CardContent className={classes.cardContent}>
                 <div className={classes.handle} />
                 <div className={classes.date} />
                 <div className={classes.fullLine} />

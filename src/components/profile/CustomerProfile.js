@@ -107,7 +107,7 @@ CustomerProfile.propTypes = {
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     logoutUser: PropTypes.func.isRequired,
-    uploadImage: PropTypes.func.isRequired
+    uploadCustomerImage: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(CustomerProfile))

@@ -81,7 +81,7 @@ class login extends Component {
                         {errors.general && <Typography variant='body2' className={classes.customError}>
                             {errors.general}
                         </Typography>}
-                        <Button type='submit' variant='contained' color='primary' disable={loadingUI} className={classes.button}>
+                        <Button type='submit' variant='contained' color='primary' disabled={loadingUI} className={classes.button}>
                             Login {loadingUI && (<CircularProgress size={30} className={classes.progress} />)}
                         </Button>
                         <br />

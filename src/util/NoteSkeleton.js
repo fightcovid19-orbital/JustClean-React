@@ -42,7 +42,7 @@ const NoteSkeleton = props => {
     const noteContent = Array.from({ length: 4 }).map((item, index) => (
         <Card className={classes.card} key={index}>
             <img src={noImg} alt="profile picture" className={classes.cover} />
-            <CardContent classesName={classes.cardContent}>
+            <CardContent className={classes.cardContent}>
                 <div className={classes.handle} />
                 <div className={classes.date} />
                 <div className={classes.fullLine} />
@@ -60,7 +60,6 @@ const NoteSkeleton = props => {
 
 NoteSkeleton.propTypes = {
     classes: PropTypes.object.isRequired,
-    type: PropTypes.string.isRequired
 }
 
 export default withStyles(styles)(NoteSkeleton)

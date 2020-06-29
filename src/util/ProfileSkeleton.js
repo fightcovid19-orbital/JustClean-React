@@ -64,7 +64,6 @@ const ProfileSkeleton = props => {
 
 ProfileSkeleton.propTypes = {
     classes: PropTypes.object.isRequired,
-    type: PropTypes.string.isRequired
 }
 
 export default withStyles(styles)(ProfileSkeleton)
