@@ -17,6 +17,8 @@ const initialState = {
     cleaner: {},
     comments: [],
     comment: {},
+    reservations: [],
+    histories: [],
     loadingData: false
 };
 

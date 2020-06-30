@@ -34,7 +34,7 @@ const style = {
 class ReserveCard extends Component {
 
     render() {
-        const { classes, reserve: { customerImage, customerName, createdAt},
+        const { classes, reserve: { customerImage, customerName, createdAt, location},
             user: { authenticated } } = this.props
 
         return (
@@ -44,9 +44,11 @@ class ReserveCard extends Component {
                     <Typography variant="h5" color='primary'>
                         {customerName}
                     </Typography>
-                    <br />
                     <Typography variant="body2" color='textSecondary'>
                         {dayjs(createdAt).format('DD MMMM YYYY')}
+                    </Typography>
+                    <Typography variant="body2" >
+                        location: {location}
                     </Typography>
                 </CardContent>
             </Card>

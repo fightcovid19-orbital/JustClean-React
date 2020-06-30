@@ -16,7 +16,7 @@ import HomeIcon from '@material-ui/icons/Home'
 
 class Navbar extends Component {
     render() {
-        const { authenticated, user: { type } } = this.props;
+        const { authenticated } = this.props;
         return (
             <AppBar>
                 <Toolbar className="nav-container">
@@ -28,7 +28,7 @@ class Navbar extends Component {
                                     <HomeIcon />
                                 </MyButton>
                             </Link>
-                            <Notifications type={type} />
+                            <Notifications />
                         </Fragment>
                     ) : (
                             <Fragment>
@@ -45,12 +45,10 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
     authenticated: PropTypes.bool.isRequired,
-    user: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-    authenticated: state.user.authenticated,
-    user: state.user
+    authenticated: state.user.authenticated
 })
 
 export default connect(mapStateToProps)(Navbar)
