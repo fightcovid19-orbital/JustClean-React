@@ -24,8 +24,6 @@ import signup from './pages/signup';
 import cleanerPage from './pages/cleanerPage'
 import searchPage from './pages/searchPage.js'
 
-import axios from 'axios'
-
 const theme = createMuiTheme(themeFile);
 
 const token = localStorage.FBIdToken;
