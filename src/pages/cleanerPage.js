@@ -42,7 +42,7 @@ class cleanerPage extends Component {
             <Grid container spacing={2}>
                 <Grid item sm={4} xs={12}>
                     {this.state.cleanerProfile === null ? (
-                        <ProfileSkeleton />
+                        <p>No cleaner found</p>
                     ) : (
                             <StaticCleanerProfile profile={this.state.cleanerProfile} />
                         )}

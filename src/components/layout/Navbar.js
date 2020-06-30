@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import MyButton from '../../util/MyButton'
 import Notifications from './Notifications'
+import SearchBar from './SearchBar'
 
 // MUI stuff
 import AppBar from '@material-ui/core/AppBar'
@@ -15,18 +16,19 @@ import HomeIcon from '@material-ui/icons/Home'
 
 class Navbar extends Component {
     render() {
-        const { authenticated, user: {type} } = this.props;
+        const { authenticated, user: { type } } = this.props;
         return (
             <AppBar>
                 <Toolbar className="nav-container">
                     {authenticated ? (
                         <Fragment>
+                            <SearchBar />
                             <Link to='/'>
                                 <MyButton tip='Home'>
                                     <HomeIcon />
                                 </MyButton>
                             </Link>
-                            <Notifications type={type}/>
+                            <Notifications type={type} />
                         </Fragment>
                     ) : (
                             <Fragment>

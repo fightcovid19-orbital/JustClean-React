@@ -5,11 +5,13 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import themeFile from './util/theme'
 import jwtDecode from 'jwt-decode'
+import axios from 'axios'
 
 // Redux
 import { Provider } from 'react-redux';
 import store from './redux/store'
 import { logoutUser } from './redux/actions/userActions'
+import { SET_AUTHENTICATED } from './redux/types'
 
 // Components
 import Navbar from './components/layout/Navbar';
@@ -20,6 +22,7 @@ import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
 import cleanerPage from './pages/cleanerPage'
+import searchPage from './pages/searchPage.js'
 
 const theme = createMuiTheme(themeFile);
 
@@ -29,6 +32,9 @@ if (token) {
   console.log(decodedToken);
   if (decodedToken.exp * 1000 < Date.now()) { // inside decodedtoken has exp as expired time
     store.dispatch(logoutUser());
+  } else {
+    store.dispatch({ type: SET_AUTHENTICATED });
+    axios.defaults.headers.common['Authorization'] = token;
   }
 }
 
@@ -44,6 +50,7 @@ function App() {
               <AuthRoute exact path='/login' component={login} />
               <AuthRoute exact path='/signup' component={signup} />
               <Route exact path='/cleaners/:cleanerName' component={cleanerPage} />
+              <Route exact path='/cleaners/search/:location' component={searchPage} />
             </Switch>
           </div>
         </Router>
