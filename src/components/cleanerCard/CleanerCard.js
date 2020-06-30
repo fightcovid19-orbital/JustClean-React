@@ -7,6 +7,7 @@ import CleanerDialog from './CleanerDialog'
 import LikeButton from './LikeButton'
 import UnlikeButton from './UnlikeButton'
 import CommentDialog from './CommentDialog'
+import ReserveButton from '../notes/ReserveButton'
 
 // MUI stuff
 import Card from '@material-ui/core/Card'
@@ -62,6 +63,7 @@ class CleanerCard extends Component {
                     </MyButton>
                     <span>{hiredCount} Hired</span>
                     <CommentDialog cleanerName={cleanerName} />
+                    <ReserveButton cleanerName={cleanerName} />
                     <CleanerDialog cleanerName={cleanerName} />
                 </CardContent>
             </Card>

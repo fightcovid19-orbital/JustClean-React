@@ -8,7 +8,9 @@ import {
     CANCELUNLIKE_CLEANER,
     UNLIKE_CLEANER,
     DELETE_CLEANER,
-    MARK_NOTIFICATIONS_READ
+    MARK_NOTIFICATIONS_READ,
+    RESERVE,
+    CANCEL_RESERVE
 } from '../types';
 
 const initialState = {
@@ -16,7 +18,9 @@ const initialState = {
     loadingUser: false,
     credentials: {},
     likes: [],
-    notifications: []
+    unlikes: [],
+    notifications: [],
+    reserve: {}
 };
 
 export default function (state = initialState, action) {
@@ -76,6 +80,15 @@ export default function (state = initialState, action) {
             state.notifications.forEach(not => (not.read = true));
             return {
                 ...state
+            }
+        case RESERVE:
+            return {
+                ...state
+            }
+        case CANCEL_RESERVE:
+            return {
+                ...state,
+                reserve: {}
             }
         default:
             return state;

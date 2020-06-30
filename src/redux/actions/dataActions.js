@@ -13,7 +13,9 @@ import {
     LOADING_UI,
     SUBMIT_COMMENT,
     SET_HISTORIES,
-    SET_RESERVATIONS
+    SET_RESERVATIONS,
+    RESERVE,
+    CANCEL_RESERVE
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -202,4 +204,34 @@ export const getReservations = () => (dispatch) => {
                 payload: []
             })
         })
+}
+
+// reserve
+export const reserve = (cleanerName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.get(`/reserve/${cleanerName}`)
+        .then(res => {
+            dispatch(getCustomerData()) // to refresh 
+            dispatch(getCleaners())
+            dispatch({
+                type: RESERVE,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
+}
+
+// cancel Reserve
+export const cancelReserve = (customerName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.delete(`/reserve/${customerName}`)
+        .then(res => {
+            dispatch(getCustomerData())
+            dispatch(getCleaners())
+            dispatch({
+                type: CANCEL_RESERVE,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
 }
