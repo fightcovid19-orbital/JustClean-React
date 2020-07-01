@@ -7,9 +7,9 @@ import {
     CANCELUNLIKE_CLEANER,
     SET_COMMENTS,
     SET_CLEANER,
-    SUBMIT_COMMENT,
     SET_HISTORIES,
-    SET_RESERVATIONS
+    SET_RESERVATIONS,
+    SET_EMPTY_DATA,
 } from '../types'
 
 const initialState = {
@@ -24,6 +24,8 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
+        case SET_EMPTY_DATA:
+            return initialState;
         case LOADING_DATA:
             return {
                 ...state,
@@ -68,15 +70,13 @@ export default function (state = initialState, action) {
                 comments: action.payload,
                 loadingData: false
             };
-        // case SUBMIT_COMMENT:
-        //     return state;
-        case SET_HISTORIES: 
+        case SET_HISTORIES:
             return {
                 ...state,
                 histories: action.payload,
                 loadingData: false
             };
-        case SET_RESERVATIONS: 
+        case SET_RESERVATIONS:
             return {
                 ...state,
                 reservations: action.payload,

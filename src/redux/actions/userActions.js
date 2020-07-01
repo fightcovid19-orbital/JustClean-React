@@ -6,7 +6,8 @@ import {
     SET_UNAUTHENTICATED,
     LOADING_USER,
     DELETE_CLEANER,
-    MARK_NOTIFICATIONS_READ
+    MARK_NOTIFICATIONS_READ,
+    SET_EMPTY_DATA
 } from '../types';
 import axios from 'axios';
 import { getCleaners, getHistories, getReservations } from './dataActions'
@@ -87,6 +88,7 @@ export const logoutUser = () => (dispatch) => {
     localStorage.removeItem('state');
     delete axios.defaults.headers.common['Authorization'];
     dispatch({ type: SET_UNAUTHENTICATED });
+    dispatch({ type: SET_EMPTY_DATA })
 }
 
 const setAuthorizationHeader = (token) => {
@@ -142,7 +144,7 @@ export const deleteCleaner = () => dispatch => {
 
 // mark notification read for cleaners profiile 
 export const markNotificationsRead = (type, notificationIds) => dispatch => {
-    if (type === 'cleaner')  {
+    if (type === 'cleaner') {
         axios.post('/cleanerNotifications', notificationIds)
             .then(res => {
                 dispatch({
@@ -159,5 +161,5 @@ export const markNotificationsRead = (type, notificationIds) => dispatch => {
             })
             .catch(err => console.log(err));
     }
-    
+
 }

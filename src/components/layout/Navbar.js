@@ -16,13 +16,13 @@ import HomeIcon from '@material-ui/icons/Home'
 
 class Navbar extends Component {
     render() {
-        const { authenticated } = this.props;
+        const { authenticated, credentials: { type } } = this.props.user;
         return (
             <AppBar>
                 <Toolbar className="nav-container">
                     {authenticated ? (
                         <Fragment>
-                            <SearchBar />
+                            {type === 'customer' ? (<SearchBar />) : null}
                             <Link to='/'>
                                 <MyButton tip='Home'>
                                     <HomeIcon />
@@ -44,11 +44,11 @@ class Navbar extends Component {
 }
 
 Navbar.propTypes = {
-    authenticated: PropTypes.bool.isRequired,
+    user: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-    authenticated: state.user.authenticated
+    user: state.user
 })
 
 export default connect(mapStateToProps)(Navbar)

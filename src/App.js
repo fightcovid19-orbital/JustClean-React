@@ -22,7 +22,7 @@ import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
 import cleanerPage from './pages/cleanerPage'
-import searchPage from './pages/searchPage.js'
+import searchPage from './pages/searchPage'
 
 const theme = createMuiTheme(themeFile);
 
