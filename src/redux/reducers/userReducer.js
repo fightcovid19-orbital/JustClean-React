@@ -10,7 +10,9 @@ import {
     DELETE_CLEANER,
     MARK_NOTIFICATIONS_READ,
     RESERVE,
-    CANCEL_RESERVE
+    CANCEL_RESERVE,
+    ACCEPT,
+    REJECT
 } from '../types';
 
 const initialState = {
@@ -81,6 +83,8 @@ export default function (state = initialState, action) {
             return {
                 ...state
             }
+        case ACCEPT:
+        case REJECT:
         case RESERVE:
             return {
                 ...state

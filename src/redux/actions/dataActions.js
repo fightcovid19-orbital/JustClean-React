@@ -15,7 +15,9 @@ import {
     SET_HISTORIES,
     SET_RESERVATIONS,
     RESERVE,
-    CANCEL_RESERVE
+    CANCEL_RESERVE,
+    ACCEPT,
+    REJECT
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -224,12 +226,40 @@ export const reserve = (cleanerName) => (dispatch) => {
 // cancel Reserve
 export const cancelReserve = (customerName) => (dispatch) => {
     dispatch({ type: LOADING_DATA });
-    axios.delete(`/reserve/${customerName}`)
+    axios.delete(`/custReserve/${customerName}`)
         .then(res => {
             dispatch(getCustomerData())
             dispatch(getCleaners())
             dispatch({
                 type: CANCEL_RESERVE,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
+}
+
+// Accept Reserve
+export const accept = (customerName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.get(`/history/${customerName}`)
+        .then(res => {
+            dispatch(getReservations())
+            dispatch({
+                type: ACCEPT,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
+}
+
+// reject
+export const reject = (customerName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.delete(`/cleanerReserve/${customerName}`)
+        .then(res => {
+            dispatch(getReservations())
+            dispatch({
+                type: REJECT,
                 payload: res.data
             })
         })

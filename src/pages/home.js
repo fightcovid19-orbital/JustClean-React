@@ -25,6 +25,12 @@ const styles = theme => ({
     ...theme.spreadThis,
     title: {
         marginLeft: 100
+    },
+    scrollablePaper: {
+        maxHeight:400, 
+        overflow:'auto',
+        padding: 20,
+        marginRight: '20px'
     }
 })
 
@@ -52,7 +58,7 @@ class home extends Component {
         let recentHistoriesMarkup = (histories)
             ? histories.map(history => <HistoryCard key={history.historyId} history={history} />)
             : <p>Have not hired anyone before</p>;
-        let recentReservesMarkup = (reservations)
+        let recentReservesMarkup = (reservations)// it check the collections instead the particular person 
             ? reservations.map(reserve => <ReserveCard key={reserve.customerName} reserve={reserve}/>)
             : <p>No one reserve you yet</p>
 
@@ -65,7 +71,7 @@ class home extends Component {
             feed = recentCleanersMarkup
             profile = <CustomerProfile />
             notes = (
-                <Paper className={classes.paper} styles={{maxHeight:200, overflow:'auto'}}>
+                <Paper className={classes.scrollablePaper} >
                     <Typography variant="h5" color='primary' className={classes.title}>
                         History
                     </Typography>
@@ -76,7 +82,7 @@ class home extends Component {
             feed = recentCommentsMarkup
             profile = <CleanerProfile />
             notes = (
-                <Paper className={classes.paper} styles={{maxHeight:200, overflow:'auto'}}>
+                <Paper className={classes.scrollablePaper} >
                     <Typography variant="h5" color='primary' className={classes.title}>
                         Reservations
                     </Typography>

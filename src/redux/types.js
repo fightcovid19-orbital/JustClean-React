@@ -25,3 +25,5 @@ export const SET_HISTORIES ='SET_HISTORIES';
 export const SET_RESERVATIONS ='SET_RESERVATIONS';
 export const RESERVE = 'RESERVE';
 export const CANCEL_RESERVE = 'CANCEL_RESERVE';
+export const ACCEPT = 'ACCEPT';
+export const REJECT = 'REJECT';

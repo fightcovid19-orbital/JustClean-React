@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import withStyle from '@material-ui/core/styles/withStyles'
 import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
+import AcceptButton from './AcceptButton'
+import RejectButton from './RejectButton'
 
 // MUI stuff
 import Card from '@material-ui/core/Card'
@@ -50,6 +52,8 @@ class ReserveCard extends Component {
                     <Typography variant="body2" >
                         location: {location}
                     </Typography>
+                    <AcceptButton customerName={customerName}/>
+                    <RejectButton customerName={customerName}/>
                 </CardContent>
             </Card>
         )
