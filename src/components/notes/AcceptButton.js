@@ -7,11 +7,12 @@ import CheckIcon from '@material-ui/icons/Check'
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { accept } from '../../redux/actions/dataActions'
+import { accept, record } from '../../redux/actions/dataActions'
 
 export class AcceptButton extends Component {
     accept = () => {
         this.props.accept(this.props.customerName);
+        this.props.record(this.props.customerName);
     };
 
     render() {
@@ -29,6 +30,7 @@ AcceptButton.propTypes = {
     user: PropTypes.object.isRequired,
     customerName: PropTypes.string.isRequired,
     accpet: PropTypes.func.isRequired,
+    record: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -36,7 +38,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionsToProps = {
-    accept
+    accept, 
+    record
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(AcceptButton)

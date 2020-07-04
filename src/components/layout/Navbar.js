@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import MyButton from '../../util/MyButton'
 import Notifications from './Notifications'
 import SearchBar from './SearchBar'
+import Records from './Records'
 
 // MUI stuff
 import AppBar from '@material-ui/core/AppBar'
@@ -29,6 +30,7 @@ class Navbar extends Component {
                                 </MyButton>
                             </Link>
                             <Notifications />
+                            {type === 'cleaner' ? (<Records />) : null}
                         </Fragment>
                     ) : (
                             <Fragment>

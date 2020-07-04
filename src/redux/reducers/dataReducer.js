@@ -10,6 +10,7 @@ import {
     SET_HISTORIES,
     SET_RESERVATIONS,
     SET_EMPTY_DATA,
+    SET_RECORDS
 } from '../types'
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
     comment: {},
     reservations: [],
     histories: [],
+    records: [],
     loadingData: false
 };
 
@@ -80,6 +82,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 reservations: action.payload,
+                loadingData: false
+            };
+        case SET_RECORDS:
+            return {
+                ...state,
+                records: action.payload,
                 loadingData: false
             };
         default:

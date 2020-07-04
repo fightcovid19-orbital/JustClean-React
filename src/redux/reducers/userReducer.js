@@ -12,7 +12,9 @@ import {
     RESERVE,
     CANCEL_RESERVE,
     ACCEPT,
-    REJECT
+    REJECT,
+    RECORD,
+    DELETE_RECORD
 } from '../types';
 
 const initialState = {
@@ -93,6 +95,26 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 reserve: {}
+            }
+        case RECORD:
+            return {
+                ...state,
+                records: [
+                    ...state.records,
+                    {
+                        cleanerName: state.credentials.cleanerName,
+                        customerName: action.payload.customerName,
+                        customerImage: action.payload.customerImage,
+                        customerLocation: action.payload.location
+                    }
+                ]
+            }
+        case DELETE_RECORD:
+            return {
+                ...state,
+                records: state.records.filter(record => (
+                    record.customerName !== action.payload.customerName 
+                    && record.cleanerName !== state.credentials.cleanerName ))
             }
         default:
             return state;

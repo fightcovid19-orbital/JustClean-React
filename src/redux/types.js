@@ -27,3 +27,6 @@ export const RESERVE = 'RESERVE';
 export const CANCEL_RESERVE = 'CANCEL_RESERVE';
 export const ACCEPT = 'ACCEPT';
 export const REJECT = 'REJECT';
+export const SET_RECORDS = 'SET_RECORDS';
+export const RECORD = 'RECORD';
+export const DELETE_RECORD = 'DELETE_RECORD';

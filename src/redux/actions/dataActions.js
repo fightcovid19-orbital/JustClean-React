@@ -17,7 +17,10 @@ import {
     RESERVE,
     CANCEL_RESERVE,
     ACCEPT,
-    REJECT
+    REJECT,
+    SET_RECORDS,
+    RECORD,
+    DELETE_RECORD
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -260,6 +263,54 @@ export const reject = (customerName) => (dispatch) => {
             dispatch(getReservations())
             dispatch({
                 type: REJECT,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
+}
+
+// Get records
+export const getRecords = () => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.get('/records')
+        .then(res => {
+            dispatch({
+                type: SET_RECORDS,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_RECORDS,
+                payload: []
+            })
+        })
+}
+
+// record
+export const record = (customerName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.get(`/record/${customerName}`)
+        .then(res => {
+            dispatch(getRecords())
+            dispatch(getCleanerData())
+            dispatch({
+                type: RECORD,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
+}
+
+// delete record
+export const deleteRecord = (recordId) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.delete(`/record/${recordId}`)
+        .then(res => {
+            dispatch(getRecords())
+            dispatch(getCleanerData())
+            dispatch({
+                type: DELETE_RECORD,
                 payload: res.data
             })
         })
