@@ -74,7 +74,7 @@ class Records extends Component {
                     const recordId = cleanerName + ':' + customerName;
 
                     return (
-                        <MenuItem key={customerName} onClick={this.handleClose}>
+                        <MenuItem key={customerName}>
                             <Grid container spacing={1}>
                                 <Grid item>
                                     <img src={customerImage} alt="Profile Image" className={classes.image} />
@@ -96,7 +96,7 @@ class Records extends Component {
                     )
                 })
             ) : (
-                <MenuItem onClick={this.handleClose}>
+                <MenuItem onCLick={this.handleClose}>
                     You have no any record
                 </MenuItem>
             )

@@ -1,6 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import MyButton from '../../util/MyButton'
+
+// Mui
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogActions from '@material-ui/core/DialogActions'
+import Button from '@material-ui/core/Button'
 
 // Icons
 import DeleteIcon from '@material-ui/icons/DeleteOutline'
@@ -10,18 +16,52 @@ import { connect } from 'react-redux'
 import { deleteRecord } from '../../redux/actions/dataActions'
 
 export class DeleteRecordButton extends Component {
+    state = {
+        open: false
+    }
+
+    handleOpen = () => {
+        this.setState({open: true})
+    }
+
+    handleClose = () => {
+        this.setState({open: false})
+    }
+
     deleteRecord = () => {
         this.props.deleteRecord(this.props.recordId);
+        this.handleClose();
     };
 
     render() {
-        const deleteButton = (
-            <MyButton tip='delete' onClick={this.deleteRecord}>
-                <DeleteIcon color='secondary' />
-            </MyButton>
+        return (
+            <Fragment>
+                <MyButton 
+                    tip="Delete" 
+                    onClick={this.handleOpen}
+                >
+                    <DeleteIcon color="secondary" />
+                </MyButton>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleclose}
+                    fullWidth
+                    maxWidth="sm"
+                >
+                    <DialogTitle>
+                        Are you sure you want to delete this record?
+                    </DialogTitle>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            Cancel
+                        </Button>
+                        <Button onClick={this.deleteRecord} color="secondary">
+                            Delete
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </Fragment>
         )
-            
-        return deleteButton;
     }
 }
 
