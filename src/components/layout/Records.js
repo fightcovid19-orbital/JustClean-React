@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import Badge from '@material-ui/core/Badge'
+import Grid from '@material-ui/core/Grid'
 
 // Icon
 import AssignmentIcon from '@material-ui/icons/AssignmentInd'
@@ -20,6 +21,7 @@ import { getRecords } from '../../redux/actions/dataActions';
 
 
 const styles = theme => ({
+    ...theme.spreadThis,
     image: {
         width: 100,
         height: 100,
@@ -27,6 +29,9 @@ const styles = theme => ({
         maxWidth: '100%',
         borderRadius: '50%',
         margin: 15
+    },
+    name: {
+        marginTop: 30
     }
 })
 
@@ -70,14 +75,23 @@ class Records extends Component {
 
                     return (
                         <MenuItem key={customerName} onClick={this.handleClose}>
-                            <img src={customerImage} alt="Profile Image" className={classes.image} />
-                            <Typography variant="h5" color='primary'>
-                                {customerName}
-                            </Typography>
-                            <Typography variant="body2" >
-                                location: {location}
-                            </Typography>
-                            <DeleteRecordButton recordId={recordId} />
+                            <Grid container spacing={1}>
+                                <Grid item>
+                                    <img src={customerImage} alt="Profile Image" className={classes.image} />
+                                </Grid>
+                                <Grid item xs={12} sm>
+                                    <Typography className={classes.name} variant="h5" color='primary'>
+                                        {customerName}
+                                    </Typography>
+                                    <hr className={classes.invisibleSeparator}/>
+                                    <Typography variant="body2" >
+                                        location: {location}
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <DeleteRecordButton recordId={recordId} />
+                                </Grid>
+                            </Grid>
                         </MenuItem>
                     )
                 })

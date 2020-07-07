@@ -105,7 +105,7 @@ export default function (state = initialState, action) {
                         cleanerName: state.credentials.cleanerName,
                         customerName: action.payload.customerName,
                         customerImage: action.payload.customerImage,
-                        customerLocation: action.payload.location
+                        customerLocation: action.payload.customerLocation
                     }
                 ]
             }

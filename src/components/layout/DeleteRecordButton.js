@@ -17,7 +17,7 @@ export class DeleteRecordButton extends Component {
     render() {
         const deleteButton = (
             <MyButton tip='delete' onClick={this.deleteRecord}>
-                <ClearIcon color='primary' />
+                <ClearIcon color='secondary' />
             </MyButton>
         )
             

@@ -25,10 +25,6 @@ import { getCleaner } from '../../redux/actions/dataActions'
 
 const style = (theme) => ({
     ...theme.spreadThis,
-    invisibleSeparator: {
-        border: 'none',
-        margin: 1
-    },
     profileImage: {
         maxWidth: 200,
         height: 200,
