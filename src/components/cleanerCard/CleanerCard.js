@@ -8,6 +8,7 @@ import LikeButton from './LikeButton'
 import UnlikeButton from './UnlikeButton'
 import CommentDialog from './CommentDialog'
 import ReserveButton from '../notes/ReserveButton'
+import ChatDialog from './ChatDialog'
 
 // MUI stuff
 import Card from '@material-ui/core/Card'
@@ -19,6 +20,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 // Redux
 import { connect } from 'react-redux'
+
 
 const style = {
     card: {
@@ -64,6 +66,7 @@ class CleanerCard extends Component {
                     <span>{hiredCount} Hired</span>
                     <CommentDialog cleanerName={cleanerName} />
                     <ReserveButton cleanerName={cleanerName} />
+                    <ChatDialog cleanerName={cleanerName} />
                     <CleanerDialog cleanerName={cleanerName} />
                 </CardContent>
             </Card>
