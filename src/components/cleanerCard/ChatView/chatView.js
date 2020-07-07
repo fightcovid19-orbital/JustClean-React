@@ -1,14 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
 
-class ChatViewComponent extends React.Component {
+class ChatView extends Component {
 
-    componentDidMount = () => {
-        const container = document.getElementById('chatview-container');
-        if (container)
-            container.scrollTo(0, container.scrollHeight);
-    }
     componentDidUpdate = () => {
         const container = document.getElementById('chatview-container');
         if (container)
@@ -26,14 +21,14 @@ class ChatViewComponent extends React.Component {
             return (
                 <div>
                     <div className={classes.chatHeader}>
-                        Your conversation with {this.props.user}
+                        Your conversation with {this.props.chat.users.filter(usr => usr != this.props.user)}
                     </div>
-                    <main id='chatview-container' className={classes.content}>
+                    <main className={classes.content}>
                         {
-                            this.props.chat.messages.map((_msg, _index) => {
+                            this.props.chat.messages.map((msg, index) => {
                                 return (
-                                    <div key={_index} className={_msg.sender === this.props.user ? classes.userSent : classes.friendSent}>
-                                        {_msg.message}
+                                    <div key={index} className={msg.sender === this.props.user ? classes.userSent : classes.friendSent}>
+                                        {msg.message}
                                     </div>
                                 )
                             })
@@ -47,4 +42,4 @@ class ChatViewComponent extends React.Component {
     }
 }
 
-export default withStyles(styles)(ChatViewComponent);
+export default withStyles(styles)(ChatView);

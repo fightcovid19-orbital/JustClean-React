@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MyButton from '../../util/MyButton';
 import axios from 'axios';
-import ChatViewComponent from './ChatView/chatView'
+import ChatView from './chatView/ChatView'
 
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog'
@@ -12,6 +12,8 @@ import DialogContent from '@material-ui/core/DialogContent'
 // Icons
 import CloseIcon from '@material-ui/icons/Close'
 import ChatIcon from '@material-ui/icons/Chat'
+
+import { connect } from 'react-redux'
 
 const style = (theme) => ({
     ...theme.spreadThis
@@ -25,7 +27,7 @@ class ChatDialog extends Component {
     }
 
     componentWillMount = () => {
-        axios.get(`/chat/refresh/${this.props.cleanerName}`)
+        axios.get(`/custChat/refresh/${this.props.cleanerName}`)
             .then((res) => {
                 console.log(res.data)
                 this.setState({ chat: res.data })
@@ -44,7 +46,7 @@ class ChatDialog extends Component {
     }
 
     render() {
-        const { classes, cleanerName } = this.props;
+        const { classes, customerName } = this.props;
 
         return (
             <Fragment>
@@ -56,7 +58,7 @@ class ChatDialog extends Component {
                         <CloseIcon />
                     </MyButton>
                     <DialogContent className={classes.dialogContent}>
-                        <ChatViewComponent user={cleanerName} chat={this.state.chat} />
+                        <ChatView user={customerName} chat={this.state.chat} />
                     </DialogContent>
                 </Dialog>
             </Fragment>
@@ -65,9 +67,13 @@ class ChatDialog extends Component {
 }
 
 ChatDialog.propTypes = {
-    cleanerName: PropTypes.string.isRequired,
+    customerName: PropTypes.string.isRequired,
     classes: PropTypes.object.isRequired,
-
+    cleanerName: PropTypes.string.isRequired,
 }
 
-export default withStyles(style)(ChatDialog)
+const mapStateToProps = state => ({
+    customerName: state.user.credentials.customerName
+})
+
+export default connect(mapStateToProps)(withStyles(style)(ChatDialog))
