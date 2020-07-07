@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import PropTypes from 'prop-types'
+import DeleteComment from './DeleteComment';
 
 // MUI Stuff
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -9,8 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
+import { connect } from 'react-redux'
+
 const styles = {
     card: {
+        position: 'relative',
         display: 'flex',
         marginBottom: 20
     },
@@ -29,9 +33,20 @@ const styles = {
 };
 
 class CommentCard extends Component {
+    
     render() {
         dayjs.extend(relativeTime);
-        const { classes, comment: { body, createdAt, userImage, userHandle, replyCount } } = this.props;
+        const { 
+            classes, 
+            comment: { body, createdAt, userImage, userHandle, commentId }, 
+            customerName 
+        } = this.props;
+
+        const  deleteCommentButton = userHandle === customerName? (
+            <DeleteComment commentId={commentId} />
+        ) : (
+            null
+        )
         return (
             <Card className={classes.card}>
                 <img src={userImage} alt="Customer Profile" className={classes.image} />
@@ -39,6 +54,7 @@ class CommentCard extends Component {
                     <Typography variant="h5" color='primary'>
                         {userHandle}
                     </Typography>
+                    {deleteCommentButton}
                     <Typography variant="body2" color="textSecondary">
                         {dayjs(createdAt).fromNow()}
                     </Typography>
@@ -50,9 +66,15 @@ class CommentCard extends Component {
         )
     }
 }
+
 CommentCard.propTypes = {
     classes: PropTypes.object.isRequired,
-    comment: PropTypes.object.isRequired
+    comment: PropTypes.object.isRequired,
+    customerNmae: PropTypes.string
 }
 
-export default withStyles(styles)(CommentCard)
+const mapStateToProps = state => ({
+    customerName: state.user.credentials.customerName
+})
+
+export default connect(mapStateToProps)(withStyles(styles)(CommentCard))

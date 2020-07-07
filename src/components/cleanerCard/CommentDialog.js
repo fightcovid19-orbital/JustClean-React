@@ -11,7 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 
 // Icons
 import CloseIcon from '@material-ui/icons/Close'
-import ChatIcon from '@material-ui/icons/Chat'
+import AddCommentIcon from '@material-ui/icons/AddComment'
 
 // Redux stuff
 import { connect } from 'react-redux'
@@ -73,7 +73,8 @@ class CommentDialog extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.submitComment(this.props.cleanerName, { body: this.state.body })
+        this.props.submitComment(this.props.cleanerName, { body: this.state.body });
+        this.handleClose();
     }
     render() {
         const { classes, UI: { loadingUI }, authenticated
@@ -94,7 +95,7 @@ class CommentDialog extends Component {
         return (
             <Fragment>
                 <MyButton onClick={this.handleOpen} tip='Comment this cleaner' tipClassName={classes.commentButton}>
-                    <ChatIcon color='primary' />
+                    <AddCommentIcon color='primary' />
                 </MyButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth='sm'>
                     <MyButton tip='Close' onClick={this.handleClose} tipClassName={classes.closeButton}>

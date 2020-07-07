@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import MyButton from '../../util/MyButton'
 
 // Icons
-import ClearIcon from '@material-ui/icons/Clear'
+import DeleteIcon from '@material-ui/icons/DeleteOutline'
 
 // Redux stuff
 import { connect } from 'react-redux'
@@ -17,7 +17,7 @@ export class DeleteRecordButton extends Component {
     render() {
         const deleteButton = (
             <MyButton tip='delete' onClick={this.deleteRecord}>
-                <ClearIcon color='secondary' />
+                <DeleteIcon color='secondary' />
             </MyButton>
         )
             

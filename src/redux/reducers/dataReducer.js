@@ -10,7 +10,8 @@ import {
     SET_HISTORIES,
     SET_RESERVATIONS,
     SET_EMPTY_DATA,
-    SET_RECORDS
+    SET_RECORDS,
+    DELETE_COMMENT
 } from '../types'
 
 const initialState = {
@@ -89,6 +90,12 @@ export default function (state = initialState, action) {
                 ...state,
                 records: action.payload,
                 loadingData: false
+            };
+        case DELETE_COMMENT:
+            let commentIndex = state.comments.findIndex(comment => comment.commentId == action.payload);
+            state.comments.splice(commentIndex, 1);
+            return {
+                ...state
             };
         default:
             return state;

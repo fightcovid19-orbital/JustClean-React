@@ -20,7 +20,8 @@ import {
     REJECT,
     SET_RECORDS,
     RECORD,
-    DELETE_RECORD
+    DELETE_RECORD,
+    DELETE_COMMENT
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -315,4 +316,15 @@ export const deleteRecord = (recordId) => (dispatch) => {
             })
         })
         .catch(err => console.log(err))
+}
+
+export const deleteComment = (commentId) => (dispatch)=> {
+    axios.delete(`/comment/${commentId}`)
+        .then(()=> {
+            dispatch({
+                type: DELETE_COMMENT,
+                payload: commentId
+            })
+        })
+        .catch(err => console.log(err));
 }
