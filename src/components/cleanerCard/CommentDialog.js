@@ -30,10 +30,6 @@ const style = (theme) => ({
         padding: 20,
         textAlign: 'center'
     },
-    closeButton: {
-        // position: 'absolute',
-        // left: '90%'
-    },
     expandButton: {
         position: 'absolute',
         left: '85%'
