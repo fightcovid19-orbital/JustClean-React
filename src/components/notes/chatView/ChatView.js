@@ -18,7 +18,7 @@ class ChatView extends Component {
         }
     }
     componentWillMount = () => {
-        axios.get(`/chat/refresh/cleaner/${this.props.friend}`) // no realtime update
+        axios.get(`/chat/refresh/customer/${this.props.friend}`) // no realtime update
             .then((res) => {
                 this.setState({ chat: res.data })
             })
@@ -41,7 +41,7 @@ class ChatView extends Component {
     render() {
 
         const { classes } = this.props;
-        const { credentials: { customerName } } = this.props.user;
+        const { credentials: { cleanerName } } = this.props.user;
 
         if (this.state.chat === undefined) {
             return (<main className={classes.content}></main>);
@@ -55,7 +55,7 @@ class ChatView extends Component {
                         {
                             this.state.chat.messages.map((msg, index) => {
                                 return (
-                                    <div key={index} className={msg.sender === customerName ? classes.userSent : classes.friendSent}>
+                                    <div key={index} className={msg.sender === cleanerName ? classes.userSent : classes.friendSent}>
                                         {msg.message}
                                     </div>
                                 )
