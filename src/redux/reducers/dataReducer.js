@@ -92,7 +92,7 @@ export default function (state = initialState, action) {
                 loadingData: false
             };
         case DELETE_COMMENT:
-            let commentIndex = state.comments.findIndex(comment => comment.commentId == action.payload);
+            let commentIndex = state.comments.findIndex(comment => comment.commentId === action.payload);
             state.comments.splice(commentIndex, 1);
             return {
                 ...state

@@ -3,12 +3,11 @@ const styles = theme => ({
     content: {
         height: 'calc(100vh - 100px)',
         overflow: 'auto',
-        padding: '25px',
-        marginLeft: '300px',
+        padding: '75px',
         boxSizing: 'border-box',
         overflowY: 'scroll',
         top: '50px',
-        width: 'calc(100% - 300px)',
+        width: '100%',
         position: 'absolute'
     },
 
@@ -39,11 +38,10 @@ const styles = theme => ({
     },
 
     chatHeader: {
-        width: 'calc(100% - 301px)',
+        width: '100%',
         height: '50px',
         backgroundColor: '#344195',
         position: 'fixed',
-        marginLeft: '301px',
         fontSize: '18px',
         textAlign: 'center',
         color: 'white',
