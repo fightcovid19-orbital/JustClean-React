@@ -13,6 +13,22 @@ class ChatTextbox extends React.Component {
             chatText: ''
         };
     }
+    userTyping = (e) => e.keyCode === 13 ? this.submitMessage() : this.setState({ chatText: e.target.value });
+
+    messageValid = (txt) => txt && txt.replace(/\s/g, '').length;
+
+    userClickedInput = () => this.props.userClickedInputFn(); // messageRead
+
+    submitMessage = () => {
+        if (this.messageValid(this.state.chatText)) {
+
+            axios.post(`/chat/cleaner/${this.props.friend}`, { message: this.state.chatText })
+                .then(res => console.log(res)) // refresh chatView?? 
+                .catch(err => console.log(err));
+
+            document.getElementById('chattextbox').value = '';
+        }
+    }
 
     render() {
 
@@ -25,28 +41,13 @@ class ChatTextbox extends React.Component {
                     onKeyUp={(e) => this.userTyping(e)}
                     id='chattextbox'
                     className={classes.chatTextBox}
-                    onFocus={this.userClickedInput}>
+                    onFocus={null}>
                 </TextField>
                 <Send onClick={this.submitMessage} className={classes.sendBtn}></Send>
             </div>
         );
     }
-    userTyping = (e) => e.keyCode === 13 ? this.submitMessage() : this.setState({ chatText: e.target.value });
 
-    messageValid = (txt) => txt && txt.replace(/\s/g, '').length;
-
-    userClickedInput = () => this.props.userClickedInputFn(); // messageRead
-
-    submitMessage = () => {
-        if (this.messageValid(this.state.chatText)) {
-
-            axios.post(`/chat/cleaner/${this.props.friend}`, { message: this.state.chatText })
-                .then(res => { }) // refresh chatView?? 
-                .catch(err => console.log(err));
-
-            document.getElementById('chattextbox').value = '';
-        }
-    }
 }
 
 export default withStyles(styles)(ChatTextbox);
