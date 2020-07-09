@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MyButton from '../../util/MyButton';
 import ChatView from './chatView/ChatView'
+import ChatTextbox from './chatTextbox/ChatTextbox'
 
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog'
@@ -13,7 +14,13 @@ import CloseIcon from '@material-ui/icons/Close'
 import ChatIcon from '@material-ui/icons/Chat'
 
 const style = (theme) => ({
-    ...theme.spreadThis
+    ...theme.spreadThis,
+    closeButton: {
+        color: 'white',
+        position: 'absolute',
+        left: '95%',
+        top: '1%'
+    }
 })
 
 class ChatDialog extends Component {
@@ -43,6 +50,7 @@ class ChatDialog extends Component {
                     </MyButton>
                     <DialogContent >
                         <ChatView friend={customerName} />
+                        <ChatTextbox friend={customerName} />
                     </DialogContent>
                 </Dialog>
             </Fragment>
