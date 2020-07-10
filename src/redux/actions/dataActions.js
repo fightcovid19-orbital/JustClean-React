@@ -6,11 +6,6 @@ import {
     UNLIKE_CLEANER,
     CANCELUNLIKE_CLEANER,
     SET_COMMENTS,
-    SET_ERRORS,
-    CLEAR_ERRORS,
-    LOADING_DATA,
-    STOP_LOADING_UI,
-    LOADING_UI,
     SUBMIT_COMMENT,
     SET_HISTORIES,
     SET_RESERVATIONS,
@@ -21,7 +16,13 @@ import {
     SET_RECORDS,
     RECORD,
     DELETE_RECORD,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    //
+    SET_ERRORS,
+    CLEAR_ERRORS,
+    LOADING_DATA,
+    STOP_LOADING_UI,
+    LOADING_UI,
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -318,9 +319,9 @@ export const deleteRecord = (recordId) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-export const deleteComment = (commentId) => (dispatch)=> {
+export const deleteComment = (commentId) => (dispatch) => {
     axios.delete(`/comment/${commentId}`)
-        .then(()=> {
+        .then(() => {
             dispatch({
                 type: DELETE_COMMENT,
                 payload: commentId

@@ -21,6 +21,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 // Redux stuff
 import { connect } from 'react-redux'
 import { signupUser } from '../redux/actions/userActions'
+import { clearErrors } from '../redux/actions/dataActions'
 
 const style = theme => ({
     ...theme.spreadThis
@@ -38,6 +39,10 @@ class signup extends Component {
             location: '',
             errors: {}
         }
+    }
+
+    componentDidMount() {
+        this.props.clearErrors()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -145,4 +150,4 @@ const mapStateToProps = (state) => ({
     UI: state.UI
 })
 
-export default connect(mapStateToProps, { signupUser })(withStyles(style)(signup))
+export default connect(mapStateToProps, { signupUser, clearErrors })(withStyles(style)(signup))
