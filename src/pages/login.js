@@ -12,6 +12,12 @@ import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 // Redux stuff
 import { connect } from 'react-redux';
@@ -74,13 +80,25 @@ class login extends Component {
                         <TextField id='password' name='password' type='password' label='Password' className={classes.textField}
                             value={this.state.password} onChange={this.handleChange} fullWidth
                             helperText={errors.password} error={errors.password ? true : false} />
-                        <TextField id='type' name='type' type='text' label="Type, e.g 'cleaner' or 'customer' "
-                            className={classes.textField}
-                            value={this.state.type} onChange={this.handleChange} fullWidth
-                            helperText={errors.type} error={errors.type ? true : false} />
+
+                        <FormControl component="fieldset" className={classes.textField} >
+                            <FormLabel component="legend" >
+                                Type
+                            </FormLabel>
+                            <RadioGroup row aria-label="type" name="type" value={this.state.type} onChange={this.handleChange}>
+                                <FormControlLabel value="customer" control={<Radio color='primary' />} label="Customer" />
+                                <FormControlLabel value="cleaner" control={<Radio color='primary' />} label="Cleaner" />
+                            </RadioGroup>
+                            {!loadingUI && errors.type ?
+                                <FormHelperText error={errors.type ? true : false}>
+                                    {errors.type}
+                                </FormHelperText> : null}
+                        </FormControl>
+
                         {errors.general && <Typography variant='body2' className={classes.customError}>
                             {errors.general}
                         </Typography>}
+                        <hr />
                         <Button type='submit' variant='contained' color='primary' disabled={loadingUI} className={classes.button}>
                             Login {loadingUI && (<CircularProgress size={30} className={classes.progress} />)}
                         </Button>

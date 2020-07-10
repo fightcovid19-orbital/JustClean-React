@@ -11,6 +11,12 @@ import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 // Redux stuff
 import { connect } from 'react-redux'
@@ -81,11 +87,6 @@ class signup extends Component {
                             value={this.state.userName} onChange={this.handleChange} fullWidth
                             helperText={errors.userName} error={errors.userName ? true : false} />
 
-                        <TextField id='type' name='type' type='text' label="Type, e.g 'cleaner' or 'customer' "
-                            className={classes.textField}
-                            value={this.state.type} onChange={this.handleChange} fullWidth
-                            helperText={errors.type} error={errors.type ? true : false} />
-
                         <TextField id='location' name='location' type='text' label="Location, e.g 'Clementi' "
                             className={classes.textField}
                             value={this.state.location} onChange={this.handleChange} fullWidth
@@ -100,6 +101,21 @@ class signup extends Component {
                             value={this.state.confirmPassword} onChange={this.handleChange} fullWidth
                             helperText={errors.confirmPassword} error={errors.confirmPassword ? true : false} />
 
+                        <FormControl component="fieldset" className={classes.textField} >
+                            <FormLabel component="legend" >
+                                Type
+                            </FormLabel>
+                            <RadioGroup row aria-label="type" name="type" value={this.state.type} onChange={this.handleChange}>
+                                <FormControlLabel value="customer" control={<Radio color='primary' />} label="Customer" />
+                                <FormControlLabel value="cleaner" control={<Radio color='primary' />} label="Cleaner" />
+                            </RadioGroup>
+                            {!loadingUI && errors.type ?
+                                <FormHelperText error={errors.type ? true : false}>
+                                    {errors.type}
+                                </FormHelperText> : null}
+                        </FormControl>
+
+                        <hr />
                         {errors.general && <Typography variant='body2' className={classes.customError}>
                             {errors.general}
                         </Typography>}
