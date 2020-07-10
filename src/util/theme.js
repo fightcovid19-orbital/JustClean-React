@@ -1,9 +1,9 @@
 export default {
     palette: {
         primary: {
-            light: '#33c9dc',
+            light: '#ffb74d',
             main: '#ff9800', // orange colour Navbar
-            dark: '#008394',
+            dark: '#f57c00',
             contrastText: '#000', // black colour font
         },
         secondary: {

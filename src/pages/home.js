@@ -20,6 +20,7 @@ import Paper from '@material-ui/core/Paper'
 import { connect } from 'react-redux'
 import { getComments } from '../redux/actions/dataActions'
 import { Typography } from '@material-ui/core'
+import { LOADING_DATA } from '../redux/types'
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -63,7 +64,7 @@ class home extends Component {
             : <p>No one reserve you yet</p>
 
         let feed, profile, notes
-        if (loadingUser) {
+        if (loadingUser || loadingData) {
             feed = <CardSkeleton />
             profile = <ProfileSkeleton />
             notes = <NoteSkeleton />

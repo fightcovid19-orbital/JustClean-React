@@ -17,7 +17,7 @@ const styles = theme => ({
         boxSizing: 'border-box',
         wordWrap: 'break-word',
         marginTop: '10px',
-        backgroundColor: '#707BC4',
+        backgroundColor: '#ffb74d',
         color: 'white',
         width: '300px',
         borderRadius: '10px'
@@ -30,7 +30,7 @@ const styles = theme => ({
         boxSizing: 'border-box',
         wordWrap: 'break-word',
         marginTop: '10px',
-        backgroundColor: '#707BC4',
+        backgroundColor: '#ffb74d',
         color: 'white',
         width: '300px',
         borderRadius: '10px'
@@ -39,7 +39,7 @@ const styles = theme => ({
     chatHeader: {
         width: '100%',
         height: '50px',
-        backgroundColor: '#344195',
+        backgroundColor: '#ff9800',
         fontSize: '18px',
         textAlign: 'center',
         color: 'white',
