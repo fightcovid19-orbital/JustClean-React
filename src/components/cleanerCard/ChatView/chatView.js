@@ -17,7 +17,8 @@ class ChatView extends Component {
             }
         }
     }
-    componentWillMount = () => {
+
+    componentDidMount() {
         axios.get(`/chat/refresh/cleaner/${this.props.friend}`) // no realtime update
             .then((res) => {
                 this.setState({ chat: res.data })
@@ -26,16 +27,21 @@ class ChatView extends Component {
                 console.log(err)
             })
     }
-    componentDidMount = () => {
-        const container = document.getElementById('chatview-container');
-        if (container)
-            container.scrollTo(0, container.scrollHeight);
-    }
 
-    componentDidUpdate = () => {
+
+    componentDidUpdate() {
         const container = document.getElementById('chatview-container');
-        if (container)
+        if (container) {
             container.scrollTo(0, container.scrollHeight);
+        }
+        
+        axios.get(`/chat/refresh/cleaner/${this.props.friend}`) // no realtime update
+            .then((res) => {
+                this.setState({ chat: res.data })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     render() {
