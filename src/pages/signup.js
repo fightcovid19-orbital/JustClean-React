@@ -120,7 +120,7 @@ class signup extends Component {
                                 </FormHelperText> : null}
                         </FormControl>
 
-                        <hr />
+                        <hr className={classes.invisibleSeparator}/>
                         {errors.general && <Typography variant='body2' className={classes.customError}>
                             {errors.general}
                         </Typography>}

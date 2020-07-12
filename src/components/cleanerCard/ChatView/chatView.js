@@ -6,6 +6,7 @@ import axios from 'axios'
 
 // Redux stuff
 import { connect } from 'react-redux'
+import { getChats } from '../../../redux/actions/dataActions'
 
 class ChatView extends Component {
     constructor() {
@@ -19,39 +20,42 @@ class ChatView extends Component {
     }
 
     componentDidMount() {
-        axios.get(`/chat/refresh/cleaner/${this.props.friend}`) // no realtime update
+        this.props.getChats(this.props.friend);
+        /*axios.get(`/chat/refresh/cleaner/${this.props.friend}`) // no realtime update
             .then((res) => {
                 this.setState({ chat: res.data })
             })
             .catch((err) => {
                 console.log(err)
-            })
+            })*/
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if(this.state.chat.messages !== prevState.chat.messages){
+            const container = document.getElementById('chatview-container');
+            if (container) {
+                container.scrollTo(0, container.scrollHeight);
+            }
 
-    componentDidUpdate() {
-        const container = document.getElementById('chatview-container');
-        if (container) {
-            container.scrollTo(0, container.scrollHeight);
+            this.props.getChats(this.props.friend);
+            /*axios.get(`/chat/refresh/cleaner/${this.props.friend}`) // no realtime update
+                .then((res) => {
+                    this.setState({ chat: res.data })
+                })
+                .catch((err) => {
+                    console.log(err)
+                })*/
         }
-        
-        axios.get(`/chat/refresh/cleaner/${this.props.friend}`) // no realtime update
-            .then((res) => {
-                this.setState({ chat: res.data })
-            })
-            .catch((err) => {
-                console.log(err)
-            })
     }
 
     render() {
-
         const { classes } = this.props;
         const { credentials: { customerName } } = this.props.user;
+        const { chatMessages } = this.props.data;
 
-        if (this.state.chat === undefined) {
+        if (chatMessages) {
             return (<main className={classes.content}></main>);
-        } else if (this.state.chat !== undefined) {
+        } else {
             return (
                 <div>
                     <div className={classes.chatHeader}>
@@ -59,7 +63,7 @@ class ChatView extends Component {
                     </div>
                     <main id='chatview-container' className={classes.content}>
                         {
-                            this.state.chat.messages.map((msg, index) => {
+                            chatMessages.map((msg, index) => {
                                 return (
                                     <div key={index} className={msg.sender === customerName ? classes.userSent : classes.friendSent}>
                                         {msg.message}
@@ -70,19 +74,20 @@ class ChatView extends Component {
                     </main>
                 </div>
             );
-        } else {
-            return (<div className='chatview-container'>Loading...</div>);
-        }
+        } 
     }
 }
 ChatView.propTypes = {
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     friend: PropTypes.string.isRequired,
+    getChats: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    data: state.data
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(ChatView))
+export default connect(mapStateToProps, { getChats })(withStyles(styles)(ChatView))

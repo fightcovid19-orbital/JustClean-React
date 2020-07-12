@@ -11,7 +11,8 @@ import {
     SET_RESERVATIONS,
     SET_EMPTY_DATA,
     SET_RECORDS,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    SET_CHAT_MESSAGES
 } from '../types'
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
     reservations: [],
     histories: [],
     records: [],
-    loadingData: false
+    loadingData: false,
+    chatMessages: []
 };
 
 export default function (state = initialState, action) {
@@ -96,6 +98,11 @@ export default function (state = initialState, action) {
             state.comments.splice(commentIndex, 1);
             return {
                 ...state
+            };
+        case SET_CHAT_MESSAGES: 
+            return {
+                ...state,
+                chatMessages: action.payload,
             };
         default:
             return state;
