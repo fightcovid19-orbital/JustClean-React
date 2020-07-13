@@ -12,7 +12,8 @@ import {
     SET_EMPTY_DATA,
     SET_RECORDS,
     DELETE_COMMENT,
-    SET_CHAT_MESSAGES
+    SET_CHAT_MESSAGES,
+    CLEAR_CHATS
 } from '../types'
 
 const initialState = {
@@ -99,11 +100,16 @@ export default function (state = initialState, action) {
             return {
                 ...state
             };
-        case SET_CHAT_MESSAGES: 
+        case SET_CHAT_MESSAGES:
             return {
                 ...state,
                 chatMessages: action.payload,
             };
+        case CLEAR_CHATS:
+            return {
+                ...state,
+                chatMessages: []
+            }
         default:
             return state;
     }

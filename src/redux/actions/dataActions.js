@@ -23,7 +23,8 @@ import {
     LOADING_DATA,
     STOP_LOADING_UI,
     LOADING_UI,
-    SET_CHAT_MESSAGES
+    SET_CHAT_MESSAGES,
+    CLEAR_CHATS
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -333,16 +334,20 @@ export const deleteComment = (commentId) => (dispatch) => {
 
 export const getChats = (friend) => (dispatch) => {
     axios.get(`/chat/refresh/cleaner/${friend}`) // no realtime update
-            .then(res => {
-                dispatch({
-                    type: SET_CHAT_MESSAGES,
-                    payload: res.data.messages
-                })
+        .then(res => {
+            dispatch({
+                type: SET_CHAT_MESSAGES,
+                payload: res.data.messages
             })
-            .catch(err => {
-                dispatch({
-                    type: SET_CHAT_MESSAGES,
-                    payload: []
-                })
+        })
+        .catch(err => {
+            dispatch({
+                type: SET_CHAT_MESSAGES,
+                payload: []
             })
+        })
+}
+
+export const clearChats = () => (dispatch) => {
+    dispatch({ type: CLEAR_CHATS })
 }
