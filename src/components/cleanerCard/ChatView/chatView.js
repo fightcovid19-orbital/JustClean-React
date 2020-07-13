@@ -9,42 +9,22 @@ import { connect } from 'react-redux'
 import { getChats } from '../../../redux/actions/dataActions'
 
 class ChatView extends Component {
-    constructor() {
-        super()
-        this.state = {
-            chat: {
-                messages: [],
-                users: []
-            }
-        }
-    }
 
     componentDidMount() {
-        this.props.getChats(this.props.friend);
-        /*axios.get(`/chat/refresh/cleaner/${this.props.friend}`) // no realtime update
-            .then((res) => {
-                this.setState({ chat: res.data })
-            })
-            .catch((err) => {
-                console.log(err)
-            })*/
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if(this.state.chat.messages !== prevState.chat.messages){
-            const container = document.getElementById('chatview-container');
-            if (container) {
-                container.scrollTo(0, container.scrollHeight);
-            }
-
-            this.props.getChats(this.props.friend);
-            /*axios.get(`/chat/refresh/cleaner/${this.props.friend}`) // no realtime update
-                .then((res) => {
-                    this.setState({ chat: res.data })
+        // if !loadingdata && chatMessages => createChat so can submit message
+        if (!this.props.data.loadingData && (!this.props.data.chatMessages)) {
+            axios.get(`/chat/new/cleaner/${this.props.friend}`)
+                .then(() => {
+                    console.log('new chat created!')
+                    this.props.getChats(this.props.friend)
                 })
                 .catch((err) => {
                     console.log(err)
-                })*/
+                })
+        }
+        const container = document.getElementById('chatview-container');
+        if (container) {
+            container.scrollTo(0, container.scrollHeight);
         }
     }
 
@@ -53,8 +33,16 @@ class ChatView extends Component {
         const { credentials: { customerName } } = this.props.user;
         const { chatMessages } = this.props.data;
 
-        if (chatMessages) {
-            return (<main className={classes.content}></main>);
+        if (!chatMessages) {
+            return (
+                <div>
+                    <div className={classes.chatHeader}>
+                        Your conversation with {this.props.friend}
+                    </div>
+                    <main className={classes.content}></main>
+                </div>
+
+            );
         } else {
             return (
                 <div>
@@ -74,7 +62,7 @@ class ChatView extends Component {
                     </main>
                 </div>
             );
-        } 
+        }
     }
 }
 ChatView.propTypes = {
