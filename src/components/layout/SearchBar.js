@@ -1,16 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 // MUI stuff
 import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+
+import {regions} from '../../util/Regions'
 
 class SearchBar extends Component {
     state = {
         location: ''
     }
 
-    handleChange = (event) => {
+    handleInputChange = (event, value) => {
         this.setState({
-            [event.target.name]: event.target.value
+            location: value
+        })
+    }
+
+    handleChange = (event, value) => {
+        this.setState({
+            [event.target.name]: value
         })
     }
 
@@ -22,10 +31,37 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <TextField id='location' name='location' type='text' placeholder='Search by Location' variant='outlined' size='small'
-                value={this.state.location} onChange={this.handleChange} onKeyDown={this.handleKeyPress} fullWidth />
+            <Autocomplete
+                id="region-select"
+                style={{ width: 300 }}
+                options={regions}
+                autoHighlight
+                getOptionLabel={(option) => option.regionName}
+                renderOption={(option) => (
+                    <Fragment>
+                        {option.regionName} 
+                    </Fragment>
+                )}
+                onInputChange={this.handleInputChange}
+                onChange={this.handleChange}
+                onKeyDown={this.handleKeyPress}
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        label="Location"
+                        variant="outlined"
+                        inputProps={{
+                            ...params.inputProps,
+                            autoComplete: 'new-password'
+                        }}
+                    />
+                )}
+            />
+
+
         )
     }
 }
+
 
 export default SearchBar

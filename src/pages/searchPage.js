@@ -15,7 +15,7 @@ class cleanerPage extends Component {
         const locationData = {
             location: location
         }
-        axios.post('/location', locationData)
+        axios.post('/locations', locationData)
             .then(res => {
                 this.setState({
                     searchedCleaners: res.data

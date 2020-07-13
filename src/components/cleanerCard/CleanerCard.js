@@ -24,6 +24,7 @@ import { connect } from 'react-redux'
 
 const style = {
     card: {
+        position: 'relative',
         display: 'flex',
         marginBottom: 20
     },

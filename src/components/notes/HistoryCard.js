@@ -21,12 +21,13 @@ const style = {
         marginBottom: 20
     },
     image: {
-        width: 100,
-        height: 100,
+        width: 90,
+        height: 90,
         objectFit: 'cover',
         maxWidth: '100%',
         borderRadius: '50%',
-        margin: 15
+        margin: 15,
+        marginTop: 40
     },
     content: {
         padding: 25,

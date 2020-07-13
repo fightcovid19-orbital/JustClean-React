@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles'
 import MyButton from '../../util/MyButton';
+import { regions } from '../../util/Regions'
 
 // Redux
 import { connect } from 'react-redux'
@@ -14,6 +15,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
 
 // Icons
 import EditIcon from '@material-ui/icons/Edit'
@@ -88,9 +90,15 @@ class EditDetails extends Component {
                             <TextField name='bio' type='text' label='Bio' multiline row='3'
                                 placeholder='A short bio about yourself' className={classes.textField}
                                 value={this.state.bio} onChange={this.handleChange} fullWidth />
-                            <TextField name='location' type='text' label='Location'
-                                placeholder='Where you live' className={classes.textField}
-                                value={this.state.location} onChange={this.handleChange} fullWidth />
+                            <TextField name='location' type='text' label="Location, Region "
+                                className={classes.textField} select
+                                value={this.state.location} onChange={this.handleChange} fullWidth>
+                                    {regions.map((option) => (
+                                        <MenuItem key={option.regionName} value={option.regionName}>
+                                            {option.regionName}
+                                        </MenuItem>
+                                    ))}
+                            </TextField>
                         </form>
                     </DialogContent>
                     <DialogActions>

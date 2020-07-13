@@ -53,7 +53,7 @@ class ChatView extends Component {
         const { credentials: { customerName } } = this.props.user;
         const { chatMessages } = this.props.data;
 
-        if (chatMessages) {
+        if (!chatMessages) {
             return (<main className={classes.content}></main>);
         } else {
             return (

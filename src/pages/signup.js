@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import PropTypes from 'prop-types'
 import AppIcon from '../images/iconword.png'
 import { Link } from 'react-router-dom'
+import { regions } from '../util/Regions'
 
 // MUI stuff
 import Grid from '@material-ui/core/Grid'
@@ -17,6 +18,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import MenuItem from '@material-ui/core/MenuItem';
 
 // Redux stuff
 import { connect } from 'react-redux'
@@ -92,10 +94,16 @@ class signup extends Component {
                             value={this.state.userName} onChange={this.handleChange} fullWidth
                             helperText={errors.userName} error={errors.userName ? true : false} />
 
-                        <TextField id='location' name='location' type='text' label="Location, e.g 'Clementi' "
-                            className={classes.textField}
+                        <TextField id='location' name='location' type='text' label="Location, Region "
+                            className={classes.textField} select
                             value={this.state.location} onChange={this.handleChange} fullWidth
-                            helperText={errors.location} error={errors.location ? true : false} />
+                            helperText={errors.location} error={errors.location ? true : false}>
+                                {regions.map((option) => (
+                                    <MenuItem key={option.regionName} value={option.regionName}>
+                                        {option.regionName}
+                                    </MenuItem>
+                                ))}
+                        </TextField>
 
                         <TextField id='password' name='password' type='password' label='Password' className={classes.textField}
                             value={this.state.password} onChange={this.handleChange} fullWidth
