@@ -13,7 +13,8 @@ import {
     SET_RECORDS,
     DELETE_COMMENT,
     SET_CHAT_MESSAGES,
-    CLEAR_CHATS
+    CLEAR_CHATS,
+    SEND_MESSAGE
 } from '../types'
 
 const initialState = {
@@ -109,6 +110,18 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 chatMessages: []
+            }
+        case SEND_MESSAGE: 
+            return {
+                ...state,
+                chatMessages: [
+                    ...state.chatMessages,
+                    {
+                        message: action.payload.txt.message,
+                        sender: action.payload.sender,
+                        timestamp: action.payload.timestamp
+                    }
+                ]
             }
         default:
             return state;

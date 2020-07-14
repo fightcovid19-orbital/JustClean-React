@@ -24,7 +24,8 @@ import {
     STOP_LOADING_UI,
     LOADING_UI,
     SET_CHAT_MESSAGES,
-    CLEAR_CHATS
+    CLEAR_CHATS, 
+    SEND_MESSAGE
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -365,4 +366,15 @@ export const getChats = (friend) => (dispatch) => {
 
 export const clearChats = () => (dispatch) => {
     dispatch({ type: CLEAR_CHATS })
+}
+
+export const sendMessage = (friend, chatText) => (dispatch) => {
+    axios.post(`/chat/cleaner/${friend}`, chatText.txt)
+        .then(() => {
+            dispatch({
+                type: SEND_MESSAGE,
+                payload: chatText
+            })
+        }) // refresh chatView?? 
+        .catch(err => console.log(err));
 }

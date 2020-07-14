@@ -10,7 +10,7 @@ import { getChats } from '../../../redux/actions/dataActions'
 
 class ChatView extends Component {
 
-    componentDidMount() {
+    componentDidUpdate() {
         const container = document.getElementById('chatview-container');
         if (container) {
             container.scrollTo(0, container.scrollHeight);
