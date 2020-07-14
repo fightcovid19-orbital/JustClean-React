@@ -11,23 +11,22 @@ import { getChats } from '../../../redux/actions/dataActions'
 class ChatView extends Component {
 
     componentDidMount() {
-        //this.props.getChats(this.props.friend);
         // if !loadingdata && chatMessages => createChat so can submit message
-        if (!this.props.data.chatMessages) {
-            axios.get(`/chat/new/cleaner/${this.props.friend}`)
-                .then(() => {
-                    console.log('new chat created!')
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-        }
+        // if (!this.props.data.chatMessages) {
+        //     axios.get(`/chat/new/cleaner/${this.props.friend}`)
+        //         .then(() => {
+        //             console.log('new chat created!')
+        //         })
+        //         .catch((err) => {
+        //             console.log(err)
+        //         })
+        // }
 
         const container = document.getElementById('chatview-container');
         if (container) {
             container.scrollTo(0, container.scrollHeight);
         }
-        
+
     }
 
     render() {

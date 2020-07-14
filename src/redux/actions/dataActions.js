@@ -335,12 +335,27 @@ export const deleteComment = (commentId) => (dispatch) => {
 export const getChats = (friend) => (dispatch) => {
     axios.get(`/chat/refresh/cleaner/${friend}`) // no realtime update
         .then(res => {
-            dispatch({
-                type: SET_CHAT_MESSAGES,
-                payload: res.data.messages
-            })
+            if (!res.data.messages) {
+                axios.get(`/chat/new/cleaner/${friend}`)
+                    .then(() => {
+                        console.log('new chat created!')
+                        dispatch({
+                            type: SET_CHAT_MESSAGES,
+                            payload: []
+                        })
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            } else {
+                dispatch({
+                    type: SET_CHAT_MESSAGES,
+                    payload: res.data.messages
+                })
+            }
         })
         .catch(err => {
+            console.log(err)
             dispatch({
                 type: SET_CHAT_MESSAGES,
                 payload: []
