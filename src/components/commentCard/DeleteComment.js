@@ -38,7 +38,7 @@ class DeleteComment extends Component {
 
     deleteComment = () => {
         this.props.deleteComment(this.props.commentId);
-        this.handleCLose();
+        this.handleClose();
     }
 
     render() {

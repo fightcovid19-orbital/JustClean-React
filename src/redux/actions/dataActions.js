@@ -354,7 +354,7 @@ export const createChat = (friend) => dispatch => {
 export const getChats = (friend) => (dispatch) => {
     axios.get(`/chat/refresh/cleaner/${friend}`) // no realtime update
         .then(res => {
-            if (!res.data.messages) {
+            if (!res.data) {
                 dispatch(createChat(friend));
             } else {
                 dispatch({

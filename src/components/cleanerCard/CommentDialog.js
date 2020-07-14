@@ -70,7 +70,9 @@ class CommentDialog extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.submitComment(this.props.cleanerName, { body: this.state.body });
-        this.handleClose();
+        if (this.props.UI.errors) {
+            this.handleClose();
+        }
     }
     render() {
         const { classes, UI: { loadingUI }, authenticated
