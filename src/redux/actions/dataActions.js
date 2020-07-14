@@ -333,21 +333,29 @@ export const deleteComment = (commentId) => (dispatch) => {
         .catch(err => console.log(err));
 }
 
+export const createChat = (friend) => dispatch => {
+    axios.get(`/chat/new/cleaner/${friend}`)
+        .then(() => {
+            console.log('new chat created!')
+            dispatch({
+                type: SET_CHAT_MESSAGES,
+                payload: []
+            })
+        })
+        .catch((err) => {
+            console.log(err)
+            dispatch({
+                type: SET_CHAT_MESSAGES,
+                payload: []
+            })
+        })
+}
+
 export const getChats = (friend) => (dispatch) => {
     axios.get(`/chat/refresh/cleaner/${friend}`) // no realtime update
         .then(res => {
             if (!res.data.messages) {
-                axios.get(`/chat/new/cleaner/${friend}`)
-                    .then(() => {
-                        console.log('new chat created!')
-                        dispatch({
-                            type: SET_CHAT_MESSAGES,
-                            payload: []
-                        })
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
+                dispatch(createChat(friend));
             } else {
                 dispatch({
                     type: SET_CHAT_MESSAGES,
