@@ -30,16 +30,6 @@ class ChatView extends Component {
         
     }
 
-    componentDidUpdate (prevProps) {
-        if(this.props.data.chatMessages.length !== prevProps.data.chatMessages.length) {
-            this.props.getChats(this.props.friend);
-            const container = document.getElementById('chatview-container');
-            if (container) {
-                container.scrollTo(0, container.scrollHeight);
-            }
-        }
-    }
-
     render() {
         const { classes } = this.props;
         const { credentials: { customerName } } = this.props.user;
