@@ -11,20 +11,32 @@ import { getChats } from '../../../redux/actions/dataActions'
 class ChatView extends Component {
 
     componentDidMount() {
+        //this.props.getChats(this.props.friend);
         // if !loadingdata && chatMessages => createChat so can submit message
-        if (!this.props.data.loadingData && (!this.props.data.chatMessages)) {
+        if (!this.props.data.chatMessages) {
             axios.get(`/chat/new/cleaner/${this.props.friend}`)
                 .then(() => {
                     console.log('new chat created!')
-                    this.props.getChats(this.props.friend)
                 })
                 .catch((err) => {
                     console.log(err)
                 })
         }
+
         const container = document.getElementById('chatview-container');
         if (container) {
             container.scrollTo(0, container.scrollHeight);
+        }
+        
+    }
+
+    componentDidUpdate (prevProps) {
+        if(this.props.data.chatMessages.length !== prevProps.data.chatMessages.length) {
+            this.props.getChats(this.props.friend);
+            const container = document.getElementById('chatview-container');
+            if (container) {
+                container.scrollTo(0, container.scrollHeight);
+            }
         }
     }
 
@@ -65,6 +77,7 @@ class ChatView extends Component {
         }
     }
 }
+
 ChatView.propTypes = {
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,

@@ -47,10 +47,10 @@ class signup extends Component {
         this.props.clearErrors()
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.UI.errors) {
+    componentDidUpdate(prevProps) {
+        if (this.props.UI.errors !== prevProps.UI.errors) {
             this.setState({
-                errors: nextProps.UI.errors
+                errors: this.props.UI.errors
             })
         }
     }
@@ -132,7 +132,7 @@ class signup extends Component {
                         {errors.general && <Typography variant='body2' className={classes.customError}>
                             {errors.general}
                         </Typography>}
-                        <Button type='submit' variant='contained' color='primary' disable={loadingUI} className={classes.button}>
+                        <Button type='submit' variant='contained' color='primary' disabled={loadingUI} className={classes.button}>
                             Sign Up {loadingUI && (<CircularProgress size={30} className={classes.progress} />)}
                         </Button>
                         <br />
