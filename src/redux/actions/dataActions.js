@@ -17,7 +17,6 @@ import {
     RECORD,
     DELETE_RECORD,
     DELETE_COMMENT,
-    //
     SET_ERRORS,
     CLEAR_ERRORS,
     LOADING_DATA,
@@ -25,7 +24,9 @@ import {
     LOADING_UI,
     SET_CHAT_MESSAGES,
     CLEAR_CHATS, 
-    SEND_MESSAGE
+    SEND_MESSAGE,
+    SET_COMMENT,
+    SET_CLEANER_DATA
 } from '../types'
 import { getCustomerData } from './userActions'
 import axios from 'axios'
@@ -68,13 +69,14 @@ export const getCleanerData = (cleanerName) => (dispatch) => {
     axios.get(`/cleaner/${cleanerName}`)
         .then(res => {
             dispatch({
-                type: SET_COMMENTS,
-                payload: res.data.comments
-            });
+                type: SET_CLEANER_DATA,
+                payload: res.data
+            })
+
         })
         .catch(() => {
             dispatch({
-                type: SET_COMMENTS,
+                type: SET_CLEANER_DATA,
                 payload: null
             });
         });
@@ -384,5 +386,24 @@ export const sendMessage = (friend, chatText) => (dispatch) => {
                 payload: chatText
             })
         }) // refresh chatView?? 
+        .catch(err => console.log(err));
+}
+
+export const editComment = (commentId, commentBody, cleanerName) => (dispatch) => {
+    axios.post(`/comment/edit/${commentId}`, commentBody)
+        .then(()=> {
+            dispatch(getComments(cleanerName));
+        })
+        .catch(err => console.log(err));
+}
+
+export const getComment = (commentId) => (dispatch) => {
+    axios.get(`/comment/${commentId}`)
+        .then(res => {
+            dispatch({
+                type: SET_COMMENT,
+                payload: res.data
+            })
+        })
         .catch(err => console.log(err));
 }

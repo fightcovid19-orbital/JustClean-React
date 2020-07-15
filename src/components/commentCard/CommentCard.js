@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import PropTypes from 'prop-types'
 import DeleteComment from './DeleteComment';
+import EditComment from './EditComment';
 
 // MUI Stuff
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -38,12 +39,18 @@ class CommentCard extends Component {
         dayjs.extend(relativeTime);
         const { 
             classes, 
-            comment: { body, createdAt, userImage, userHandle, commentId }, 
+            comment: { body, createdAt, userImage, userHandle, commentId, commentOn }, 
             customerName 
         } = this.props;
-
+        
         const  deleteCommentButton = userHandle === customerName? (
             <DeleteComment commentId={commentId} />
+        ) : (
+            null
+        )
+
+        const  editCommentButton = userHandle === customerName? (
+            <EditComment commentId={commentId} cleanerName={commentOn} />
         ) : (
             null
         )
@@ -61,6 +68,7 @@ class CommentCard extends Component {
                     <Typography variant="body1">
                         {body}
                     </Typography>
+                    {editCommentButton}
                 </CardContent>
             </Card>
         )

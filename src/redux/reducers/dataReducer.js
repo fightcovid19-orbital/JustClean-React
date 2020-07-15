@@ -14,8 +14,11 @@ import {
     DELETE_COMMENT,
     SET_CHAT_MESSAGES,
     CLEAR_CHATS,
-    SEND_MESSAGE
+    SEND_MESSAGE,
+    SET_COMMENT,
+    SET_CLEANER_DATA
 } from '../types'
+import { reserve } from '../actions/dataActions';
 
 const initialState = {
     cleaners: [],
@@ -26,7 +29,8 @@ const initialState = {
     histories: [],
     records: [],
     loadingData: false,
-    chatMessages: []
+    chatMessages: [],
+    comment: {}
 };
 
 export default function (state = initialState, action) {
@@ -49,6 +53,13 @@ export default function (state = initialState, action) {
                 ...state,
                 cleaner: action.payload
             };
+        case SET_CLEANER_DATA:
+            return {
+                ...state,
+                cleaner: action.payload.user,
+                comments: action.payload.comments,
+                loadingData: false
+            }
         case LIKE_CLEANER:
         case CANCELLIKE_CLEANER:
             let like_index = state.cleaners.findIndex((cleaner) => cleaner.cleanerName === action.payload.cleanerName);
@@ -122,6 +133,12 @@ export default function (state = initialState, action) {
                         timestamp: action.payload.timestamp
                     }
                 ]
+            }
+        case SET_COMMENT: 
+            return {
+                ...state,
+                comment: action.payload,
+                loadingData: false
             }
         default:
             return state;

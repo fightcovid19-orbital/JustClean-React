@@ -14,6 +14,7 @@ export const STOP_LOADING_UI = 'STOP_LOADING_UI'
 // Data reducer types
 export const SET_CLEANERS = 'SET_CLEANERS';
 export const SET_CLEANER = 'SET_CLEANER';
+export const SET_CLEANER_DATA = 'SET_CLEANER_DATA';
 export const LIKE_CLEANER = 'LIKE_CLEANER';
 export const CANCELLIKE_CLEANER = 'CANCELLIKE_CLEANER';
 export const UNLIKE_CLEANER = 'UNLIKE_CLEANER';
