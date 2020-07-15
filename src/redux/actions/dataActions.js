@@ -23,7 +23,7 @@ import {
     STOP_LOADING_UI,
     LOADING_UI,
     SET_CHAT_MESSAGES,
-    CLEAR_CHATS, 
+    CLEAR_CHATS,
     SEND_MESSAGE,
     SET_COMMENT,
     SET_CLEANER_DATA
@@ -341,11 +341,11 @@ export const createChat = (friend) => dispatch => {
         })
 }
 
-export const getChats = (friend) => (dispatch) => {
+export const getChatsWithCleaner = (friend) => (dispatch) => {
     axios.get(`/chat/refresh/cleaner/${friend}`) // no realtime update
         .then(res => {
             if (!res.data) {
-                dispatch(createChat(friend));
+                dispatch(createChat(friend)); // only customer create chat
             } else {
                 dispatch({
                     type: SET_CHAT_MESSAGES,
@@ -362,24 +362,52 @@ export const getChats = (friend) => (dispatch) => {
         })
 }
 
+export const getChatsWithCustomer = (friend) => (dispatch) => {
+    axios.get(`/chat/refresh/customer/${friend}`) // no realtime update
+        .then(res => {
+            dispatch({
+                type: SET_CHAT_MESSAGES,
+                payload: res.data.messages
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: SET_CHAT_MESSAGES,
+                payload: []
+            })
+        })
+}
+
 export const clearChats = () => (dispatch) => {
     dispatch({ type: CLEAR_CHATS })
 }
 
-export const sendMessage = (friend, chatText) => (dispatch) => {
+export const sendMessageToCleaner = (friend, chatText) => (dispatch) => {
     axios.post(`/chat/cleaner/${friend}`, chatText.txt)
         .then(() => {
             dispatch({
                 type: SEND_MESSAGE,
                 payload: chatText
             })
-        }) // refresh chatView?? 
+        })
+        .catch(err => console.log(err));
+}
+
+export const sendMessageToCustomer = (friend, chatText) => (dispatch) => {
+    axios.post(`/chat/customer/${friend}`, chatText.txt)
+        .then(() => {
+            dispatch({
+                type: SEND_MESSAGE,
+                payload: chatText
+            })
+        })
         .catch(err => console.log(err));
 }
 
 export const editComment = (commentId, commentBody, cleanerName) => (dispatch) => {
     axios.post(`/comment/edit/${commentId}`, commentBody)
-        .then(()=> {
+        .then(() => {
             dispatch(getComments(cleanerName));
         })
         .catch(err => console.log(err));

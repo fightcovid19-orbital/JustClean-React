@@ -2,50 +2,36 @@ import React, { Component } from 'react';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types'
-import axios from 'axios'
 
 // Redux stuff
 import { connect } from 'react-redux'
 
 class ChatView extends Component {
-    constructor() {
-        super()
-        this.state = {
-            chat: {
-                messages: [],
-                users: []
-            }
-        }
-    }
-    componentWillMount = () => {
-        axios.get(`/chat/refresh/customer/${this.props.friend}`) // no realtime update
-            .then((res) => {
-                this.setState({ chat: res.data })
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-    componentDidMount = () => {
-        const container = document.getElementById('chatview-container');
-        if (container)
-            container.scrollTo(0, container.scrollHeight);
-    }
 
-    componentDidUpdate = () => {
+    componentDidUpdate() {
         const container = document.getElementById('chatview-container');
-        if (container)
+        if (container) {
             container.scrollTo(0, container.scrollHeight);
+        }
     }
 
     render() {
 
         const { classes } = this.props;
         const { credentials: { cleanerName } } = this.props.user;
+        const { chatMessages } = this.props.data;
 
-        if (this.state.chat === undefined) {
-            return (<main className={classes.content}></main>);
-        } else if (this.state.chat !== undefined) {
+        if (!chatMessages) {
+            return (
+                <div>
+                    <div className={classes.chatHeader}>
+                        Your conversation with {this.props.friend}
+                    </div>
+                    <main className={classes.content}></main>
+                </div>
+
+            );
+        } else {
             return (
                 <div>
                     <div className={classes.chatHeader}>
@@ -53,7 +39,7 @@ class ChatView extends Component {
                     </div>
                     <main id='chatview-container' className={classes.content}>
                         {
-                            this.state.chat.messages.map((msg, index) => {
+                            chatMessages.map((msg, index) => {
                                 return (
                                     <div key={index} className={msg.sender === cleanerName ? classes.userSent : classes.friendSent}>
                                         {msg.message}
@@ -64,8 +50,6 @@ class ChatView extends Component {
                     </main>
                 </div>
             );
-        } else {
-            return (<div className='chatview-container'>Loading...</div>);
         }
     }
 }
@@ -73,10 +57,12 @@ ChatView.propTypes = {
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     friend: PropTypes.string.isRequired,
+    data: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    data: state.data
 })
 
 export default connect(mapStateToProps)(withStyles(styles)(ChatView))

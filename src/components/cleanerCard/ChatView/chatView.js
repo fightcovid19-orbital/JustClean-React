@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types'
-import axios from 'axios'
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { getChats } from '../../../redux/actions/dataActions'
 
 class ChatView extends Component {
 
@@ -59,7 +57,6 @@ ChatView.propTypes = {
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     friend: PropTypes.string.isRequired,
-    getChats: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired
 }
 
@@ -68,4 +65,4 @@ const mapStateToProps = state => ({
     data: state.data
 })
 
-export default connect(mapStateToProps, { getChats })(withStyles(styles)(ChatView))
+export default connect(mapStateToProps)(withStyles(styles)(ChatView))

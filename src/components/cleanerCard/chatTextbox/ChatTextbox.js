@@ -1,13 +1,13 @@
 import React from 'react';
-import axios from 'axios';
 import styles from './styles';
 import TextField from '@material-ui/core/TextField';
 import Send from '@material-ui/icons/Send';
 import { withStyles } from '@material-ui/core/styles';
-
 import PropTypes from 'prop-types'
+
+// Redux
 import { connect } from 'react-redux'
-import { sendMessage } from '../../../redux/actions/dataActions'
+import { sendMessageToCleaner } from '../../../redux/actions/dataActions'
 
 class ChatTextbox extends React.Component {
 
@@ -24,11 +24,11 @@ class ChatTextbox extends React.Component {
     submitMessage = () => {
         if (this.messageValid(this.state.chatText)) {
             const chatText = {
-                txt: {message: this.state.chatText},
+                txt: { message: this.state.chatText },
                 sender: this.props.customerName,
                 timestamp: new Date().toISOString
             }
-            this.props.sendMessage(this.props.friend, chatText)
+            this.props.sendMessageToCleaner(this.props.friend, chatText)
 
             document.getElementById('chattextbox').value = '';
         }
@@ -57,11 +57,11 @@ class ChatTextbox extends React.Component {
 ChatTextbox.propTypes = {
     friend: PropTypes.string.isRequired,
     customerName: PropTypes.string.isRequired,
-    sendMessage: PropTypes.func.isRequired
+    sendMessageToCleaner: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     customerName: state.user.credentials.customerName
 })
 
-export default  connect(mapStateToProps, { sendMessage })(withStyles(styles)(ChatTextbox));
+export default connect(mapStateToProps, { sendMessageToCleaner })(withStyles(styles)(ChatTextbox));

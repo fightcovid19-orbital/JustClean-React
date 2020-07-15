@@ -1,18 +1,20 @@
 import React from 'react';
-import axios from 'axios';
 import styles from './styles';
 import TextField from '@material-ui/core/TextField';
 import Send from '@material-ui/icons/Send';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types'
+
+// Redux 
+import { connect } from 'react-redux'
+import { sendMessageToCustomer } from '../../../redux/actions/dataActions'
 
 class ChatTextbox extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-            chatText: ''
-        };
-    }
+    state = {
+        chatText: ''
+    };
+
     userTyping = (e) => e.keyCode === 13 ? this.submitMessage() : this.setState({ chatText: e.target.value });
 
     messageValid = (txt) => txt && txt.replace(/\s/g, '').length;
@@ -22,9 +24,13 @@ class ChatTextbox extends React.Component {
     submitMessage = () => {
         if (this.messageValid(this.state.chatText)) {
 
-            axios.post(`/chat/customer/${this.props.friend}`, { message: this.state.chatText })
-                .then(res => console.log(res)) // refresh chatView?? 
-                .catch(err => console.log(err));
+            const chatText = {
+                txt: { message: this.state.chatText },
+                sender: this.props.cleanerName,
+                timestamp: new Date().toISOString
+            }
+
+            this.props.sendMessageToCustomer(this.props.friend, chatText)
 
             document.getElementById('chattextbox').value = '';
         }
@@ -50,4 +56,14 @@ class ChatTextbox extends React.Component {
 
 }
 
-export default withStyles(styles)(ChatTextbox);
+ChatTextbox.propTypes = {
+    friend: PropTypes.string.isRequired,
+    cleanerName: PropTypes.string.isRequired,
+    sendMessageToCustomer: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+    cleanerName: state.user.credentials.cleanerName
+})
+
+export default connect(mapStateToProps, { sendMessageToCustomer })(withStyles(styles)(ChatTextbox));
