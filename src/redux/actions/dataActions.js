@@ -84,11 +84,8 @@ export const getCleanerData = (cleanerName) => (dispatch) => {
 
 // like a cleaner
 export const likeCleaner = (cleanerName) => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
     axios.get(`/like/${cleanerName}`)
         .then(res => {
-            dispatch(getCustomerData()) // to refresh 
-            dispatch(getCleaners())
             dispatch({
                 type: LIKE_CLEANER,
                 payload: res.data
@@ -99,11 +96,8 @@ export const likeCleaner = (cleanerName) => (dispatch) => {
 
 // cancel like a cleaner
 export const cancelLikeCleaner = (cleanerName) => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
     axios.get(`/cancelLike/${cleanerName}`)
         .then(res => {
-            dispatch(getCustomerData())
-            dispatch(getCleaners())
             dispatch({
                 type: CANCELLIKE_CLEANER,
                 payload: res.data
@@ -114,11 +108,8 @@ export const cancelLikeCleaner = (cleanerName) => (dispatch) => {
 
 // unlike a cleaner
 export const unlikeCleaner = (cleanerName) => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
     axios.get(`/unlike/${cleanerName}`)
         .then(res => {
-            dispatch(getCustomerData())
-            dispatch(getCleaners())
             dispatch({
                 type: UNLIKE_CLEANER,
                 payload: res.data
@@ -129,11 +120,8 @@ export const unlikeCleaner = (cleanerName) => (dispatch) => {
 
 // cancel unlike a cleaner
 export const cancelUnlikeCleaner = (cleanerName) => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
     axios.get(`/cancelUnlike/${cleanerName}`)
         .then(res => {
-            dispatch(getCustomerData())
-            dispatch(getCleaners())
             dispatch({
                 type: CANCELUNLIKE_CLEANER,
                 payload: res.data

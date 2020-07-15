@@ -9,7 +9,7 @@ import DissatisfiedTwoTone from '@material-ui/icons/SentimentDissatisfiedTwoTone
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { unlikeCleaner, cancelUnlikeCleaner } from '../../redux/actions/dataActions'
+import { unlikeCleaner, cancelUnlikeCleaner, cancelLikeCleaner } from '../../redux/actions/dataActions'
 
 export class UnlikeButton extends Component {
     unlikedCleaner = () => {
@@ -19,6 +19,9 @@ export class UnlikeButton extends Component {
         else return false;
     };
     unlikeCleaner = () => {
+        if (this.props.user.likes && this.props.user.likes.find((like) => like.cleanerName === this.props.cleanerName)) {
+            this.props.cancelLikeCleaner(this.props.cleanerName)
+        }
         this.props.unlikeCleaner(this.props.cleanerName);
     }
     cancelUnlikeCleaner = () => {
@@ -52,6 +55,7 @@ UnlikeButton.propTypes = {
     cleanerName: PropTypes.string.isRequired,
     unlikeCleaner: PropTypes.func.isRequired,
     cancelUnlikeCleaner: PropTypes.func.isRequired,
+    cancelLikeCleaner: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -59,7 +63,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionsToProps = {
-    unlikeCleaner, cancelUnlikeCleaner
+    unlikeCleaner, cancelUnlikeCleaner, cancelLikeCleaner
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(UnlikeButton)
