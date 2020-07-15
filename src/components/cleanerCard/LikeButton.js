@@ -9,16 +9,18 @@ import SatisfiedTwoTone from '@material-ui/icons/SentimentSatisfiedAltTwoTone'
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { likeCleaner, cancelLikeCleaner } from '../../redux/actions/dataActions'
+import { likeCleaner, cancelLikeCleaner, cancelUnlikeCleaner } from '../../redux/actions/dataActions'
 
 export class LikeButton extends Component {
     likedCleaner = () => {
         if (this.props.user.likes && this.props.user.likes.find((like) => like.cleanerName === this.props.cleanerName))
-            // if doens't find one, condition is false
             return true;
         else return false;
     };
     likeCleaner = () => {
+        if (this.props.user.unlikes && this.props.user.unlikes.find((unlike) => unlike.cleanerName === this.props.cleanerName)) {
+            this.props.cancelUnlikeCleaner(this.props.cleanerName)
+        }
         this.props.likeCleaner(this.props.cleanerName);
     };
     cancelLikeCleaner = () => {
@@ -52,6 +54,7 @@ LikeButton.propTypes = {
     cleanerName: PropTypes.string.isRequired,
     likeCleaner: PropTypes.func.isRequired,
     cancelLikeCleaner: PropTypes.func.isRequired,
+    cancelUnlikeCleaner: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -59,7 +62,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionsToProps = {
-    likeCleaner, cancelLikeCleaner
+    likeCleaner, cancelLikeCleaner, cancelUnlikeCleaner
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(LikeButton)

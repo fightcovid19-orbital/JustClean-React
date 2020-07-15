@@ -78,7 +78,7 @@ export default function (state = initialState, action) {
         case CANCELUNLIKE_CLEANER:
             return {
                 ...state,
-                unlikes: state.likes.filter((unlike) => unlike.cleanerName !== action.payload.cleanerName)
+                unlikes: state.unlikes.filter((unlike) => unlike.cleanerName !== action.payload.cleanerName)
             }
         case MARK_NOTIFICATIONS_READ:
             state.notifications.forEach(not => (not.read = true));
@@ -113,8 +113,8 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 records: state.records.filter(record => (
-                    record.customerName !== action.payload.customerName 
-                    && record.cleanerName !== state.credentials.cleanerName ))
+                    record.customerName !== action.payload.customerName
+                    && record.cleanerName !== state.credentials.cleanerName))
             }
         default:
             return state;

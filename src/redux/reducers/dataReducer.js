@@ -58,7 +58,6 @@ export default function (state = initialState, action) {
             }
             return {
                 ...state,
-                loadingData: false
             };
         case UNLIKE_CLEANER:
         case CANCELUNLIKE_CLEANER:
@@ -69,7 +68,6 @@ export default function (state = initialState, action) {
             }
             return {
                 ...state,
-                loadingData: false
             };
         case SET_COMMENTS:
             return {
@@ -111,7 +109,7 @@ export default function (state = initialState, action) {
                 ...state,
                 chatMessages: []
             }
-        case SEND_MESSAGE: 
+        case SEND_MESSAGE:
             return {
                 ...state,
                 chatMessages: [
