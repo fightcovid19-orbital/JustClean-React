@@ -160,11 +160,12 @@ export const getComments = (cleanerName) => (dispatch) => {
         })
 }
 
+// Clear all errors in redux state UI
 export const clearErrors = () => (dispatch) => {
     dispatch({ type: CLEAR_ERRORS })
 }
 
-// Get histories
+// Get histories for Customers
 export const getHistories = () => (dispatch) => {
     dispatch({ type: LOADING_DATA });
     axios.get('/histories')
@@ -182,7 +183,7 @@ export const getHistories = () => (dispatch) => {
         })
 }
 
-// Get reservations
+// Get reservations for Cleaners
 export const getReservations = () => (dispatch) => {
     dispatch({ type: LOADING_DATA });
     axios.get('/reserves')
@@ -200,7 +201,7 @@ export const getReservations = () => (dispatch) => {
         })
 }
 
-// reserve
+// Handle reservation when customer want to reserve a cleaner
 export const reserve = (cleanerName) => (dispatch) => {
     axios.get(`/reserve/${cleanerName}`)
         .then(res => {
@@ -224,7 +225,7 @@ export const cancelReserve = (customerName) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-// Accept Reserve
+// Accept a customer's reservation by Cleaner
 export const accept = (customerName) => (dispatch) => {
     axios.get(`/history/${customerName}`)
         .then(res => {
@@ -236,7 +237,7 @@ export const accept = (customerName) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-// reject
+// Reject a customer's reservation by Cleaner
 export const reject = (customerName) => (dispatch) => {
     axios.delete(`/cleanerReserve/${customerName}`)
         .then(res => {
@@ -248,7 +249,7 @@ export const reject = (customerName) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-// Get records
+// Get all records for Cleaner
 export const getRecords = () => (dispatch) => {
     axios.get('/records')
         .then(res => {
@@ -277,7 +278,7 @@ export const record = (customerName) => (dispatch) => {
         .catch(err => console.log(err))
 }
 
-// delete record
+// delete record by Cleaner
 export const deleteRecord = (recordId) => (dispatch) => {
     dispatch({ type: LOADING_DATA });
     axios.delete(`/record/${recordId}`)
@@ -303,6 +304,7 @@ export const deleteComment = (commentId) => (dispatch) => {
         .catch(err => console.log(err));
 }
 
+// (Only) customer create chat with a cleaner
 export const createChat = (friend) => dispatch => {
     axios.get(`/chat/new/cleaner/${friend}`)
         .then(() => {
@@ -321,6 +323,7 @@ export const createChat = (friend) => dispatch => {
         })
 }
 
+// Get the chat of the customer with a cleaner
 export const getChatsWithCleaner = (friend) => (dispatch) => {
     axios.get(`/chat/refresh/cleaner/${friend}`) // no realtime update
         .then(res => {
@@ -342,6 +345,7 @@ export const getChatsWithCleaner = (friend) => (dispatch) => {
         })
 }
 
+// Get the chat of the cleaner with a customer
 export const getChatsWithCustomer = (friend) => (dispatch) => {
     axios.get(`/chat/refresh/customer/${friend}`) // no realtime update
         .then(res => {
@@ -359,10 +363,12 @@ export const getChatsWithCustomer = (friend) => (dispatch) => {
         })
 }
 
+// Clear all the chatMessages in redux 
 export const clearChats = () => (dispatch) => {
     dispatch({ type: CLEAR_CHATS })
 }
 
+// Customer send message to a cleaner at the same time update redux 
 export const sendMessageToCleaner = (friend, chatText) => (dispatch) => {
     axios.post(`/chat/cleaner/${friend}`, chatText.txt)
         .then(() => {
@@ -374,6 +380,7 @@ export const sendMessageToCleaner = (friend, chatText) => (dispatch) => {
         .catch(err => console.log(err));
 }
 
+// Cleaner send message to a customer at the same time update redux 
 export const sendMessageToCustomer = (friend, chatText) => (dispatch) => {
     axios.post(`/chat/customer/${friend}`, chatText.txt)
         .then(() => {

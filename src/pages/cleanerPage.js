@@ -15,7 +15,7 @@ import { getCleanerData } from '../redux/actions/dataActions'
 class cleanerPage extends Component {
 
     componentDidMount() {
-        const cleanerName = this.props.match.params.cleanerName; // from exact path /cleaners/cleanerName
+        const cleanerName = this.props.match.params.cleanerName;
         this.props.getCleanerData(cleanerName);
     }
     render() {

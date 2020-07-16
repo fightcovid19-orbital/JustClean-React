@@ -75,7 +75,7 @@ class CommentDialog extends Component {
         }
     }
     render() {
-        const { classes, UI: { loadingUI }, authenticated
+        const { classes, authenticated
         } = this.props;
         const errors = this.state.errors
 

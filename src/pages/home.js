@@ -4,23 +4,22 @@ import CleanerCard from '../components/cleanerCard/CleanerCard'
 import CommentCard from '../components/commentCard/CommentCard'
 import CustomerProfile from '../components/profile/CustomerProfile'
 import CleanerProfile from '../components/profile/CleanerProfile'
+import SmallLoginAndSignup from '../components/profile/SmallLoginAndSignup'
+import HistoryCard from '../components/notes/HistoryCard'
+import ReserveCard from '../components/notes/ReserveCard'
 import CardSkeleton from '../util/CardSkeleton'
 import ProfileSkeleton from '../util/ProfileSkeleton'
 import NoteSkeleton from '../util/NoteSkeleton'
-import SmallLoginAndSignup from '../components/profile/SmallLoginAndSignup'
-import withStyles from '@material-ui/core/styles/withStyles'
-import HistoryCard from '../components/notes/HistoryCard'
-import ReserveCard from '../components/notes/ReserveCard'
 
 // MUI stuff
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import withStyles from '@material-ui/core/styles/withStyles'
 
 // Redux 
 import { connect } from 'react-redux'
 import { getComments } from '../redux/actions/dataActions'
-import { Typography } from '@material-ui/core'
-import { LOADING_DATA } from '../redux/types'
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -28,22 +27,14 @@ const styles = theme => ({
         marginLeft: 100
     },
     scrollablePaper: {
-        maxHeight:400, 
-        overflow:'auto',
+        maxHeight: 400,
+        overflow: 'auto',
         padding: 20,
         marginRight: '20px'
     }
 })
 
 class home extends Component {
-    saveComments = () => {
-        if (this.props.user.credentials.cleanerName && this.props.user.credentials.type === 'cleaner') {
-            this.props.getComments(this.props.user.credentials.cleanerName);
-        }
-    }
-    componentDidMount() {
-        this.saveComments();
-    }
 
     render() {
         const { cleaners, loadingData, comments, histories, reservations } = this.props.data;
@@ -60,7 +51,7 @@ class home extends Component {
             ? histories.map(history => <HistoryCard key={history.historyId} history={history} />)
             : <p>Have not hired anyone before</p>;
         let recentReservesMarkup = (reservations)// it check the collections instead the particular person 
-            ? reservations.map(reserve => <ReserveCard key={reserve.customerName} reserve={reserve}/>)
+            ? reservations.map(reserve => <ReserveCard key={reserve.customerName} reserve={reserve} />)
             : <p>No one reserve you yet</p>
 
         let feed, profile, notes
@@ -90,7 +81,7 @@ class home extends Component {
                     {recentReservesMarkup}
                 </Paper>
             )
-            
+
         } else {
             feed = 'noUser'
             profile = 'noUser'

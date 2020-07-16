@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react'
+import { regions } from '../../util/Regions'
 
 // MUI stuff
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-
-import {regions} from '../../util/Regions'
 
 class SearchBar extends Component {
     state = {
@@ -39,7 +38,7 @@ class SearchBar extends Component {
                 getOptionLabel={(option) => option.regionName}
                 renderOption={(option) => (
                     <Fragment>
-                        {option.regionName} 
+                        {option.regionName}
                     </Fragment>
                 )}
                 onInputChange={this.handleInputChange}

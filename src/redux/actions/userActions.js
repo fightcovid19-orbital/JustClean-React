@@ -10,23 +10,24 @@ import {
     SET_EMPTY_DATA
 } from '../types';
 import axios from 'axios';
-import { getCleaners, getHistories, getReservations } from './dataActions'
+import { getCleaners, getHistories, getReservations, getComments } from './dataActions'
 
+// login a user either customer or cleaner
 export const loginUser = (userData, history) => dispatch => {
     dispatch({ type: LOADING_UI });
     axios.post('/login', userData)
         .then(res => {
             setAuthorizationHeader(res.data.token);
             if (userData.type === 'customer') {
-                dispatch(getCustomerData()); // after customer login, get all cleaners
+                dispatch(getCustomerData());
                 dispatch(getCleaners());
                 dispatch(getHistories());
             } else {
-                dispatch(getCleanerData()); // after cleaner login, get all comments handled by home.js
+                dispatch(getCleanerData());
                 dispatch(getReservations());
             }
             dispatch({ type: CLEAR_ERRORS })
-            history.push('/'); // redirect to home page
+            history.push('/');
         })
         .catch(err => {
             dispatch({
@@ -36,20 +37,24 @@ export const loginUser = (userData, history) => dispatch => {
         });
 };
 
+// login and get cleaner data for cleaner user credentials and then get all the comments on this cleaner
 export const getCleanerData = () => dispatch => {
     dispatch({ type: LOADING_USER })
-    axios.get('/cleaner')  // login and get cleaner data for cleaner user credentials
+    axios.get('/cleaner')
         .then(res => {
             dispatch({
                 type: SET_USER,
                 payload: res.data
-            })
+            });
+            dispatch(getComments(res.data.credentials.cleanerName));
         })
         .catch(err => console.log(err));
 };
+
+// login and get customer data for customer user credentials
 export const getCustomerData = () => dispatch => {
     dispatch({ type: LOADING_USER })
-    axios.get('/customer')  // login and get customer data for customer user credentials
+    axios.get('/customer')
         .then(res => {
             dispatch({
                 type: SET_USER,
@@ -59,19 +64,20 @@ export const getCustomerData = () => dispatch => {
         .catch(err => console.log(err));
 };
 
+// sign up a user either customer or cleaner
 export const signupUser = (newUserData, history) => (dispatch) => {
     dispatch({ type: LOADING_UI });
     axios.post('/signup', newUserData)
         .then(res => {
             setAuthorizationHeader(res.data.token);
             if (newUserData.type === 'customer') {
-                dispatch(getCustomerData()); // after customer login, get all cleaners
+                dispatch(getCustomerData());
                 dispatch(getCleaners())
             } else {
-                dispatch(getCleanerData()) // after cleaner login, get all comments handled by home.js
+                dispatch(getCleanerData())
             }
             dispatch({ type: CLEAR_ERRORS })
-            history.push('/'); // redirect to home page
+            history.push('/');
         })
         .catch(err => {
             dispatch({
@@ -81,6 +87,8 @@ export const signupUser = (newUserData, history) => (dispatch) => {
         });
 };
 
+// logout a user 
+// initialize redux state 
 export const logoutUser = () => (dispatch) => {
     dispatch({ type: LOADING_USER })
     window.location.href = '/login';
@@ -91,12 +99,14 @@ export const logoutUser = () => (dispatch) => {
     dispatch({ type: SET_EMPTY_DATA })
 }
 
+// set authorization header using Firebase token after successfully login
 const setAuthorizationHeader = (token) => {
     const FBIdToken = `Bearer ${token}`;
     localStorage.setItem('FBIdToken', FBIdToken);
     axios.defaults.headers.common['Authorization'] = FBIdToken;
 }
 
+// upload a customer's profile image 
 export const uploadCustomerImage = (formData) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios.post('/customer/image', formData)
@@ -106,6 +116,7 @@ export const uploadCustomerImage = (formData) => (dispatch) => {
         .catch(err => console.log(err))
 };
 
+// upload a cleaner's profile image 
 export const uploadCleanerImage = (formData) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios.post('/cleaner/image', formData)
@@ -115,7 +126,7 @@ export const uploadCleanerImage = (formData) => (dispatch) => {
         .catch(err => console.log(err))
 };
 
-// for profile site 
+// edit customer user details
 export const editCustomerDetails = (userDetails) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios.post('/customer', userDetails)
@@ -125,6 +136,7 @@ export const editCustomerDetails = (userDetails) => (dispatch) => {
         .catch(err => console.log(err));
 }
 
+// edit cleaner user details
 export const editCleanerDetails = (userDetails) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios.post('/cleaner', userDetails)
@@ -134,6 +146,7 @@ export const editCleanerDetails = (userDetails) => (dispatch) => {
         .catch(err => console.log(err));
 }
 
+// delete cleaner self account
 export const deleteCleaner = () => dispatch => {
     axios.delete('/deleteCleaner')
         .then(() => {
@@ -161,5 +174,4 @@ export const markNotificationsRead = (type, notificationIds) => dispatch => {
             })
             .catch(err => console.log(err));
     }
-
 }

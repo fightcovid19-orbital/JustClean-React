@@ -6,9 +6,9 @@ import CustomerProfile from '../components/profile/CustomerProfile'
 // MUI stuff
 import Grid from '@material-ui/core/Grid'
 
-class cleanerPage extends Component {
+class searchPage extends Component {
     state = {
-        searchedCleaners: null
+        searchedCleaners: []
     }
     componentDidMount() {
         const location = this.props.match.params.location;
@@ -26,7 +26,7 @@ class cleanerPage extends Component {
     render() {
         const { searchedCleaners } = this.state
 
-        const cleanersMarkup = (searchedCleaners === null) ? (
+        const cleanersMarkup = (searchedCleaners.length === 0) ? (
             <p>No cleaner found</p>
         ) : (
                 searchedCleaners.map((cleaner) => <CleanerCard key={cleaner.cleanerName} cleaner={cleaner} />)
@@ -46,4 +46,4 @@ class cleanerPage extends Component {
     }
 }
 
-export default cleanerPage
+export default searchPage
