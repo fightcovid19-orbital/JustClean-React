@@ -16,9 +16,10 @@ import {
     CLEAR_CHATS,
     SEND_MESSAGE,
     SET_COMMENT,
-    SET_CLEANER_DATA
+    SET_CLEANER_DATA,
+    ACCEPT,
+    REJECT
 } from '../types'
-import { reserve } from '../actions/dataActions';
 
 const initialState = {
     cleaners: [],
@@ -30,7 +31,6 @@ const initialState = {
     records: [],
     loadingData: false,
     chatMessages: [],
-    comment: {}
 };
 
 export default function (state = initialState, action) {
@@ -104,6 +104,24 @@ export default function (state = initialState, action) {
                 records: action.payload,
                 loadingData: false
             };
+        case ACCEPT:
+            return {
+                ...state,
+                records: [
+                    ...state.records,
+                    {
+                        customerImage: action.payload.customerImage,
+                        customerName: action.payload.customerName,
+                        customerLocation: action.payload.customerLocation
+                    }
+                ],
+                reservations: state.reservations.filter((reserve) => reserve.customerName !== action.payload.customerName)
+            }
+        case REJECT:
+            return {
+                ...state,
+                reservations: state.reservations.filter((reserve) => reserve.customerName !== action.payload)
+            }
         case DELETE_COMMENT:
             let commentIndex = state.comments.findIndex(comment => comment.commentId === action.payload);
             state.comments.splice(commentIndex, 1);

@@ -41,7 +41,7 @@ const NoteSkeleton = props => {
     const { classes } = props
     const noteContent = Array.from({ length: 4 }).map((item, index) => (
         <Card className={classes.card} key={index}>
-            <img src={noImg} alt="profile picture" className={classes.cover} />
+            <img src={noImg} alt="profile" className={classes.cover} />
             <CardContent className={classes.cardContent}>
                 <div className={classes.handle} />
                 <div className={classes.date} />

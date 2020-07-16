@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import PropTypes from 'prop-types'
 import AppIcon from '../images/iconword.png'
-import SignupIcon from '../images/signup.png'
 import { Link } from 'react-router-dom'
 
 // MUI stuff

@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import dayjs from 'dayjs'
+import ChatDialog from '../cleanerCard/ChatDialog'
 
 // MUI stuff
-import Link from '@material-ui/core/Link'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
@@ -25,7 +25,7 @@ const StaticCleanerProfile = (props) => {
 
     return (
         <Paper className={classes.paper}>
-
+            <ChatDialog cleanerName={cleanerName} />
             <div className={classes.profile}>
                 <div className="image-wrapper">
                     <hr />

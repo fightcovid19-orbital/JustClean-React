@@ -37,12 +37,14 @@ const style = {
 class ReserveCard extends Component {
 
     render() {
-        const { classes, reserve: { customerImage, customerName, createdAt, customerLocation },
-            user: { authenticated } } = this.props
+        const { 
+            classes, 
+            reserve: { customerImage, customerName, createdAt, customerLocation },
+        } = this.props
 
         return (
             <Card className={classes.card}>
-                <img src={customerImage} alt="Profile Image" className={classes.image} />
+                <img src={customerImage} alt="Profile" className={classes.image} />
                 <CardContent className={classes.content}>
                     <Typography variant="h5" color='primary'>
                         {customerName}

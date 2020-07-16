@@ -77,7 +77,7 @@ class Records extends Component {
                         <MenuItem key={customerName}>
                             <Grid container spacing={1}>
                                 <Grid item>
-                                    <img src={customerImage} alt="Profile Image" className={classes.image} />
+                                    <img src={customerImage} alt="Profile" className={classes.image} />
                                 </Grid>
                                 <Grid item xs={12} sm>
                                     <Typography className={classes.name} variant="h5" color='primary'>

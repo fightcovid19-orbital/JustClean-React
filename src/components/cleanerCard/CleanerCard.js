@@ -46,12 +46,14 @@ const style = {
 class CleanerCard extends Component {
 
     render() {
-        const { classes, cleaner: { imageUrl, cleanerName, likeCount, unlikeCount, hiredCount },
-            user: { authenticated } } = this.props
+        const { 
+            classes, 
+            cleaner: { imageUrl, cleanerName, likeCount, unlikeCount, hiredCount },
+        } = this.props
 
         return (
             <Card className={classes.card}>
-                <img src={imageUrl} alt="Profile Image" className={classes.image} />
+                <img src={imageUrl} alt="Profile" className={classes.image} />
                 <CardContent className={classes.content}>
                     <Typography variant="h5" component={Link} to={`/cleaners/${cleanerName}`} color='primary'>
                         {cleanerName}
