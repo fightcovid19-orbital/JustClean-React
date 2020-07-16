@@ -25,7 +25,7 @@ const CardSkeleton = props => {
     
     const content = Array.from({ length: 4 }).map((item, index) => (
         <Card className={classes.card} key={index}>
-            <img src={noImg} alt="profile picture" className={classes.cover} />
+            <img src={noImg} alt="profile" className={classes.cover} />
             {cardContent}
         </Card>
     ))

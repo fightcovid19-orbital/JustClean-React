@@ -67,7 +67,7 @@ class ChatDialog extends Component {
 ChatDialog.propTypes = {
     classes: PropTypes.object.isRequired,
     cleanerName: PropTypes.string.isRequired,
-    getChats: PropTypes.func.isRequired,
+    getChatsWithCleaner: PropTypes.func.isRequired,
     clearChats: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
 }

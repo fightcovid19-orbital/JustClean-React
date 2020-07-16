@@ -39,12 +39,14 @@ const style = {
 class HistoryCard extends Component {
 
     render() {
-        const { classes, history: { cleanerImage, cleanerName, createdAt},
-            user: { authenticated } } = this.props
+        const { 
+            classes, 
+            history: { cleanerImage, cleanerName, createdAt, cleanerLocation},
+        } = this.props
 
         return (
             <Card className={classes.card}>
-                <img src={cleanerImage} alt="Profile Image" className={classes.image} />
+                <img src={cleanerImage} alt="Profile" className={classes.image} />
                 <CardContent className={classes.content}>
                     <Typography variant="h5" component={Link} to={`/cleaners/${cleanerName}`} color='primary'>
                         {cleanerName}
@@ -52,6 +54,9 @@ class HistoryCard extends Component {
                     <br />
                     <Typography variant="body2" color='textSecondary'>
                         {dayjs(createdAt).format('DD MMMM YYYY')}
+                    </Typography>
+                    <Typography variant="body2">
+                        Location: {cleanerLocation}
                     </Typography>
                     <br />
                     <LikeButton cleanerName={cleanerName} />

@@ -6,7 +6,6 @@ import {
     UNLIKE_CLEANER,
     CANCELUNLIKE_CLEANER,
     SET_COMMENTS,
-    SUBMIT_COMMENT,
     SET_HISTORIES,
     SET_RESERVATIONS,
     RESERVE,
@@ -28,7 +27,6 @@ import {
     SET_COMMENT,
     SET_CLEANER_DATA
 } from '../types'
-import { getCustomerData } from './userActions'
 import axios from 'axios'
 
 // Get all cleaners
@@ -208,11 +206,8 @@ export const getReservations = () => (dispatch) => {
 
 // reserve
 export const reserve = (cleanerName) => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
     axios.get(`/reserve/${cleanerName}`)
         .then(res => {
-            dispatch(getCustomerData()) // to refresh 
-            dispatch(getCleaners())
             dispatch({
                 type: RESERVE,
                 payload: res.data
@@ -223,11 +218,8 @@ export const reserve = (cleanerName) => (dispatch) => {
 
 // cancel Reserve
 export const cancelReserve = (customerName) => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
     axios.delete(`/custReserve/${customerName}`)
         .then(res => {
-            dispatch(getCustomerData())
-            dispatch(getCleaners())
             dispatch({
                 type: CANCEL_RESERVE,
                 payload: res.data
@@ -238,10 +230,8 @@ export const cancelReserve = (customerName) => (dispatch) => {
 
 // Accept Reserve
 export const accept = (customerName) => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
     axios.get(`/history/${customerName}`)
         .then(res => {
-            dispatch(getReservations())
             dispatch({
                 type: ACCEPT,
                 payload: res.data
@@ -252,13 +242,11 @@ export const accept = (customerName) => (dispatch) => {
 
 // reject
 export const reject = (customerName) => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
     axios.delete(`/cleanerReserve/${customerName}`)
         .then(res => {
-            dispatch(getReservations())
             dispatch({
                 type: REJECT,
-                payload: res.data
+                payload: customerName
             })
         })
         .catch(err => console.log(err))
@@ -266,7 +254,6 @@ export const reject = (customerName) => (dispatch) => {
 
 // Get records
 export const getRecords = () => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
     axios.get('/records')
         .then(res => {
             dispatch({
@@ -284,11 +271,8 @@ export const getRecords = () => (dispatch) => {
 
 // record
 export const record = (customerName) => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
     axios.get(`/record/${customerName}`)
         .then(res => {
-            dispatch(getRecords())
-            dispatch(getCleanerData())
             dispatch({
                 type: RECORD,
                 payload: res.data

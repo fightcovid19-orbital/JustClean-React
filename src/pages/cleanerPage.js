@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import CommentCard from '../components/commentCard/CommentCard'
 import StaticCleanerProfile from '../components/profile/StaticCleanerProfile'
 import ProfileSkeleton from '../util/ProfileSkeleton'
