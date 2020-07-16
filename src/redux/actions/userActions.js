@@ -31,7 +31,7 @@ export const loginUser = (userData, history) => dispatch => {
         .catch(err => {
             dispatch({
                 type: SET_ERRORS,
-                payload: err.code
+                payload: err.response.data
             });
         });
 };
@@ -76,7 +76,7 @@ export const signupUser = (newUserData, history) => (dispatch) => {
         .catch(err => {
             dispatch({
                 type: SET_ERRORS,
-                payload: err.code
+                payload: err.response.data
             });
         });
 };

@@ -13,9 +13,12 @@ import { likeCleaner, cancelLikeCleaner, cancelUnlikeCleaner } from '../../redux
 
 export class LikeButton extends Component {
     likedCleaner = () => {
-        if (this.props.user.likes && this.props.user.likes.find((like) => like.cleanerName === this.props.cleanerName))
+        if (this.props.user.likes 
+            && this.props.user.likes.find((like) => like.cleanerName === this.props.cleanerName)) {
             return true;
-        else return false;
+        } else {
+            return false;
+        }
     };
     likeCleaner = () => {
         if (this.props.user.unlikes && this.props.user.unlikes.find((unlike) => unlike.cleanerName === this.props.cleanerName)) {
@@ -40,10 +43,10 @@ export class LikeButton extends Component {
                         <SatisfiedTwoTone color='primary' />
                     </MyButton>
                 ) : (
-                        <MyButton tip='Like' onClick={this.likeCleaner}>
-                            <SatisfiedIcon color='primary' />
-                        </MyButton>
-                    )
+                    <MyButton tip='Like' onClick={this.likeCleaner}>
+                        <SatisfiedIcon color='primary' />
+                    </MyButton>
+                )
             )
         return likeButton;
     }
