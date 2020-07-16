@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import CommentCard from '../components/commentCard/CommentCard'
 import StaticCleanerProfile from '../components/profile/StaticCleanerProfile'
 import ProfileSkeleton from '../util/ProfileSkeleton'
@@ -14,22 +13,22 @@ import { connect } from 'react-redux'
 import { getCleanerData } from '../redux/actions/dataActions'
 
 class cleanerPage extends Component {
-    
+
     componentDidMount() {
         const cleanerName = this.props.match.params.cleanerName; // from exact path /cleaners/cleanerName
         this.props.getCleanerData(cleanerName);
     }
     render() {
         const { comments, loadingData, cleaner } = this.props.data
-        
+
         let commentsMarkup, profile
         if (loadingData) {
             commentsMarkup = <CardSkeleton />
-            profile = <ProfileSkeleton /> 
-        } else if(comments && cleaner) {
+            profile = <ProfileSkeleton />
+        } else if (comments && cleaner) {
             commentsMarkup = comments.map((comment) => <CommentCard key={comment.commentId} comment={comment} />)
             profile = <StaticCleanerProfile profile={cleaner} />
-        } else { 
+        } else {
             commentsMarkup = <p>No comment on this cleaner</p>
             profile = <p>No cleaner found</p>
         }
@@ -44,9 +43,7 @@ class cleanerPage extends Component {
                     {commentsMarkup}
                 </Grid>
             </Grid>
-
         )
-        // need to check if no profile
     }
 }
 

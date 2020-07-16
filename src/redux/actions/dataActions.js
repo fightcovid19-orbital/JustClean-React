@@ -6,7 +6,6 @@ import {
     UNLIKE_CLEANER,
     CANCELUNLIKE_CLEANER,
     SET_COMMENTS,
-    SUBMIT_COMMENT,
     SET_HISTORIES,
     SET_RESERVATIONS,
     RESERVE,
@@ -134,10 +133,6 @@ export const cancelUnlikeCleaner = (cleanerName) => (dispatch) => {
 export const submitComment = (cleanerName, commentData) => (dispatch) => {
     axios.post(`/comment/${cleanerName}`, commentData)
         .then(res => {
-            // dispatch({
-            //     type: SUBMIT_COMMENT,
-            //     payload: res.data // when submit a comment, get a comment back
-            // })
             dispatch(clearErrors())
         })
         .catch(err => {

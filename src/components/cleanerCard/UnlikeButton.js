@@ -14,7 +14,6 @@ import { unlikeCleaner, cancelUnlikeCleaner, cancelLikeCleaner } from '../../red
 export class UnlikeButton extends Component {
     unlikedCleaner = () => {
         if (this.props.user.unlikes && this.props.user.unlikes.find((unlike) => unlike.cleanerName === this.props.cleanerName))
-            // if doens't find one, condition is false
             return true;
         else return false;
     };

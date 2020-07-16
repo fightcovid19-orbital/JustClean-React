@@ -21,7 +21,7 @@ export class AcceptButton extends Component {
                 <CheckIcon color='primary' />
             </MyButton>
         )
-            
+
         return acceptButton;
     }
 }
@@ -29,7 +29,7 @@ export class AcceptButton extends Component {
 AcceptButton.propTypes = {
     user: PropTypes.object.isRequired,
     customerName: PropTypes.string.isRequired,
-    accpet: PropTypes.func.isRequired,
+    accept: PropTypes.func.isRequired,
     record: PropTypes.func.isRequired
 }
 
@@ -38,7 +38,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionsToProps = {
-    accept, 
+    accept,
     record
 }
 

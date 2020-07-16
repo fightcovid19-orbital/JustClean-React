@@ -83,7 +83,7 @@ class Records extends Component {
                                     <Typography className={classes.name} variant="h5" color='primary'>
                                         {customerName}
                                     </Typography>
-                                    <hr className={classes.invisibleSeparator}/>
+                                    <hr className={classes.invisibleSeparator} />
                                     <Typography variant="body2" >
                                         location: {location}
                                     </Typography>
@@ -96,7 +96,7 @@ class Records extends Component {
                     )
                 })
             ) : (
-                <MenuItem onCLick={this.handleClose}>
+                <MenuItem onClick={this.handleClose}>
                     You have no any record
                 </MenuItem>
             )
