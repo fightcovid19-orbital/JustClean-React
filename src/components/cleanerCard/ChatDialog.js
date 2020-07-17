@@ -34,7 +34,7 @@ class ChatDialog extends Component {
 
     handleOpen = () => {
         this.setState({ open: true })
-        this.props.getChatsWithCleaner(this.props.cleanerName)
+        this.props.getChatsWithCleaner(this.props.cleanerName);
     }
 
     handleClose = () => {

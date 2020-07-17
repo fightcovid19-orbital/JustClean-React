@@ -5,10 +5,20 @@ import PropTypes from 'prop-types'
 
 // Redux stuff
 import { connect } from 'react-redux'
+import { getChatsWithCleaner } from '../../../redux/actions/dataActions'
 
 class ChatView extends Component {
-
-    componentDidUpdate() {
+    
+    /*shouldComponentUpdate(nextProps) {
+        const current = this.props.data.chatMessages.length;
+        const next = nextProps.data.chatMessages.length;
+        return current !==  next
+    }*/
+    
+    componentDidUpdate(prevProps) {
+        if(this.props.data.chatMessages.length === prevProps.data.chatMessages.length + 1){
+            this.props.getChatsWithCleaner(this.props.friend);
+        }
         const container = document.getElementById('chatview-container');
         if (container) {
             container.scrollTo(0, container.scrollHeight);
@@ -57,7 +67,8 @@ ChatView.propTypes = {
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     friend: PropTypes.string.isRequired,
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    getChatsWithCleaner: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -65,4 +76,4 @@ const mapStateToProps = state => ({
     data: state.data
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(ChatView))
+export default connect(mapStateToProps, {getChatsWithCleaner})(withStyles(styles)(ChatView))

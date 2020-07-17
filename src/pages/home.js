@@ -19,7 +19,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 
 // Redux 
 import { connect } from 'react-redux'
-import { getComments } from '../redux/actions/dataActions'
+
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -116,7 +116,6 @@ class home extends Component {
 }
 
 home.propTypes = {
-    getComments: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired
@@ -127,4 +126,4 @@ const mapStateToProps = (state) => ({
     data: state.data
 })
 
-export default connect(mapStateToProps, { getComments })(withStyles(styles)(home))
+export default connect(mapStateToProps)(withStyles(styles)(home))
