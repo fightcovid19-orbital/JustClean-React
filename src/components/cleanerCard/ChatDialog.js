@@ -15,7 +15,6 @@ import ChatIcon from '@material-ui/icons/Chat'
 
 // Redux 
 import { connect } from 'react-redux'
-import { getChatsWithCleaner, clearChats } from '../../redux/actions/dataActions'
 
 const style = (theme) => ({
     ...theme.spreadThis,
@@ -29,17 +28,15 @@ const style = (theme) => ({
 
 class ChatDialog extends Component {
     state = {
-        open: false
+        open: false,
     }
 
     handleOpen = () => {
         this.setState({ open: true })
-        this.props.getChatsWithCleaner(this.props.cleanerName);
     }
 
     handleClose = () => {
         this.setState({ open: false });
-        this.props.clearChats()
     }
 
     render() {
@@ -67,8 +64,6 @@ class ChatDialog extends Component {
 ChatDialog.propTypes = {
     classes: PropTypes.object.isRequired,
     cleanerName: PropTypes.string.isRequired,
-    getChatsWithCleaner: PropTypes.func.isRequired,
-    clearChats: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
 }
 
@@ -76,4 +71,4 @@ const mapStateToProps = (state) => ({
     data: state.data
 })
 
-export default connect(mapStateToProps, { getChatsWithCleaner, clearChats })(withStyles(style)(ChatDialog))
+export default connect(mapStateToProps)(withStyles(style)(ChatDialog))

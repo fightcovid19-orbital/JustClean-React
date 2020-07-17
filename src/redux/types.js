@@ -32,6 +32,3 @@ export const SET_RECORDS = 'SET_RECORDS';
 export const RECORD = 'RECORD';
 export const DELETE_RECORD = 'DELETE_RECORD';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
-export const SET_CHAT_MESSAGES = 'SET_CHATS_MESSAGES';
-export const CLEAR_CHATS = 'CLEAR_CHATS';
-export const SEND_MESSAGE = 'SEND_MESSAGE';

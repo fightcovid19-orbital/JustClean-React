@@ -5,20 +5,34 @@ import PropTypes from 'prop-types'
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { getChatsWithCleaner } from '../../../redux/actions/dataActions'
+import { createChat } from '../../../redux/actions/dataActions'
+
+// firebase
+const firebase = require("firebase");
 
 class ChatView extends Component {
     
-    /*shouldComponentUpdate(nextProps) {
-        const current = this.props.data.chatMessages.length;
-        const next = nextProps.data.chatMessages.length;
-        return current !==  next
-    }*/
+    state = {
+        chatMessages: []
+    };
     
-    componentDidUpdate(prevProps) {
-        if(this.props.data.chatMessages.length === prevProps.data.chatMessages.length + 1){
-            this.props.getChatsWithCleaner(this.props.friend);
-        }
+    componentDidMount() {
+        const docKey = [this.props.user.credentials.customerName, this.props.friend].join(':');
+        firebase.firestore()
+            .doc(`chats/${docKey}`)
+            .onSnapshot(doc => {
+                if(doc.exists) {
+                    const chats = doc.data().messages;
+                    this.setState({
+                        chatMessages: chats
+                    });
+                } else {
+                    this.props.createChat(this.props.friend);
+                }
+            });
+     }
+    
+    componentDidUpdate() {
         const container = document.getElementById('chatview-container');
         if (container) {
             container.scrollTo(0, container.scrollHeight);
@@ -28,9 +42,8 @@ class ChatView extends Component {
     render() {
         const { classes } = this.props;
         const { credentials: { customerName } } = this.props.user;
-        const { chatMessages } = this.props.data;
 
-        if (!chatMessages) {
+        if (!this.state.chatMessages) {
             return (
                 <div>
                     <div className={classes.chatHeader}>
@@ -48,7 +61,7 @@ class ChatView extends Component {
                     </div>
                     <main id='chatview-container' className={classes.content}>
                         {
-                            chatMessages.map((msg, index) => {
+                            this.state.chatMessages.map((msg, index) => {
                                 return (
                                     <div key={index} className={msg.sender === customerName ? classes.userSent : classes.friendSent}>
                                         {msg.message}
@@ -68,7 +81,7 @@ ChatView.propTypes = {
     classes: PropTypes.object.isRequired,
     friend: PropTypes.string.isRequired,
     data: PropTypes.object.isRequired,
-    getChatsWithCleaner: PropTypes.func.isRequired
+    createChat: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -76,4 +89,4 @@ const mapStateToProps = state => ({
     data: state.data
 })
 
-export default connect(mapStateToProps, {getChatsWithCleaner})(withStyles(styles)(ChatView))
+export default connect(mapStateToProps, {createChat})(withStyles(styles)(ChatView))

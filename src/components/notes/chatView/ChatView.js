@@ -5,9 +5,33 @@ import PropTypes from 'prop-types'
 
 // Redux stuff
 import { connect } from 'react-redux'
+import { createChat } from '../../../redux/actions/dataActions'
+
+// firebase
+const firebase = require('firebase')
 
 class ChatView extends Component {
 
+    state = {
+        chatMessages: []
+    }
+
+    componentDidMount() {
+        const docKey = [this.props.friend, this.props.user.credentials.cleanerName].join(':');
+        firebase.firestore()
+            .doc(`chats/${docKey}`)
+            .onSnapshot(doc => {
+                if(doc.exists){
+                    const chats = doc.data().messages;
+                    this.setState({
+                        chatMessages: chats
+                    });
+                } else {
+                    this.props.createChat(this.props.friend);
+                }
+            });
+    }
+    
     componentDidUpdate() {
         const container = document.getElementById('chatview-container');
         if (container) {
@@ -19,9 +43,8 @@ class ChatView extends Component {
 
         const { classes } = this.props;
         const { credentials: { cleanerName } } = this.props.user;
-        const { chatMessages } = this.props.data;
 
-        if (!chatMessages) {
+        if (!this.state.chatMessages) {
             return (
                 <div>
                     <div className={classes.chatHeader}>
@@ -39,7 +62,7 @@ class ChatView extends Component {
                     </div>
                     <main id='chatview-container' className={classes.content}>
                         {
-                            chatMessages.map((msg, index) => {
+                            this.state.chatMessages.map((msg, index) => {
                                 return (
                                     <div key={index} className={msg.sender === cleanerName ? classes.userSent : classes.friendSent}>
                                         {msg.message}
@@ -57,7 +80,8 @@ ChatView.propTypes = {
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     friend: PropTypes.string.isRequired,
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    createChat: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -65,4 +89,4 @@ const mapStateToProps = state => ({
     data: state.data
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(ChatView))
+export default connect(mapStateToProps, { createChat })(withStyles(styles)(ChatView))

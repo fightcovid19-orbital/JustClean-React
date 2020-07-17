@@ -12,9 +12,6 @@ import {
     SET_EMPTY_DATA,
     SET_RECORDS,
     DELETE_COMMENT,
-    SET_CHAT_MESSAGES,
-    CLEAR_CHATS,
-    SEND_MESSAGE,
     SET_COMMENT,
     SET_CLEANER_DATA,
     ACCEPT,
@@ -30,7 +27,6 @@ const initialState = {
     histories: [],
     records: [],
     loadingData: false,
-    chatMessages: [],
 };
 
 export default function (state = initialState, action) {
@@ -128,28 +124,6 @@ export default function (state = initialState, action) {
             return {
                 ...state
             };
-        case SET_CHAT_MESSAGES:
-            return {
-                ...state,
-                chatMessages: action.payload,
-            };
-        case CLEAR_CHATS:
-            return {
-                ...state,
-                chatMessages: []
-            }
-        case SEND_MESSAGE:
-            return {
-                ...state,
-                chatMessages: [
-                    ...state.chatMessages,
-                    {
-                        message: action.payload.txt.message,
-                        sender: action.payload.sender,
-                        timestamp: action.payload.timestamp
-                    }
-                ]
-            }
         case SET_COMMENT: 
             return {
                 ...state,

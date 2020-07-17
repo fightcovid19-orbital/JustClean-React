@@ -21,7 +21,9 @@ const styles = theme => ({
 
 // not saving this profile to state
 const StaticCleanerProfile = (props) => {
-    const { classes, profile: { cleanerName, imageUrl, createdAt, bio, location, likeCount, unlikeCount, hiredCount } } = props;
+    const { classes, 
+        profile: { cleanerName, imageUrl, createdAt, bio, location, likeCount, unlikeCount, hiredCount } 
+    } = props;
 
     return (
         <Paper className={classes.paper}>

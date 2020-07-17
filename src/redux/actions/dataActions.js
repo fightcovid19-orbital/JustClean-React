@@ -21,9 +21,6 @@ import {
     LOADING_DATA,
     STOP_LOADING_UI,
     LOADING_UI,
-    SET_CHAT_MESSAGES,
-    CLEAR_CHATS,
-    SEND_MESSAGE,
     SET_COMMENT,
     SET_CLEANER_DATA
 } from '../types'
@@ -309,73 +306,17 @@ export const createChat = (friend) => dispatch => {
     axios.get(`/chat/new/cleaner/${friend}`)
         .then(() => {
             console.log('new chat created!')
-            dispatch({
-                type: SET_CHAT_MESSAGES,
-                payload: []
-            })
         })
         .catch((err) => {
             console.log(err)
-            dispatch({
-                type: SET_CHAT_MESSAGES,
-                payload: []
-            })
         })
-}
-
-// Get the chat of the customer with a cleaner
-export const getChatsWithCleaner = (friend) => (dispatch) => {
-    axios.get(`/chat/refresh/cleaner/${friend}`) // no realtime update
-        .then(res => {
-            if (!res.data) {
-                dispatch(createChat(friend)); // only customer create chat
-            } else {
-                dispatch({
-                    type: SET_CHAT_MESSAGES,
-                    payload: res.data.messages
-                })
-            }
-        })
-        .catch(err => {
-            console.log(err)
-            dispatch({
-                type: SET_CHAT_MESSAGES,
-                payload: []
-            })
-        })
-}
-
-// Get the chat of the cleaner with a customer
-export const getChatsWithCustomer = (friend) => (dispatch) => {
-    axios.get(`/chat/refresh/customer/${friend}`) // no realtime update
-        .then(res => {
-            dispatch({
-                type: SET_CHAT_MESSAGES,
-                payload: res.data.messages
-            })
-        })
-        .catch(err => {
-            console.log(err)
-            dispatch({
-                type: SET_CHAT_MESSAGES,
-                payload: []
-            })
-        })
-}
-
-// Clear all the chatMessages in redux 
-export const clearChats = () => (dispatch) => {
-    dispatch({ type: CLEAR_CHATS })
 }
 
 // Customer send message to a cleaner at the same time update redux 
 export const sendMessageToCleaner = (friend, chatText) => (dispatch) => {
     axios.post(`/chat/cleaner/${friend}`, chatText.txt)
-        .then(() => {
-            dispatch({
-                type: SEND_MESSAGE,
-                payload: chatText
-            })
+        .then(res => {
+            console.log(res);
         })
         .catch(err => console.log(err));
 }
@@ -383,11 +324,8 @@ export const sendMessageToCleaner = (friend, chatText) => (dispatch) => {
 // Cleaner send message to a customer at the same time update redux 
 export const sendMessageToCustomer = (friend, chatText) => (dispatch) => {
     axios.post(`/chat/customer/${friend}`, chatText.txt)
-        .then(() => {
-            dispatch({
-                type: SEND_MESSAGE,
-                payload: chatText
-            })
+        .then(res => {
+            console.log(res);
         })
         .catch(err => console.log(err));
 }
