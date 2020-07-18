@@ -8,7 +8,7 @@ import ChatTextbox from './ChatTextbox'
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContentText from '@material-ui/core/DialogContentText'
 
 // Icons
 import CloseIcon from '@material-ui/icons/Close'
@@ -19,8 +19,7 @@ const style = (theme) => ({
     closeButton: {
         color: '#ff3d00',
         position: 'absolute',
-        left: '95%',
-        top: '1%'
+        left: '95%'
     }
 })
 
@@ -45,19 +44,23 @@ class ChatDialog extends Component {
                 <MyButton onClick={this.handleOpen} tip='Chat' tipClassName={this.props.chatButtonClassName}>
                     <ChatIcon color='primary' />
                 </MyButton>
-                <Dialog open={this.state.open} onClose={this.handleClose} maxWidth='md' fullWidth={true} >
+                <Dialog open={this.state.open} onClose={this.handleClose} maxWidth='md' fullWidth={true}>
                     <MyButton tip='Close' onClick={this.handleClose} tipClassName={classes.closeButton}>
                         <CloseIcon />
                     </MyButton>
-                    <DialogTitle>
-                        <div className={classes.chatHeader}>
-                            Your conversation with {this.props.friendName}
-                        </div>
-                    </DialogTitle>
-                    <DialogContent >
+                    
+                    <div className={classes.chatHeader}>
+                        Your conversation with {this.props.friendName}
+                    </div>
+
+                    <DialogContent style={{overflow: "hidden"}}>
                         <ChatView friend={friendName} />
+                    </DialogContent>
+                    
+                    <DialogContent style={{overflow: "hidden"}}>
                         <ChatTextbox friend={friendName} />
                     </DialogContent>
+
                 </Dialog>
             </Fragment>
         )

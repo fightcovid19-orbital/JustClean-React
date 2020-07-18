@@ -20,40 +20,50 @@ export default {
         form: {
             textAlign: 'center'
         },
+        
         image: {
             margin: '20px auto 20px auto'
         },
+
         pageTitle: {
             margin: '10px auto 10px auto'
         },
+
         textField: {
             margin: '10px auto 10px auto'
         },
+
         button: {
             marginTop: 20,
             position: 'relative' // relative to progress
         },
+
         customError: {
             color: 'red',
             fontSize: '0.8rem',
             marginTop: 10
         },
+
         progress: {
             position: 'absolute'
         },
+
         card: {
             display: 'flex',
             marginBottom: 20
         },
+
         cardContent: {
             width: '100%',
             flexDirection: 'column',
             padding: 25
         },
+
         paper: {
             padding: 20,
             marginRight: '20px'
         },
+
         profile: {
             '& .image-wrapper': {
                 textAlign: 'center',
@@ -135,17 +145,6 @@ export default {
         },
         visibleSeparator: {
 
-        },
-
-        chatHeader: {
-            width: '100%',
-            height: '50px',
-            backgroundColor: '#ff9800',
-            fontSize: '18px',
-            textAlign: 'center',
-            color: 'white',
-            paddingTop: '10px',
-            boxSizing: 'border-box'
         },
 
         content: {
