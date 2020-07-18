@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import DeleteRecordButton from './DeleteRecordButton'
+import ChatDialog from '../chat/ChatDialog'
 
 //Mui
 import Menu from '@material-ui/core/Menu'
@@ -87,6 +88,7 @@ class Records extends Component {
                                     <Typography variant="body2" >
                                         location: {location}
                                     </Typography>
+                                    <ChatDialog friendName={customerName} />
                                 </Grid>
                                 <Grid item>
                                     <DeleteRecordButton recordId={recordId} />

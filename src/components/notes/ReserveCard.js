@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
 import AcceptButton from './AcceptButton'
 import RejectButton from './RejectButton'
-import ChatDialog from './ChatDialog'
+import ChatDialog from '../chat/ChatDialog'
 
 // MUI stuff
 import Card from '@material-ui/core/Card'
@@ -25,7 +25,8 @@ const style = {
         objectFit: 'cover',
         maxWidth: '100%',
         borderRadius: '50%',
-        margin: 15
+        margin: 15,
+        marginTop: 40
     },
     content: {
         padding: 25,
@@ -55,7 +56,7 @@ class ReserveCard extends Component {
                     <Typography variant="body2" >
                         location: {customerLocation}
                     </Typography>
-                    <ChatDialog customerName={customerName} />
+                    <ChatDialog friendName={customerName} />
                     <AcceptButton customerName={customerName} />
                     <RejectButton customerName={customerName} />
                 </CardContent>

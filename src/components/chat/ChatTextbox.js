@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './styles';
 import TextField from '@material-ui/core/TextField';
 import Send from '@material-ui/icons/Send';
 import { withStyles } from '@material-ui/core/styles';
@@ -7,7 +6,11 @@ import PropTypes from 'prop-types'
 
 // Redux
 import { connect } from 'react-redux'
-import { sendMessageToCleaner } from '../../../redux/actions/dataActions'
+import { sendMessageToCleaner, sendMessageToCustomer } from '../../redux/actions/dataActions'
+
+const styles = (theme) => ({
+    ...theme.spreadThis,
+})
 
 class ChatTextbox extends React.Component {
 
@@ -23,12 +26,22 @@ class ChatTextbox extends React.Component {
 
     submitMessage = () => {
         if (this.messageValid(this.state.chatText)) {
-            const chatText = {
-                txt: { message: this.state.chatText },
-                sender: this.props.customerName,
-                timestamp: new Date().toISOString
+            if(this.props.userCredentials.type === "customer") {
+                const chatText = {
+                    txt: { message: this.state.chatText },
+                    sender: this.props.userCredentials.customerName,
+                    timestamp: new Date().toISOString
+                }
+                this.props.sendMessageToCleaner(this.props.friend, chatText)
+            } else {
+                const chatText = {
+                    txt: { message: this.state.chatText },
+                    sender: this.props.userCredentials.cleanerName,
+                    timestamp: new Date().toISOString
+                }
+                this.props.sendMessageToCustomer(this.props.friend, chatText)
             }
-            this.props.sendMessageToCleaner(this.props.friend, chatText)
+            
 
             document.getElementById('chattextbox').value = '';
         }
@@ -56,12 +69,13 @@ class ChatTextbox extends React.Component {
 
 ChatTextbox.propTypes = {
     friend: PropTypes.string.isRequired,
-    customerName: PropTypes.string.isRequired,
-    sendMessageToCleaner: PropTypes.func.isRequired
+    userCredentials: PropTypes.object.isRequired,
+    sendMessageToCleaner: PropTypes.func,
+    sendMessageToCustomer: PropTypes.func
 }
 
 const mapStateToProps = state => ({
-    customerName: state.user.credentials.customerName
+    userCredentials: state.user.credentials
 })
 
-export default connect(mapStateToProps, { sendMessageToCleaner })(withStyles(styles)(ChatTextbox));
+export default connect(mapStateToProps, { sendMessageToCleaner, sendMessageToCustomer })(withStyles(styles)(ChatTextbox));

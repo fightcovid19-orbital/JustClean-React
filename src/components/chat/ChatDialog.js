@@ -2,24 +2,22 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MyButton from '../../util/MyButton';
-import ChatView from './chatView/ChatView'
-import ChatTextbox from './chatTextbox/ChatTextbox';
+import ChatView from './ChatView'
+import ChatTextbox from './ChatTextbox'
 
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 // Icons
 import CloseIcon from '@material-ui/icons/Close'
 import ChatIcon from '@material-ui/icons/Chat'
 
-// Redux 
-import { connect } from 'react-redux'
-
 const style = (theme) => ({
     ...theme.spreadThis,
     closeButton: {
-        color: 'white',
+        color: '#ff3d00',
         position: 'absolute',
         left: '95%',
         top: '1%'
@@ -28,7 +26,7 @@ const style = (theme) => ({
 
 class ChatDialog extends Component {
     state = {
-        open: false,
+        open: false
     }
 
     handleOpen = () => {
@@ -40,20 +38,25 @@ class ChatDialog extends Component {
     }
 
     render() {
-        const { classes, cleanerName } = this.props;
+        const { classes, friendName } = this.props;
 
         return (
             <Fragment>
-                <MyButton onClick={this.handleOpen} tip='Chat' tipClassName={classes.commentButton}>
+                <MyButton onClick={this.handleOpen} tip='Chat' tipClassName={this.props.chatButtonClassName}>
                     <ChatIcon color='primary' />
                 </MyButton>
-                <Dialog open={this.state.open} onClose={this.handleClose} fullScreen>
+                <Dialog open={this.state.open} onClose={this.handleClose} maxWidth='md' fullWidth={true} >
                     <MyButton tip='Close' onClick={this.handleClose} tipClassName={classes.closeButton}>
                         <CloseIcon />
                     </MyButton>
+                    <DialogTitle>
+                        <div className={classes.chatHeader}>
+                            Your conversation with {this.props.friendName}
+                        </div>
+                    </DialogTitle>
                     <DialogContent >
-                        <ChatView friend={cleanerName} />
-                        <ChatTextbox friend={cleanerName} />
+                        <ChatView friend={friendName} />
+                        <ChatTextbox friend={friendName} />
                     </DialogContent>
                 </Dialog>
             </Fragment>
@@ -63,12 +66,7 @@ class ChatDialog extends Component {
 
 ChatDialog.propTypes = {
     classes: PropTypes.object.isRequired,
-    cleanerName: PropTypes.string.isRequired,
-    data: PropTypes.object.isRequired,
+    friendName: PropTypes.string.isRequired,
 }
 
-const mapStateToProps = (state) => ({
-    data: state.data
-})
-
-export default connect(mapStateToProps)(withStyles(style)(ChatDialog))
+export default withStyles(style)(ChatDialog)

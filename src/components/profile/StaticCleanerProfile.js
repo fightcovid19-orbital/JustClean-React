@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import dayjs from 'dayjs'
-import ChatDialog from '../cleanerCard/ChatDialog'
+import ChatDialog from '../chat/ChatDialog'
 
 // MUI stuff
 import Paper from '@material-ui/core/Paper'
@@ -16,7 +16,10 @@ import DissatisfiedIcon from '@material-ui/icons/SentimentDissatisfiedOutlined'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 const styles = theme => ({
-    ...theme.spreadThis
+    ...theme.spreadThis,
+    chatButton : {
+        left: "85%"
+    }
 });
 
 // not saving this profile to state
@@ -27,7 +30,7 @@ const StaticCleanerProfile = (props) => {
 
     return (
         <Paper className={classes.paper}>
-            <ChatDialog cleanerName={cleanerName} />
+            <ChatDialog friendName={cleanerName} chatButtonClassName={classes.chatButton}/>
             <div className={classes.profile}>
                 <div className="image-wrapper">
                     <hr />

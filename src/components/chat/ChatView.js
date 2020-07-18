@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types'
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { createChat } from '../../../redux/actions/dataActions'
+import { createChat } from '../../redux/actions/dataActions'
 
 // firebase
 const firebase = require("firebase");
+
+const styles = (theme) => ({
+    ...theme.spreadThis,
+})
 
 class ChatView extends Component {
     
@@ -17,7 +20,13 @@ class ChatView extends Component {
     };
     
     componentDidMount() {
-        const docKey = [this.props.user.credentials.customerName, this.props.friend].join(':');
+        let docKey;
+        if(this.props.user.credentials.type === "customer") {
+            docKey = [this.props.user.credentials.customerName, this.props.friend].join(':'); 
+        } else {
+            docKey = [this.props.friend, this.props.user.credentials.cleanerName].join(':'); 
+        }
+        
         firebase.firestore()
             .doc(`chats/${docKey}`)
             .onSnapshot(doc => {
@@ -41,14 +50,18 @@ class ChatView extends Component {
 
     render() {
         const { classes } = this.props;
-        const { credentials: { customerName } } = this.props.user;
+        const { credentials } = this.props.user;
+
+        let userHandle;
+        if(credentials.type === "customer") {
+            userHandle = credentials.customerName; 
+        } else {
+            userHandle = credentials.cleanerName;
+        }
 
         if (!this.state.chatMessages) {
             return (
                 <div>
-                    <div className={classes.chatHeader}>
-                        Your conversation with {this.props.friend}
-                    </div>
                     <main className={classes.content}></main>
                 </div>
 
@@ -56,14 +69,11 @@ class ChatView extends Component {
         } else {
             return (
                 <div>
-                    <div className={classes.chatHeader}>
-                        Your conversation with {this.props.friend}
-                    </div>
                     <main id='chatview-container' className={classes.content}>
                         {
                             this.state.chatMessages.map((msg, index) => {
                                 return (
-                                    <div key={index} className={msg.sender === customerName ? classes.userSent : classes.friendSent}>
+                                    <div key={index} className={msg.sender === userHandle ? classes.userSent : classes.friendSent}>
                                         {msg.message}
                                     </div>
                                 )

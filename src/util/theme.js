@@ -90,12 +90,14 @@ export default {
                 }
             }
         },
+
         buttons: {
             textAlign: 'center',
             '& a': {
                 margin: '20px 10px'
             }
         },
+
         cover: {
             width: 100,
             height: 100,
@@ -104,6 +106,7 @@ export default {
             borderRadius: '50%',
             margin: 15
         },
+
         handle: {
             width: 100,
             height: 20,
@@ -111,24 +114,104 @@ export default {
             marginBottom: 10,
             marginTop: 15
         },
+
         date: {
             height: 14,
             width: 140,
             backgroundColor: 'rgba(0,0,0,0.3)',
             marginBottom: 10
         },
+
         fullLine: {
             height: 15,
             width: 500,
             marginBottom: 10,
             backgroundColor: 'rgba(0,0,0,0.6)'
         },
+
         invisibleSeparator: {
             border: 'none',
             margin: 1
         },
         visibleSeparator: {
 
+        },
+
+        chatHeader: {
+            width: '100%',
+            height: '50px',
+            backgroundColor: '#ff9800',
+            fontSize: '18px',
+            textAlign: 'center',
+            color: 'white',
+            paddingTop: '10px',
+            boxSizing: 'border-box'
+        },
+
+        content: {
+            height: 'calc(100vh - 100px)',
+            overflow: 'auto',
+            padding: '75px',
+            boxSizing: 'border-box',
+            overflowY: 'scroll',
+            top: '50px',
+            width: '100%'
+        },
+    
+        userSent: {
+            float: 'left',
+            clear: 'both',
+            padding: '20px',
+            boxSizing: 'border-box',
+            wordWrap: 'break-word',
+            marginTop: '10px',
+            backgroundColor: '#ffb74d',
+            color: 'white',
+            width: '300px',
+            borderRadius: '10px'
+        },
+    
+        friendSent: {
+            float: 'right',
+            clear: 'both',
+            padding: '20px',
+            boxSizing: 'border-box',
+            wordWrap: 'break-word',
+            marginTop: '10px',
+            backgroundColor: '#f57c00',
+            color: 'white',
+            width: '300px',
+            borderRadius: '10px'
+        },
+    
+        chatHeader: {
+            width: '100%',
+            height: '50px',
+            backgroundColor: '#ff9800',
+            fontSize: '18px',
+            textAlign: 'center',
+            color: 'white',
+            paddingTop: '10px',
+            boxSizing: 'border-box'
+        },
+    
+        sendBtn: {
+            color: 'blue',
+            cursor: 'pointer',
+            '&:hover': {
+                color: 'gray'
+            }
+        },
+    
+        chatTextBoxContainer: {
+            bottom: '15px',
+            boxSizing: 'border-box',
+            overflow: 'auto',
+            width: '100%'
+        },
+    
+        chatTextBox: {
+            width: 'calc(100% - 25px)'
         }
     }
 }
