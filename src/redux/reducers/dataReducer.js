@@ -12,7 +12,6 @@ import {
     SET_EMPTY_DATA,
     SET_RECORDS,
     DELETE_COMMENT,
-    SET_COMMENT,
     SET_CLEANER_DATA,
     ACCEPT,
     REJECT
@@ -22,7 +21,6 @@ const initialState = {
     cleaners: [],
     cleaner: {},
     comments: [],
-    comment: {},
     reservations: [],
     histories: [],
     records: [],
@@ -124,12 +122,6 @@ export default function (state = initialState, action) {
             return {
                 ...state
             };
-        case SET_COMMENT: 
-            return {
-                ...state,
-                comment: action.payload,
-                loadingData: false
-            }
         default:
             return state;
     }

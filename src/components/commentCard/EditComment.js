@@ -5,7 +5,7 @@ import MyButton from '../../util/MyButton';
 
 // Redux
 import { connect } from 'react-redux'
-import { editComment, getComment } from '../../redux/actions/dataActions'
+import { editComment } from '../../redux/actions/dataActions'
 
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog';
@@ -35,9 +35,9 @@ class EditComment extends Component {
 
     handleOpen = () => {
         this.setState({ open: true })
-        this.props.getComment(this.props.commentId);
+        const comments = this.props.comments.filter((comment) => comment.commentId == this.props.commentId)
         this.setState({
-            body: this.props.commentBody
+            body: comments[0].body
         })
     }
 
@@ -94,13 +94,12 @@ EditComment.propTypes = {
     classes: PropTypes.object.isRequired,
     commentId: PropTypes.string.isRequired,
     editComment: PropTypes.func.isRequired,
-    getComment: PropTypes.func.isRequired,
-    commentBody: PropTypes.string.isRequired,
+    comments: PropTypes.array.isRequired,
     cleanerName: PropTypes.string.isRequired
 }
 
 const mapStateToProps = state => ({
-    commentBody: state.data.comment.body
+    comments: state.data.comments,
 })
 
-export default connect(mapStateToProps, { editComment, getComment })(withStyles(styles)(EditComment));
+export default connect(mapStateToProps, { editComment })(withStyles(styles)(EditComment));

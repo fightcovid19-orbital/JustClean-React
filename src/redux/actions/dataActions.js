@@ -21,7 +21,6 @@ import {
     LOADING_DATA,
     STOP_LOADING_UI,
     LOADING_UI,
-    SET_COMMENT,
     SET_CLEANER_DATA
 } from '../types'
 import axios from 'axios'
@@ -334,17 +333,6 @@ export const editComment = (commentId, commentBody, cleanerName) => (dispatch) =
     axios.post(`/comment/edit/${commentId}`, commentBody)
         .then(() => {
             dispatch(getComments(cleanerName));
-        })
-        .catch(err => console.log(err));
-}
-
-export const getComment = (commentId) => (dispatch) => {
-    axios.get(`/comment/${commentId}`)
-        .then(res => {
-            dispatch({
-                type: SET_COMMENT,
-                payload: res.data
-            })
         })
         .catch(err => console.log(err));
 }
