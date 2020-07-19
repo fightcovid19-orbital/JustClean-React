@@ -35,7 +35,7 @@ class EditComment extends Component {
 
     handleOpen = () => {
         this.setState({ open: true })
-        const comments = this.props.comments.filter((comment) => comment.commentId == this.props.commentId)
+        const comments = this.props.comments.filter((comment) => comment.commentId === this.props.commentId)
         this.setState({
             body: comments[0].body
         })
