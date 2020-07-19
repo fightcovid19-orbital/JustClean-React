@@ -62,14 +62,14 @@ class ChatView extends Component {
         if (!this.state.chatMessages) {
             return (
                 <div>
-                    <main className={classes.content}></main>
+                    <main></main>
                 </div>
 
             );
         } else {
             return (
                 <div>
-                    <main id='chatview-container' className={classes.content}>
+                    <main id='chatview-container' >
                         {
                             this.state.chatMessages.map((msg, index) => {
                                 return (

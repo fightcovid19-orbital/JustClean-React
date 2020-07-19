@@ -146,16 +146,6 @@ export default {
         visibleSeparator: {
 
         },
-
-        content: {
-            height: 'calc(100vh - 100px)',
-            overflow: 'auto',
-            padding: '75px',
-            boxSizing: 'border-box',
-            overflowY: 'scroll',
-            top: '50px',
-            width: '100%'
-        },
     
         userSent: {
             float: 'left',

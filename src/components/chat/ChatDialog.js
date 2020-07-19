@@ -8,6 +8,7 @@ import ChatTextbox from './ChatTextbox'
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 // Icons
 import CloseIcon from '@material-ui/icons/Close'
@@ -18,7 +19,8 @@ const style = (theme) => ({
     closeButton: {
         color: '#ff3d00',
         position: 'absolute',
-        left: '95%'
+        left: '91%',
+        marginTop: 16
     }
 })
 
@@ -47,18 +49,20 @@ class ChatDialog extends Component {
                     <MyButton tip='Close' onClick={this.handleClose} tipClassName={classes.closeButton}>
                         <CloseIcon />
                     </MyButton>
-                    
+                    <DialogTitle>
                     <div className={classes.chatHeader}>
                         Your conversation with {this.props.friendName}
                     </div>
+                    </DialogTitle> 
 
-                    <DialogContent style={{overflow: "hidden"}}>
+                    <DialogContent>
                         <ChatView friend={friendName} />
                     </DialogContent>
                     
-                    <DialogContent style={{overflow: "hidden"}}>
+                    
+                    <DialogTitle >
                         <ChatTextbox friend={friendName} />
-                    </DialogContent>
+                    </DialogTitle>
 
                 </Dialog>
             </Fragment>

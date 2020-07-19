@@ -47,15 +47,21 @@ class CommentDialog extends Component {
         errors: {},
         open: false
     }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.UI.errors) {
-            this.setState({ errors: nextProps.UI.errors })
+
+    static getDerivedStateFromProps(props, state) {
+        if(props.UI.errors) {
+            return {
+                errors: props.UI.errors
+            }
         }
-        if (!nextProps.UI.errors && !nextProps.UI.loadingUI) { // maybe dont have loadingUI
-            this.setState({ body: '' })
-            this.setState({ errors: {} })
+        if(!props.UI.errors && !props.UI.loadingUI) {
+            return {
+                errors: {}
+            }
         }
+        return null
     }
+
     handleOpen = () => {
         this.setState({ open: true })
     }
@@ -70,7 +76,7 @@ class CommentDialog extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.submitComment(this.props.cleanerName, { body: this.state.body });
-        if (this.props.UI.errors) {
+        if (!this.props.UI.errors) {
             this.handleClose();
         }
     }
