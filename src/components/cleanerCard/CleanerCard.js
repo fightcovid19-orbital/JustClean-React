@@ -14,6 +14,7 @@ import ChatDialog from '../chat/ChatDialog'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
 
 // Icons
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
@@ -34,11 +35,18 @@ const style = {
         objectFit: 'cover',
         maxWidth: '100%',
         borderRadius: '50%',
-        margin: 15
+        marginLeft: 15,
+        marginTop: 15,
     },
     content: {
-        padding: 25,
+        paddingTop: 25,
         objectFit: 'cover'
+    },
+    cleanerName: {
+        padding: 15,
+    },
+    gridCenter: {
+        textAlign: 'center'
     }
 }
 
@@ -46,33 +54,52 @@ const style = {
 class CleanerCard extends Component {
 
     render() {
-        const { 
-            classes, 
+        const {
+            classes,
             cleaner: { imageUrl, cleanerName, likeCount, unlikeCount, hiredCount },
         } = this.props
 
         return (
+
             <Card className={classes.card}>
-                <img src={imageUrl} alt="Profile" className={classes.image} />
-                <CardContent className={classes.content}>
-                    <Typography variant="h5" component={Link} to={`/cleaners/${cleanerName}`} color='primary'>
-                        {cleanerName}
-                    </Typography>
-                    <br />
-                    <LikeButton cleanerName={cleanerName} />
-                    <span>{likeCount} Likes</span>
-                    <UnlikeButton cleanerName={cleanerName} />
-                    <span>{unlikeCount} Unlikes</span>
-                    <MyButton tip="Number of times being hired">
-                        <AccountCircleIcon color="primary" />
-                    </MyButton>
-                    <span>{hiredCount} Hired</span>
-                    <CommentDialog cleanerName={cleanerName} />
-                    <ReserveButton cleanerName={cleanerName} />
-                    <ChatDialog friendName={cleanerName} />
-                    <CleanerDialog cleanerName={cleanerName} />
-                </CardContent>
+                <Grid container justify='flex-start' alignItems='center'>
+                    <Grid item xs={12} sm={2} className={classes.gridCenter}>
+                        <img src={imageUrl} alt="Profile" className={classes.image} />
+                    </Grid>
+                    <Grid item xs={12} sm={10} >
+                        <CardContent className={classes.content}>
+                            <Typography variant="h5" component={Link} to={`/cleaners/${cleanerName}`} color='primary' className={classes.cleanerName}>
+                                {cleanerName}
+                            </Typography>
+                            <br />
+                            <Grid container >
+                                <Grid item lg={6} sm={12} xs={12}>
+                                    <LikeButton cleanerName={cleanerName} />
+                                    <span>{likeCount} Likes</span>
+                                    <UnlikeButton cleanerName={cleanerName} />
+                                    <span>{unlikeCount} Unlikes</span>
+                                    <MyButton tip="Number of times being hired">
+                                        <AccountCircleIcon color="primary" />
+                                    </MyButton>
+                                    <span>{hiredCount} Hired</span>
+                                </Grid>
+                                <Grid item lg={4} sm={8} xs={8}>
+                                    <CommentDialog cleanerName={cleanerName} />
+                                    <ReserveButton cleanerName={cleanerName} />
+                                    <ChatDialog friendName={cleanerName} />
+                                </Grid>
+                                <Grid item lg={1} sm={2} xs={2}>
+                                    <CleanerDialog cleanerName={cleanerName} />
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    </Grid>
+
+                </Grid>
+
             </Card>
+
+
         )
     }
 }

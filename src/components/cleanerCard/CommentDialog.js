@@ -31,8 +31,6 @@ const style = (theme) => ({
         textAlign: 'center'
     },
     expandButton: {
-        position: 'absolute',
-        left: '85%'
     },
     spinnerDiv: {
         textAlign: 'center',
@@ -49,12 +47,12 @@ class CommentDialog extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if(props.UI.errors) {
+        if (props.UI.errors) {
             return {
                 errors: props.UI.errors
             }
         }
-        if(!props.UI.errors && !props.UI.loadingUI) {
+        if (!props.UI.errors && !props.UI.loadingUI) {
             return {
                 errors: {}
             }

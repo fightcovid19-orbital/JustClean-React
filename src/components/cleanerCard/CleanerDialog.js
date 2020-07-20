@@ -40,7 +40,6 @@ const style = (theme) => ({
         left: '90%'
     },
     expandButton: {
-        position: 'absolute',
         left: '85%'
     },
     spinnerDiv: {
