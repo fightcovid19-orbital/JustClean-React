@@ -24,14 +24,13 @@ import { connect } from 'react-redux'
 const styles = theme => ({
     ...theme.spreadThis,
     title: {
-        marginLeft: 100
+        textAlign: 'center'
     },
     scrollablePaper: {
         maxHeight: 400,
         overflow: 'auto',
         padding: 20,
-        marginRight: '20px'
-    }
+    },
 })
 
 class home extends Component {
@@ -91,14 +90,16 @@ class home extends Component {
         const home = (profile === 'noUser' || feed === 'noUser' || notes === 'noUser')
             ? (
                 <Grid container className={classes.form}>
-                    <Grid item sm />
-                    <SmallLoginAndSignup />
-                    <Grid item sm />
+                    <Grid item sm xs={1} />
+                    <Grid item sm xs={10}>
+                        <SmallLoginAndSignup />
+                    </Grid>
+                    <Grid item sm xs={1} />
                 </Grid>
             )
             : (
-                <Grid container spacing={2}>
-                    <Grid item sm={4} xs={12}>
+                <Grid container spacing={2} >
+                    <Grid item sm={4} xs={12} >
                         {profile}
                         <br />
                         {notes}
@@ -107,10 +108,7 @@ class home extends Component {
                         {feed}
                     </Grid>
                 </Grid>
-
             )
-
-
         return home;
     }
 }

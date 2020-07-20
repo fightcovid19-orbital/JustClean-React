@@ -43,7 +43,7 @@ class login extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if(props.UI.errors) {
+        if (props.UI.errors) {
             return {
                 errors: props.UI.errors
             }
@@ -73,10 +73,10 @@ class login extends Component {
         const { classes, UI: { loadingUI } } = this.props;
         const { errors } = this.state;
         return (
-            <Grid container className={classes.form}>
-                <Grid item sm />
-                <Grid item sm>
-                    <img src={AppIcon} alt='JustClean' className={classes.image} />
+            <Grid container className={classes.form} justify='center' alignItems='center'>
+                <Grid item sm xs={1} />
+                <Grid item sm xs={10}>
+                    <img src={AppIcon} alt='JustClean' className={classes.loginImage} />
                     <Typography variant='h3' className={classes.pageTitle}>
                         Login
                     </Typography>
@@ -88,7 +88,7 @@ class login extends Component {
                             value={this.state.password} onChange={this.handleChange} fullWidth
                             helperText={errors.password} error={errors.password ? true : false} />
 
-                        <FormControl component="fieldset" className={classes.textField} >
+                        <FormControl component="fieldset" className={classes.fieldSet} >
                             <FormLabel component="legend" >
                                 Type
                             </FormLabel>
@@ -105,7 +105,7 @@ class login extends Component {
                         {errors.general && <Typography variant='body2' className={classes.customError}>
                             {errors.general}
                         </Typography>}
-                        <hr className={classes.invisibleSeparator}/>
+                        <hr className={classes.invisibleSeparator} />
                         <Button type='submit' variant='contained' color='primary' disabled={loadingUI} className={classes.button}>
                             Login {loadingUI && (<CircularProgress size={30} className={classes.progress} />)}
                         </Button>
@@ -113,10 +113,9 @@ class login extends Component {
                         <small>Don't have an account? Sign up <Link to='/signup'>here</Link></small>
                     </form>
                 </Grid>
-                <Grid item sm />
+                <Grid item sm xs={1} />
             </Grid>
         )
-        // inside the errors received, if there is a field of email means the email is invalid
     }
 }
 

@@ -32,7 +32,7 @@ class SearchBar extends Component {
         return (
             <Autocomplete
                 id="region-select"
-                style={{ width: 300 }}
+                style={{ width: 200 }}
                 options={regions}
                 autoHighlight
                 getOptionLabel={(option) => option.regionName}
@@ -56,8 +56,6 @@ class SearchBar extends Component {
                     />
                 )}
             />
-
-
         )
     }
 }
