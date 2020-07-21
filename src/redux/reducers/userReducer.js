@@ -8,6 +8,7 @@ import {
     CANCELUNLIKE_CLEANER,
     UNLIKE_CLEANER,
     LOADING_LIKE,
+    STOP_LOADING_LIKE,
     DELETE_CLEANER,
     MARK_NOTIFICATIONS_READ,
     RESERVE,
@@ -52,14 +53,17 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 loadingLike: true
+            };
+        case STOP_LOADING_LIKE:
+            return {
+                ...state,
+                loadingLike: false
             }
         case LIKE_CLEANER:
             return {
                 ...state,
-                loadingLike: false,
                 likes: [
                     ...state.likes,
-
                     {
                         userHandle: state.credentials.customerName,
                         cleanerName: action.payload.cleanerName
@@ -69,13 +73,11 @@ export default function (state = initialState, action) {
         case CANCELLIKE_CLEANER:
             return {
                 ...state,
-                loadingLike: false,
                 likes: state.likes.filter((like) => like.cleanerName !== action.payload.cleanerName)
             }
         case UNLIKE_CLEANER:
             return {
                 ...state,
-                loadingLike: false,
                 unlikes: [
                     ...state.unlikes,
                     {
@@ -87,7 +89,6 @@ export default function (state = initialState, action) {
         case CANCELUNLIKE_CLEANER:
             return {
                 ...state,
-                loadingLike: false,
                 unlikes: state.unlikes.filter((unlike) => unlike.cleanerName !== action.payload.cleanerName)
             }
         case MARK_NOTIFICATIONS_READ:

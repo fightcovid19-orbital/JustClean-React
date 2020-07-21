@@ -21,10 +21,11 @@ export class LikeButton extends Component {
         }
     };
     likeCleaner = () => {
+        let isUnlike = false;
         if (this.props.user.unlikes && this.props.user.unlikes.find((unlike) => unlike.cleanerName === this.props.cleanerName)) {
-            this.props.cancelUnlikeCleaner(this.props.cleanerName)
+            isUnlike = true
         }
-        this.props.likeCleaner(this.props.cleanerName);
+        this.props.likeCleaner(this.props.cleanerName, isUnlike)
     };
     cancelLikeCleaner = () => {
         this.props.cancelLikeCleaner(this.props.cleanerName);
@@ -33,22 +34,24 @@ export class LikeButton extends Component {
         const { authenticated } = this.props.user;
         const { loadingDataLike, loadingUserLike } = this.props;
 
-        let likeButton; 
-        
-        if(!authenticated) {
+        let likeButton;
+
+        if (!authenticated) {
             likeButton = (<Link to='/login'>
-                    <MyButton tip='Like'>
-                        <SatisfiedIcon color='primary' />
-                    </MyButton>
+                <MyButton tip='Like'>
+                    <SatisfiedIcon color='primary' />
+                </MyButton>
             </Link>)
         } else {
-            if(this.likedCleaner()) {
-                likeButton = (<MyButton tip='Undo like' onClick={this.cancelLikeCleaner}>
-                    <SatisfiedTwoTone color='primary' disable={loadingDataLike || loadingUserLike} />
+            if (this.likedCleaner()) {
+                likeButton = (<MyButton tip='Undo like'
+                    onClick={this.cancelLikeCleaner} disable={loadingDataLike || loadingUserLike}>
+                    <SatisfiedTwoTone color='primary' />
                 </MyButton>)
             } else {
-                likeButton = (<MyButton tip='Like' onClick={this.likeCleaner}>
-                    <SatisfiedIcon color='primary' disable={loadingDataLike || loadingUserLike}/>
+                likeButton = (<MyButton tip='Like'
+                    onClick={this.likeCleaner} disable={loadingDataLike || loadingUserLike}>
+                    <SatisfiedIcon color='primary' />
                 </MyButton>)
             }
         }

@@ -6,6 +6,7 @@ import {
     UNLIKE_CLEANER,
     CANCELUNLIKE_CLEANER,
     LOADING_LIKE,
+    STOP_LOADING_LIKE,
     SET_COMMENTS,
     SET_HISTORIES,
     SET_RESERVATIONS,
@@ -77,17 +78,43 @@ export const getCleanerData = (cleanerName) => (dispatch) => {
         });
 }
 
+export const setLoadingLikeFalse = () => (dispatch) => {
+    dispatch({ type: STOP_LOADING_LIKE })
+}
+
 // like a cleaner
-export const likeCleaner = (cleanerName) => (dispatch) => {
+export const likeCleaner = (cleanerName, isUnlike) => (dispatch) => {
     dispatch({ type: LOADING_LIKE })
-    axios.get(`/like/${cleanerName}`)
-        .then(res => {
-            dispatch({
-                type: LIKE_CLEANER,
-                payload: res.data
+    if (isUnlike) {
+        axios.get(`/cancelUnlike/${cleanerName}`)
+            .then(res1 => {
+                dispatch({
+                    type: CANCELUNLIKE_CLEANER,
+                    payload: res1.data
+                })
+                axios.get(`/like/${cleanerName}`)
+                    .then(res2 => {
+                        dispatch({
+                            type: LIKE_CLEANER,
+                            payload: res2.data
+                        })
+                        dispatch(setLoadingLikeFalse())
+                    })
+                    .catch(err => console.log(err))
             })
-        })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
+    } else {
+        axios.get(`/like/${cleanerName}`)
+            .then(res => {
+                dispatch({
+                    type: LIKE_CLEANER,
+                    payload: res.data
+                })
+                dispatch(setLoadingLikeFalse())
+            })
+            .catch(err => console.log(err))
+    }
+
 }
 
 // cancel like a cleaner
@@ -99,21 +126,43 @@ export const cancelLikeCleaner = (cleanerName) => (dispatch) => {
                 type: CANCELLIKE_CLEANER,
                 payload: res.data
             })
+            dispatch(setLoadingLikeFalse())
         })
         .catch(err => console.log(err))
 }
 
 // unlike a cleaner
-export const unlikeCleaner = (cleanerName) => (dispatch) => {
+export const unlikeCleaner = (cleanerName, isLike) => (dispatch) => {
     dispatch({ type: LOADING_LIKE })
-    axios.get(`/unlike/${cleanerName}`)
-        .then(res => {
-            dispatch({
-                type: UNLIKE_CLEANER,
-                payload: res.data
+    if (isLike) {
+        axios.get(`/cancelLike/${cleanerName}`)
+            .then(res1 => {
+                dispatch({
+                    type: CANCELLIKE_CLEANER,
+                    payload: res1.data
+                })
+                axios.get(`/unlike/${cleanerName}`)
+                    .then(res2 => {
+                        dispatch({
+                            type: UNLIKE_CLEANER,
+                            payload: res2.data
+                        })
+                        dispatch(setLoadingLikeFalse())
+                    })
+                    .catch(err => console.log(err))
             })
-        })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
+    } else {
+        axios.get(`/unlike/${cleanerName}`)
+            .then(res => {
+                dispatch({
+                    type: UNLIKE_CLEANER,
+                    payload: res.data
+                })
+                dispatch(setLoadingLikeFalse())
+            })
+            .catch(err => console.log(err))
+    }
 }
 
 // cancel unlike a cleaner
@@ -125,6 +174,7 @@ export const cancelUnlikeCleaner = (cleanerName) => (dispatch) => {
                 type: CANCELUNLIKE_CLEANER,
                 payload: res.data
             })
+            dispatch(setLoadingLikeFalse())
         })
         .catch(err => console.log(err))
 }

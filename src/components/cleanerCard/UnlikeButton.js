@@ -18,10 +18,11 @@ export class UnlikeButton extends Component {
         else return false;
     };
     unlikeCleaner = () => {
+        let isLike = false;
         if (this.props.user.likes && this.props.user.likes.find((like) => like.cleanerName === this.props.cleanerName)) {
-            this.props.cancelLikeCleaner(this.props.cleanerName)
+            isLike = true;
         }
-        this.props.unlikeCleaner(this.props.cleanerName);
+        this.props.unlikeCleaner(this.props.cleanerName, isLike);
     }
     cancelUnlikeCleaner = () => {
         this.props.cancelUnlikeCleaner(this.props.cleanerName);
@@ -31,22 +32,24 @@ export class UnlikeButton extends Component {
         const { loadingDataLike, loadingUserLike } = this.props;
 
 
-        let unlikeButton; 
-        
-        if(!authenticated) {
+        let unlikeButton;
+
+        if (!authenticated) {
             unlikeButton = (<Link to='/login'>
-                    <MyButton tip='Like'>
-                        <DissatisfiedIcon color='primary' />
-                    </MyButton>
+                <MyButton tip='Like'>
+                    <DissatisfiedIcon color='primary' />
+                </MyButton>
             </Link>)
         } else {
-            if(this.unlikedCleaner()) {
-                unlikeButton = (<MyButton tip='Undo like' onClick={this.cancelUnlikeCleaner}>
-                    <DissatisfiedTwoTone color='primary' disable={loadingDataLike || loadingUserLike} />
+            if (this.unlikedCleaner()) {
+                unlikeButton = (<MyButton tip='Undo unlike'
+                    onClick={this.cancelUnlikeCleaner} disable={loadingDataLike || loadingUserLike}>
+                    <DissatisfiedTwoTone color='primary' />
                 </MyButton>)
             } else {
-                unlikeButton = (<MyButton tip='Like' onClick={this.unlikeCleaner}>
-                    <DissatisfiedIcon color='primary' disable={loadingDataLike || loadingUserLike}/>
+                unlikeButton = (<MyButton tip='Unlike'
+                    onClick={this.unlikeCleaner} disable={loadingDataLike || loadingUserLike}>
+                    <DissatisfiedIcon color='primary' />
                 </MyButton>)
             }
         }
@@ -62,7 +65,7 @@ UnlikeButton.propTypes = {
     cancelUnlikeCleaner: PropTypes.func.isRequired,
     cancelLikeCleaner: PropTypes.func.isRequired,
     loadingUserLike: PropTypes.bool.isRequired,
-    loadingDataLike: PropTypes.bool.isRequired,
+    loadingDataLike: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => ({

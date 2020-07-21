@@ -6,6 +6,7 @@ import {
     UNLIKE_CLEANER,
     CANCELUNLIKE_CLEANER,
     LOADING_LIKE,
+    STOP_LOADING_LIKE,
     SET_COMMENTS,
     SET_CLEANER,
     SET_HISTORIES,
@@ -61,6 +62,11 @@ export default function (state = initialState, action) {
                 ...state,
                 loadingLike: true
             }
+        case STOP_LOADING_LIKE:
+            return {
+                ...state,
+                loadingLike: false
+            }
         case LIKE_CLEANER:
         case CANCELLIKE_CLEANER:
             let like_index = state.cleaners.findIndex((cleaner) => cleaner.cleanerName === action.payload.cleanerName);
@@ -70,7 +76,6 @@ export default function (state = initialState, action) {
             }
             return {
                 ...state,
-                loadingLike: false
             };
         case UNLIKE_CLEANER:
         case CANCELUNLIKE_CLEANER:
@@ -81,7 +86,6 @@ export default function (state = initialState, action) {
             }
             return {
                 ...state,
-                loadingLike: false
             };
         case SET_COMMENTS:
             return {
