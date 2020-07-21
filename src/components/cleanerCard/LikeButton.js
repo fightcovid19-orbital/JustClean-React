@@ -34,9 +34,16 @@ export class LikeButton extends Component {
         const { loadingDataLike, loadingUserLike } = this.props;
 
         const likeButton = (loadingDataLike || loadingUserLike) ? (
-            <MyButton tip='Like disabled'>
-                <SatisfiedIcon color='primary' />
-            </MyButton>
+            this.likedCleaner() ? (
+                <MyButton tip='Disabled Undo like' >
+                    <SatisfiedTwoTone color='primary' />
+                </MyButton>
+            ) : (
+                    <MyButton tip='Disabled Like' >
+                        <SatisfiedIcon color='primary' />
+                    </MyButton>
+                )
+
         ) :
             !authenticated ? (
                 <Link to='/login'>

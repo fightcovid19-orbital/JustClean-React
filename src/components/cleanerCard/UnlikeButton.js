@@ -31,9 +31,16 @@ export class UnlikeButton extends Component {
         const { loadingDataLike, loadingUserLike } = this.props;
 
         const unlikeButton = (loadingDataLike || loadingUserLike) ? (
-            <MyButton tip='Unlike disabled'>
-                <DissatisfiedIcon color='primary' />
-            </MyButton>
+            this.unlikedCleaner() ? (
+                <MyButton tip='Disabled Undo unlike' >
+                    <DissatisfiedTwoTone color='primary' />
+                </MyButton>
+            ) : (
+                    <MyButton tip='Disabled Unlike' >
+                        <DissatisfiedIcon color='primary' />
+                    </MyButton>
+                )
+
         ) : !authenticated ? (
             <Link to='/login'>
                 <MyButton tip='Unlike'>
