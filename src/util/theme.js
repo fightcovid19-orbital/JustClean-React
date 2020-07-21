@@ -156,7 +156,8 @@ export default {
             marginTop: '10px',
             backgroundColor: '#ffb74d',
             color: 'white',
-            width: '300px',
+            width: 'auto',
+            maxWidth: 250,
             borderRadius: '10px'
         },
     
@@ -169,19 +170,17 @@ export default {
             marginTop: '10px',
             backgroundColor: '#f57c00',
             color: 'white',
-            width: '300px',
+            width: 'auto',
+            maxWidth: 250,
             borderRadius: '10px'
         },
     
         chatHeader: {
             width: '100%',
-            height: '50px',
+            height: 'auto',
+            minHeight: 50,
             backgroundColor: '#ff9800',
-            fontSize: '18px',
-            textAlign: 'center',
-            color: 'white',
-            paddingTop: '10px',
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
         },
     
         sendBtn: {
