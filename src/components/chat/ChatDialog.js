@@ -9,18 +9,26 @@ import ChatTextbox from './ChatTextbox'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 
 // Icons
 import CloseIcon from '@material-ui/icons/Close'
 import ChatIcon from '@material-ui/icons/Chat'
+import { Typography } from '@material-ui/core';
 
 const style = (theme) => ({
     ...theme.spreadThis,
     closeButton: {
         color: '#ff3d00',
-        position: 'absolute',
-        left: '91%',
-        marginTop: 16
+        left: "15%",
+        position: "relative"
+    },
+    header: {
+        fontSize: '18px',
+        textAlign: 'center',
+        color: 'white',
+        padding: '10px',
     }
 })
 
@@ -45,14 +53,25 @@ class ChatDialog extends Component {
                 <MyButton onClick={this.handleOpen} tip='Chat' tipClassName={this.props.chatButtonClassName}>
                     <ChatIcon color='primary' />
                 </MyButton>
-                <Dialog open={this.state.open} onClose={this.handleClose} maxWidth='md' fullWidth={true}>
-                    <MyButton tip='Close' onClick={this.handleClose} tipClassName={classes.closeButton}>
-                        <CloseIcon />
-                    </MyButton>
+                <Dialog open={this.state.open} onClose={this.handleClose} fullScreen>
+                   
                     <DialogTitle>
-                    <div className={classes.chatHeader}>
-                        Your conversation with {this.props.friendName}
-                    </div>
+                        <Paper className={classes.chatHeader}>
+                            <Grid container>
+                                <Grid item xs></Grid>
+                                <Grid item xs={9}>
+                                    <Typography className={classes.header}>
+                                        Your conversation with {this.props.friendName}
+                                    </Typography>
+                                    
+                                </Grid>
+                                <Grid item xs>
+                                    <MyButton tip='Close' onClick={this.handleClose} tipClassName={classes.closeButton}>
+                                        <CloseIcon />
+                                    </MyButton>
+                                </Grid>
+                            </Grid>
+                        </Paper>
                     </DialogTitle> 
 
                     <DialogContent>
