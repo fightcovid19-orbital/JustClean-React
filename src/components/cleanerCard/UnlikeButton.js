@@ -30,34 +30,27 @@ export class UnlikeButton extends Component {
         const { authenticated } = this.props.user;
         const { loadingDataLike, loadingUserLike } = this.props;
 
-        const unlikeButton = (loadingDataLike || loadingUserLike) ? (
-            this.unlikedCleaner() ? (
-                <MyButton tip='Disabled Undo unlike' >
-                    <DissatisfiedTwoTone color='primary' />
-                </MyButton>
-            ) : (
-                    <MyButton tip='Disabled Unlike' >
+
+        let unlikeButton; 
+        
+        if(!authenticated) {
+            unlikeButton = (<Link to='/login'>
+                    <MyButton tip='Like'>
                         <DissatisfiedIcon color='primary' />
                     </MyButton>
-                )
+            </Link>)
+        } else {
+            if(this.unlikedCleaner()) {
+                unlikeButton = (<MyButton tip='Undo like' onClick={this.cancelUnlikeCleaner}>
+                    <DissatisfiedTwoTone color='primary' disable={loadingDataLike || loadingUserLike} />
+                </MyButton>)
+            } else {
+                unlikeButton = (<MyButton tip='Like' onClick={this.unlikeCleaner}>
+                    <DissatisfiedIcon color='primary' disable={loadingDataLike || loadingUserLike}/>
+                </MyButton>)
+            }
+        }
 
-        ) : !authenticated ? (
-            <Link to='/login'>
-                <MyButton tip='Unlike'>
-                    <DissatisfiedIcon color='primary' />
-                </MyButton>
-            </Link>
-        ) : (
-                    this.unlikedCleaner() ? (
-                        <MyButton tip='Undo unlike' onClick={this.cancelUnlikeCleaner}>
-                            <DissatisfiedTwoTone color='primary' />
-                        </MyButton>
-                    ) : (
-                            <MyButton tip='Unlike' onClick={this.unlikeCleaner}>
-                                <DissatisfiedIcon color='primary' />
-                            </MyButton>
-                        )
-                )
         return unlikeButton;
     }
 }

@@ -62,8 +62,7 @@ class ChatDialog extends Component {
                                 <Grid item xs={9}>
                                     <Typography className={classes.header}>
                                         Your conversation with {this.props.friendName}
-                                    </Typography>
-                                    
+                                    </Typography>   
                                 </Grid>
                                 <Grid item xs>
                                     <MyButton tip='Close' onClick={this.handleClose} tipClassName={classes.closeButton}>

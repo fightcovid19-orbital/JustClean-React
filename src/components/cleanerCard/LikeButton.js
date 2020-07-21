@@ -33,35 +33,25 @@ export class LikeButton extends Component {
         const { authenticated } = this.props.user;
         const { loadingDataLike, loadingUserLike } = this.props;
 
-        const likeButton = (loadingDataLike || loadingUserLike) ? (
-            this.likedCleaner() ? (
-                <MyButton tip='Disabled Undo like' >
-                    <SatisfiedTwoTone color='primary' />
-                </MyButton>
-            ) : (
-                    <MyButton tip='Disabled Like' >
-                        <SatisfiedIcon color='primary' />
-                    </MyButton>
-                )
-
-        ) :
-            !authenticated ? (
-                <Link to='/login'>
+        let likeButton; 
+        
+        if(!authenticated) {
+            likeButton = (<Link to='/login'>
                     <MyButton tip='Like'>
                         <SatisfiedIcon color='primary' />
                     </MyButton>
-                </Link>
-            ) : (
-                    this.likedCleaner() ? (
-                        <MyButton tip='Undo like' onClick={this.cancelLikeCleaner}>
-                            <SatisfiedTwoTone color='primary' />
-                        </MyButton>
-                    ) : (
-                            <MyButton tip='Like' onClick={this.likeCleaner}>
-                                <SatisfiedIcon color='primary' />
-                            </MyButton>
-                        )
-                )
+            </Link>)
+        } else {
+            if(this.likedCleaner()) {
+                likeButton = (<MyButton tip='Undo like' onClick={this.cancelLikeCleaner}>
+                    <SatisfiedTwoTone color='primary' disable={loadingDataLike || loadingUserLike} />
+                </MyButton>)
+            } else {
+                likeButton = (<MyButton tip='Like' onClick={this.likeCleaner}>
+                    <SatisfiedIcon color='primary' disable={loadingDataLike || loadingUserLike}/>
+                </MyButton>)
+            }
+        }
 
         return likeButton;
     }
