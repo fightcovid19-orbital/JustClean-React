@@ -45,12 +45,12 @@ export class LikeButton extends Component {
         } else {
             if (this.likedCleaner()) {
                 likeButton = (<MyButton tip='Undo like'
-                    onClick={this.cancelLikeCleaner} disable={loadingDataLike || loadingUserLike}>
+                    onClick={this.cancelLikeCleaner} disabled={loadingDataLike || loadingUserLike}>
                     <SatisfiedTwoTone color='primary' />
                 </MyButton>)
             } else {
                 likeButton = (<MyButton tip='Like'
-                    onClick={this.likeCleaner} disable={loadingDataLike || loadingUserLike}>
+                    onClick={this.likeCleaner} disabled={loadingDataLike || loadingUserLike}>
                     <SatisfiedIcon color='primary' />
                 </MyButton>)
             }
