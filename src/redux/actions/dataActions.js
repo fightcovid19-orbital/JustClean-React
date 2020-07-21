@@ -5,6 +5,7 @@ import {
     CANCELLIKE_CLEANER,
     UNLIKE_CLEANER,
     CANCELUNLIKE_CLEANER,
+    LOADING_LIKE,
     SET_COMMENTS,
     SET_HISTORIES,
     SET_RESERVATIONS,
@@ -78,6 +79,7 @@ export const getCleanerData = (cleanerName) => (dispatch) => {
 
 // like a cleaner
 export const likeCleaner = (cleanerName) => (dispatch) => {
+    dispatch({ type: LOADING_LIKE })
     axios.get(`/like/${cleanerName}`)
         .then(res => {
             dispatch({
@@ -90,6 +92,7 @@ export const likeCleaner = (cleanerName) => (dispatch) => {
 
 // cancel like a cleaner
 export const cancelLikeCleaner = (cleanerName) => (dispatch) => {
+    dispatch({ type: LOADING_LIKE })
     axios.get(`/cancelLike/${cleanerName}`)
         .then(res => {
             dispatch({
@@ -102,6 +105,7 @@ export const cancelLikeCleaner = (cleanerName) => (dispatch) => {
 
 // unlike a cleaner
 export const unlikeCleaner = (cleanerName) => (dispatch) => {
+    dispatch({ type: LOADING_LIKE })
     axios.get(`/unlike/${cleanerName}`)
         .then(res => {
             dispatch({
@@ -114,6 +118,7 @@ export const unlikeCleaner = (cleanerName) => (dispatch) => {
 
 // cancel unlike a cleaner
 export const cancelUnlikeCleaner = (cleanerName) => (dispatch) => {
+    dispatch({ type: LOADING_LIKE })
     axios.get(`/cancelUnlike/${cleanerName}`)
         .then(res => {
             dispatch({

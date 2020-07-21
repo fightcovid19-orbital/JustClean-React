@@ -7,17 +7,19 @@ import {
     CANCELLIKE_CLEANER,
     CANCELUNLIKE_CLEANER,
     UNLIKE_CLEANER,
+    LOADING_LIKE,
     DELETE_CLEANER,
     MARK_NOTIFICATIONS_READ,
     RESERVE,
     CANCEL_RESERVE,
     RECORD,
-    DELETE_RECORD
+    DELETE_RECORD,
 } from '../types';
 
 const initialState = {
     authenticated: false,
     loadingUser: false,
+    loadingLike: false,
     credentials: {},
     likes: [],
     unlikes: [],
@@ -46,11 +48,18 @@ export default function (state = initialState, action) {
                 ...state,
                 loadingUser: true
             };
+        case LOADING_LIKE:
+            return {
+                ...state,
+                loadingLike: true
+            }
         case LIKE_CLEANER:
             return {
                 ...state,
+                loadingLike: false,
                 likes: [
                     ...state.likes,
+
                     {
                         userHandle: state.credentials.customerName,
                         cleanerName: action.payload.cleanerName
@@ -60,11 +69,13 @@ export default function (state = initialState, action) {
         case CANCELLIKE_CLEANER:
             return {
                 ...state,
+                loadingLike: false,
                 likes: state.likes.filter((like) => like.cleanerName !== action.payload.cleanerName)
             }
         case UNLIKE_CLEANER:
             return {
                 ...state,
+                loadingLike: false,
                 unlikes: [
                     ...state.unlikes,
                     {
@@ -76,6 +87,7 @@ export default function (state = initialState, action) {
         case CANCELUNLIKE_CLEANER:
             return {
                 ...state,
+                loadingLike: false,
                 unlikes: state.unlikes.filter((unlike) => unlike.cleanerName !== action.payload.cleanerName)
             }
         case MARK_NOTIFICATIONS_READ:

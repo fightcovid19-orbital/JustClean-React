@@ -28,23 +28,29 @@ export class UnlikeButton extends Component {
     }
     render() {
         const { authenticated } = this.props.user;
-        const unlikeButton = !authenticated ? (
+        const { loadingDataLike, loadingUserLike } = this.props;
+
+        const unlikeButton = (loadingDataLike || loadingUserLike) ? (
+            <MyButton tip='Unlike disabled'>
+                <DissatisfiedIcon color='primary' />
+            </MyButton>
+        ) : !authenticated ? (
             <Link to='/login'>
                 <MyButton tip='Unlike'>
                     <DissatisfiedIcon color='primary' />
                 </MyButton>
             </Link>
         ) : (
-                this.unlikedCleaner() ? (
-                    <MyButton tip='Undo unlike' onClick={this.cancelUnlikeCleaner}>
-                        <DissatisfiedTwoTone color='primary' />
-                    </MyButton>
-                ) : (
-                        <MyButton tip='Unlike' onClick={this.unlikeCleaner}>
-                            <DissatisfiedIcon color='primary' />
+                    this.unlikedCleaner() ? (
+                        <MyButton tip='Undo unlike' onClick={this.cancelUnlikeCleaner}>
+                            <DissatisfiedTwoTone color='primary' />
                         </MyButton>
-                    )
-            )
+                    ) : (
+                            <MyButton tip='Unlike' onClick={this.unlikeCleaner}>
+                                <DissatisfiedIcon color='primary' />
+                            </MyButton>
+                        )
+                )
         return unlikeButton;
     }
 }
@@ -54,11 +60,15 @@ UnlikeButton.propTypes = {
     cleanerName: PropTypes.string.isRequired,
     unlikeCleaner: PropTypes.func.isRequired,
     cancelUnlikeCleaner: PropTypes.func.isRequired,
-    cancelLikeCleaner: PropTypes.func.isRequired
+    cancelLikeCleaner: PropTypes.func.isRequired,
+    loadingUserLike: PropTypes.bool.isRequired,
+    loadingDataLike: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+    loadingUserLike: state.user.loadingLike,
+    loadingDataLike: state.data.loadingLike
 })
 
 const mapActionsToProps = {

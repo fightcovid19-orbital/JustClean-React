@@ -13,7 +13,7 @@ import { likeCleaner, cancelLikeCleaner, cancelUnlikeCleaner } from '../../redux
 
 export class LikeButton extends Component {
     likedCleaner = () => {
-        if (this.props.user.likes 
+        if (this.props.user.likes
             && this.props.user.likes.find((like) => like.cleanerName === this.props.cleanerName)) {
             return true;
         } else {
@@ -31,23 +31,31 @@ export class LikeButton extends Component {
     };
     render() {
         const { authenticated } = this.props.user;
-        const likeButton = !authenticated ? (
-            <Link to='/login'>
-                <MyButton tip='Like'>
-                    <SatisfiedIcon color='primary' />
-                </MyButton>
-            </Link>
-        ) : (
-                this.likedCleaner() ? (
-                    <MyButton tip='Undo like' onClick={this.cancelLikeCleaner}>
-                        <SatisfiedTwoTone color='primary' />
-                    </MyButton>
-                ) : (
-                    <MyButton tip='Like' onClick={this.likeCleaner}>
+        const { loadingDataLike, loadingUserLike } = this.props;
+
+        const likeButton = (loadingDataLike || loadingUserLike) ? (
+            <MyButton tip='Like disabled'>
+                <SatisfiedIcon color='primary' />
+            </MyButton>
+        ) :
+            !authenticated ? (
+                <Link to='/login'>
+                    <MyButton tip='Like'>
                         <SatisfiedIcon color='primary' />
                     </MyButton>
+                </Link>
+            ) : (
+                    this.likedCleaner() ? (
+                        <MyButton tip='Undo like' onClick={this.cancelLikeCleaner}>
+                            <SatisfiedTwoTone color='primary' />
+                        </MyButton>
+                    ) : (
+                            <MyButton tip='Like' onClick={this.likeCleaner}>
+                                <SatisfiedIcon color='primary' />
+                            </MyButton>
+                        )
                 )
-            )
+
         return likeButton;
     }
 }
@@ -57,11 +65,15 @@ LikeButton.propTypes = {
     cleanerName: PropTypes.string.isRequired,
     likeCleaner: PropTypes.func.isRequired,
     cancelLikeCleaner: PropTypes.func.isRequired,
-    cancelUnlikeCleaner: PropTypes.func.isRequired
+    cancelUnlikeCleaner: PropTypes.func.isRequired,
+    loadingUserLike: PropTypes.bool.isRequired,
+    loadingDataLike: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+    loadingUserLike: state.user.loadingLike,
+    loadingDataLike: state.data.loadingLike
 })
 
 const mapActionsToProps = {
