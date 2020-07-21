@@ -31,8 +31,8 @@ export class LikeButton extends Component {
         this.props.cancelLikeCleaner(this.props.cleanerName);
     };
     render() {
-        const { authenticated } = this.props.user;
-        const { loadingDataLike, loadingUserLike } = this.props;
+        const { authenticated, loadingLike } = this.props.user;
+        const { loadingDataLike } = this.props;
 
         let likeButton;
 
@@ -45,12 +45,12 @@ export class LikeButton extends Component {
         } else {
             if (this.likedCleaner()) {
                 likeButton = (<MyButton tip='Undo like'
-                    onClick={this.cancelLikeCleaner} disabled={loadingDataLike || loadingUserLike}>
+                    onClick={this.cancelLikeCleaner} disabled={loadingDataLike || loadingLike}>
                     <SatisfiedTwoTone color='primary' />
                 </MyButton>)
             } else {
                 likeButton = (<MyButton tip='Like'
-                    onClick={this.likeCleaner} disabled={loadingDataLike || loadingUserLike}>
+                    onClick={this.likeCleaner} disabled={loadingDataLike || loadingLike}>
                     <SatisfiedIcon color='primary' />
                 </MyButton>)
             }
@@ -66,13 +66,11 @@ LikeButton.propTypes = {
     likeCleaner: PropTypes.func.isRequired,
     cancelLikeCleaner: PropTypes.func.isRequired,
     cancelUnlikeCleaner: PropTypes.func.isRequired,
-    loadingUserLike: PropTypes.bool.isRequired,
     loadingDataLike: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = (state) => ({
     user: state.user,
-    loadingUserLike: state.user.loadingLike,
     loadingDataLike: state.data.loadingLike
 })
 
