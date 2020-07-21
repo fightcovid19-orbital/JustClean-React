@@ -29,10 +29,10 @@ const styles = theme => ({
         objectFit: 'cover',
         maxWidth: '100%',
         borderRadius: '50%',
-        margin: 15
+        margin: 10,
     },
     name: {
-        marginTop: 30
+        paddingTop: 10
     }
 })
 
@@ -77,10 +77,10 @@ class Records extends Component {
                     return (
                         <MenuItem key={customerName}>
                             <Grid container spacing={1}>
-                                <Grid item>
+                                <Grid item xs={6}>
                                     <img src={customerImage} alt="Profile" className={classes.image} />
                                 </Grid>
-                                <Grid item xs={12} sm>
+                                <Grid item xs={6} sm>
                                     <Typography className={classes.name} variant="h5" color='primary'>
                                         {customerName}
                                     </Typography>
@@ -89,8 +89,6 @@ class Records extends Component {
                                         location: {location}
                                     </Typography>
                                     <ChatDialog friendName={customerName} />
-                                </Grid>
-                                <Grid item>
                                     <DeleteRecordButton recordId={recordId} />
                                 </Grid>
                             </Grid>

@@ -48,7 +48,7 @@ class signup extends Component {
     }
 
     static getDerivedStateFromProps(props, state) {
-        if(props.UI.errors) {
+        if (props.UI.errors) {
             return {
                 errors: props.UI.errors
             }
@@ -82,9 +82,9 @@ class signup extends Component {
         const { errors } = this.state;
         return (
             <Grid container className={classes.form}>
-                <Grid item sm />
-                <Grid item sm>
-                    <img src={AppIcon} alt='JustClean' className={classes.image} />
+                <Grid item sm xs={1} />
+                <Grid item sm xs={10}>
+                    <img src={AppIcon} alt='JustClean' className={classes.loginImage} />
                     <Typography variant='h3' className={classes.pageTitle}>
                         Sign Up
                     </Typography>
@@ -101,11 +101,11 @@ class signup extends Component {
                             className={classes.textField} select
                             value={this.state.location} onChange={this.handleChange} fullWidth
                             helperText={errors.location} error={errors.location ? true : false}>
-                                {regions.map((option) => (
-                                    <MenuItem key={option.regionName} value={option.regionName}>
-                                        {option.regionName}
-                                    </MenuItem>
-                                ))}
+                            {regions.map((option) => (
+                                <MenuItem key={option.regionName} value={option.regionName}>
+                                    {option.regionName}
+                                </MenuItem>
+                            ))}
                         </TextField>
 
                         <TextField id='password' name='password' type='password' label='Password' className={classes.textField}
@@ -117,7 +117,7 @@ class signup extends Component {
                             value={this.state.confirmPassword} onChange={this.handleChange} fullWidth
                             helperText={errors.confirmPassword} error={errors.confirmPassword ? true : false} />
 
-                        <FormControl component="fieldset" className={classes.textField} >
+                        <FormControl component="fieldset" className={classes.fieldSet} >
                             <FormLabel component="legend" >
                                 Type
                             </FormLabel>
@@ -131,7 +131,7 @@ class signup extends Component {
                                 </FormHelperText> : null}
                         </FormControl>
 
-                        <hr className={classes.invisibleSeparator}/>
+                        <hr className={classes.invisibleSeparator} />
                         {errors.general && <Typography variant='body2' className={classes.customError}>
                             {errors.general}
                         </Typography>}
@@ -142,10 +142,9 @@ class signup extends Component {
                         <small>Already have an account? Login <Link to='/login'>here</Link></small>
                     </form>
                 </Grid>
-                <Grid item sm />
+                <Grid item sm xs={1} />
             </Grid>
         )
-        // inside the errors received, if there is a field of email means the email is invalid
     }
 }
 

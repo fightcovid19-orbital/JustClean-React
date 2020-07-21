@@ -11,6 +11,7 @@ import Records from './Records'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
 
 // Icons
 import HomeIcon from '@material-ui/icons/Home'
@@ -18,20 +19,26 @@ import HomeIcon from '@material-ui/icons/Home'
 class Navbar extends Component {
     render() {
         const { authenticated, credentials: { type } } = this.props.user;
+
+        let addFeature = (type === 'customer') ? (<SearchBar />) : (<Records />)
+
         return (
             <AppBar>
-                <Toolbar className="nav-container">
+                <Toolbar className="nav-container" >
                     {authenticated ? (
-                        <Fragment>
-                            {type === 'customer' ? (<SearchBar />) : null}
-                            <Link to='/'>
-                                <MyButton tip='Home'>
-                                    <HomeIcon />
-                                </MyButton>
-                            </Link>
-                            <Notifications />
-                            {type === 'cleaner' ? (<Records />) : null}
-                        </Fragment>
+                        <Grid container justify='center' alignItems='center'>
+                            <Grid item >
+                                {addFeature}
+                            </Grid>
+                            <Grid item >
+                                <Link to='/'>
+                                    <MyButton tip='Home'>
+                                        <HomeIcon />
+                                    </MyButton>
+                                </Link>
+                                <Notifications />
+                            </Grid>
+                        </Grid>
                     ) : (
                             <Fragment>
                                 <Button color="inherit" component={Link} to='/'> Home</Button>

@@ -20,9 +20,20 @@ export default {
         form: {
             textAlign: 'center'
         },
-        
+
         image: {
             margin: '20px auto 20px auto'
+        },
+
+        loginImage: {
+            width: 300,
+            height: 300,
+            objectFit: 'cover',
+            maxWidth: '100%',
+        },
+
+        fieldSet: {
+            marginTop: 10
         },
 
         pageTitle: {
@@ -35,7 +46,7 @@ export default {
 
         button: {
             marginTop: 20,
-            position: 'relative' // relative to progress
+            position: 'relative'
         },
 
         customError: {
@@ -62,6 +73,10 @@ export default {
         paper: {
             padding: 20,
             marginRight: '20px'
+        },
+
+        SLASpaper: {
+            padding: 20,
         },
 
         profile: {
@@ -146,7 +161,7 @@ export default {
         visibleSeparator: {
 
         },
-    
+
         userSent: {
             float: 'left',
             clear: 'both',
@@ -160,7 +175,7 @@ export default {
             maxWidth: 250,
             borderRadius: '10px'
         },
-    
+
         friendSent: {
             float: 'right',
             clear: 'both',
@@ -174,7 +189,7 @@ export default {
             maxWidth: 250,
             borderRadius: '10px'
         },
-    
+
         chatHeader: {
             width: '100%',
             height: 'auto',
@@ -182,7 +197,7 @@ export default {
             backgroundColor: '#ff9800',
             boxSizing: 'border-box',
         },
-    
+
         sendBtn: {
             color: 'blue',
             cursor: 'pointer',
@@ -190,14 +205,14 @@ export default {
                 color: 'gray'
             }
         },
-    
+
         chatTextBoxContainer: {
             bottom: '15px',
             boxSizing: 'border-box',
             overflow: 'auto',
             width: '100%'
         },
-    
+
         chatTextBox: {
             width: 'calc(100% - 25px)'
         }
