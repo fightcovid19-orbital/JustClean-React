@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 //Mui
 import Menu from '@material-ui/core/Menu'
@@ -72,8 +73,10 @@ class ChatNotifications extends Component {
                         <MenuItem key={not.createdAt} onClick={this.handleClose}>
                             <ChatIcon color={iconColor} style={{ marginRight: 10 }} />
                             <Typography
+                                component={Link}
                                 color="default"
                                 variant="body1"
+                                to={''}
                             >
                                 {not.sender} send a message to you on {time}
                             </Typography>
