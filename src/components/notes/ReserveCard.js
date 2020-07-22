@@ -11,6 +11,9 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 
+// Icon
+import ChatIcon from '@material-ui/icons/Chat'
+
 // Redux
 import { connect } from 'react-redux'
 
@@ -58,7 +61,10 @@ class ReserveCard extends Component {
                     </Typography>
                     <AcceptButton customerName={customerName} />
                     <RejectButton customerName={customerName} />
-                    <ChatDialog friendName={customerName} />
+                    <ChatDialog friendName={customerName} >
+                        <ChatIcon color='primary' />
+                    </ChatDialog>
+
                 </CardContent>
             </Card>
         )

@@ -18,6 +18,7 @@ import Grid from '@material-ui/core/Grid'
 
 // Icons
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import ChatIcon from '@material-ui/icons/Chat'
 
 // Redux
 import { connect } from 'react-redux'
@@ -86,7 +87,9 @@ class CleanerCard extends Component {
                                 <Grid item lg={4} sm={8} xs={8}>
                                     <CommentDialog cleanerName={cleanerName} />
                                     <ReserveButton cleanerName={cleanerName} />
-                                    <ChatDialog friendName={cleanerName} />
+                                    <ChatDialog friendName={cleanerName}>
+                                        <ChatIcon color='primary' />
+                                    </ChatDialog>
                                 </Grid>
                                 <Grid item lg={1} sm={2} xs={2}>
                                     <CleanerDialog cleanerName={cleanerName} />

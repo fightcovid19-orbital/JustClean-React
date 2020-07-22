@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import PropTypes from 'prop-types'
+import ChatDialog from '../chat/ChatDialog'
 
 //Mui
 import Menu from '@material-ui/core/Menu'
@@ -13,7 +14,6 @@ import Badge from '@material-ui/core/Badge'
 
 //icon
 import SmsIcon from '@material-ui/icons/Sms'
-import ChatIcon from '@material-ui/icons/Chat'
 
 //Redux
 import { connect } from 'react-redux'
@@ -69,15 +69,16 @@ class ChatNotifications extends Component {
                     const iconColor = not.read ? 'primary' : 'secondary'
 
                     return (
-                        <MenuItem key={not.createdAt} onClick={this.handleClose}>
-                            <ChatIcon color={iconColor} style={{ marginRight: 10 }} />
-                            <Typography
-                                color="default"
-                                variant="body1"
-                            >
-                                {not.sender} send a message to you on {time}
-                            </Typography>
-                        </MenuItem>
+                        <ChatDialog friendName={not.sender}>
+                            <MenuItem key={not.createdAt} >
+                                <Typography
+                                    color={iconColor}
+                                    variant="body1"
+                                >
+                                    {not.sender} send a message to you on {time}
+                                </Typography>
+                            </MenuItem>
+                        </ChatDialog>
                     )
                 })
             ) : (
