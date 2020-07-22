@@ -67,7 +67,7 @@ class CleanerProfile extends Component {
 
         let cleanerProfileMarkup = authenticated
             ? (
-                <Paper className={classes.SLASpaper}>
+                <Paper className={classes.paper}>
                     {deleteButton}
                     <div className={classes.profile}>
                         <div className="image-wrapper">

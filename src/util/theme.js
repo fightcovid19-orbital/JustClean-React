@@ -72,11 +72,6 @@ export default {
 
         paper: {
             padding: 20,
-            marginRight: '20px'
-        },
-
-        SLASpaper: {
-            padding: 20,
         },
 
         profile: {

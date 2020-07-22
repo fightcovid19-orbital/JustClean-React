@@ -10,17 +10,17 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogActions from '@material-ui/core/DialogActions'
 
 // Icon
-import DeleteIcon from '@material-ui/icons/DeleteOutline' 
+import DeleteIcon from '@material-ui/icons/DeleteOutline'
 
 import { connect } from 'react-redux';
 import { deleteComment } from '../../redux/actions/dataActions';
 
 const styles = {
-    deleteButton: {
-        position: "absolute",
-        left: "90%",
-        top: "15%"
-    }
+    // deleteButton: {
+    //     position: "absolute",
+    //     left: "90%",
+    //     top: "15%"
+    // }
 }
 
 class DeleteComment extends Component {
@@ -29,11 +29,11 @@ class DeleteComment extends Component {
     }
 
     handleOpen = () => {
-        this.setState({open: true});
+        this.setState({ open: true });
     }
 
     handleClose = () => {
-        this.setState({open: false});
+        this.setState({ open: false });
     }
 
     deleteComment = () => {
@@ -42,11 +42,11 @@ class DeleteComment extends Component {
     }
 
     render() {
-        const {classes} = this.props;
+        const { classes } = this.props;
         return (
             <Fragment>
-                <MyButton 
-                    tip="Delete Comment" 
+                <MyButton
+                    tip="Delete Comment"
                     onClick={this.handleOpen}
                     btnClassName={classes.deleteButton}
                 >
@@ -81,4 +81,4 @@ DeleteComment.propTypes = {
     commentId: PropTypes.string.isRequired
 }
 
-export default connect(null, {deleteComment})(withStyles(styles)(DeleteComment))
+export default connect(null, { deleteComment })(withStyles(styles)(DeleteComment))

@@ -57,7 +57,7 @@ class CustomerProfile extends Component {
         } = this.props;
 
         let profileMarkup = authenticated ? (
-            <Paper className={classes.SLASpaper}>
+            <Paper className={classes.paper}>
                 <div className={classes.profile}>
                     <div className="image-wrapper">
                         <img src={imageUrl} alt="profile" className='profile-image' />

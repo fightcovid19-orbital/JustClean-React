@@ -10,13 +10,15 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Grid from '@material-ui/core/Grid'
 
+// Redux
 import { connect } from 'react-redux'
 
 const styles = {
     card: {
-        position: 'relative',
-        display: 'flex',
+        // position: 'relative',
+        // display: 'flex',
         marginBottom: 20
     },
     image: {
@@ -25,51 +27,69 @@ const styles = {
         objectFit: 'cover',
         maxWidth: '100%',
         borderRadius: '50%',
-        margin: 15
+        marginLeft: 15,
+        marginTop: 15,
+        marginBottom: 15
     },
     content: {
-        padding: 25,
+        padding: 20,
         objectFit: 'cover'
+    },
+    gridCenter: {
+        textAlign: 'center'
     }
+
 };
 
 class CommentCard extends Component {
-    
+
     render() {
         dayjs.extend(relativeTime);
-        const { 
-            classes, 
-            comment: { body, createdAt, userImage, userHandle, commentId, commentOn }, 
-            customerName 
+        const {
+            classes,
+            comment: { body, createdAt, userImage, userHandle, commentId, commentOn },
+            customerName
         } = this.props;
-        
-        const  deleteCommentButton = userHandle === customerName? (
+
+        const deleteCommentButton = userHandle === customerName ? (
             <DeleteComment commentId={commentId} />
         ) : (
-            null
-        )
+                null
+            )
 
-        const  editCommentButton = userHandle === customerName? (
+        const editCommentButton = userHandle === customerName ? (
             <EditComment commentId={commentId} cleanerName={commentOn} />
         ) : (
-            null
-        )
+                null
+            )
         return (
             <Card className={classes.card}>
-                <img src={userImage} alt="Customer Profile" className={classes.image} />
-                <CardContent className={classes.content}>
-                    <Typography variant="h5" color='primary'>
-                        {userHandle}
-                    </Typography>
-                    {deleteCommentButton}
-                    <Typography variant="body2" color="textSecondary">
-                        {dayjs(createdAt).fromNow()}
-                    </Typography>
-                    <Typography variant="body1">
-                        {body}
-                    </Typography>
-                    {editCommentButton}
-                </CardContent>
+                <Grid container justify='flex-start' alignItems='center'>
+                    <Grid item xs={12} md={3} lg={2} className={classes.gridCenter}>
+                        <img src={userImage} alt="Customer Profile" className={classes.image} />
+                    </Grid>
+                    <Grid item xs={12} md={9} lg={10}>
+                        <CardContent className={classes.content}>
+                            <Grid container >
+                                <Grid item lg={10} md={9} xs={8}>
+                                    <Typography variant="h5" color='primary'>
+                                        {userHandle}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary">
+                                        {dayjs(createdAt).fromNow()}
+                                    </Typography>
+                                </Grid>
+                                <Grid item lg={2} md={3} xs={4}>
+                                    {editCommentButton}
+                                    {deleteCommentButton}
+                                </Grid>
+                            </Grid>
+                            <Typography variant="body1">
+                                {body}
+                            </Typography>
+                        </CardContent>
+                    </Grid>
+                </Grid>
             </Card>
         )
     }

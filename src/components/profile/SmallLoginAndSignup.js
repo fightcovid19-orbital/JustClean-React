@@ -17,7 +17,7 @@ class SmallLoginAndSignup extends Component {
         const { classes } = this.props;
 
         return (
-            <Paper className={classes.SLASpaper}>
+            <Paper className={classes.paper}>
                 <Typography variant="body2" align="center">
                     User not found, please login again!
                 </Typography>

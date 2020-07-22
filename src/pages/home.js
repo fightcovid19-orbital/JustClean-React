@@ -24,7 +24,7 @@ import { connect } from 'react-redux'
 const styles = theme => ({
     ...theme.spreadThis,
     title: {
-        textAlign: 'center'
+        textAlign: 'center',
     },
     scrollablePaper: {
         maxHeight: 400,
@@ -66,6 +66,7 @@ class home extends Component {
                     <Typography variant="h5" color='primary' className={classes.title}>
                         History
                     </Typography>
+                    <br />
                     {recentHistoriesMarkup}
                 </Paper>
             )
@@ -77,6 +78,7 @@ class home extends Component {
                     <Typography variant="h5" color='primary' className={classes.title}>
                         Reservations
                     </Typography>
+                    <br />
                     {recentReservesMarkup}
                 </Paper>
             )
