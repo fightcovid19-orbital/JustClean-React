@@ -12,6 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase'
 
 // Icons
 import CloseIcon from '@material-ui/icons/Close'
@@ -46,17 +47,25 @@ class ChatDialog extends Component {
 
     render() {
         const { classes, friendName } = this.props;
-
-        return (
-            <Fragment>
-                <MyButton
+        
+        const button = (this.props.base) ? (
+            <ButtonBase onClick={this.handleOpen}>
+                {this.props.children}
+            </ButtonBase>
+        ) : (
+            <MyButton
                     onClick={this.handleOpen}
                     tip={`Chat with ${this.props.friendName}`}
                     tipClassName={this.props.chatButtonClassName}
                     btnClassName={this.props.btnClassName}
                 >
                     {this.props.children}
-                </MyButton>
+            </MyButton>
+        )
+
+        return (
+            <Fragment>
+                {button}
                 <Dialog open={this.state.open} onClose={this.handleClose} fullScreen>
 
                     <DialogTitle>

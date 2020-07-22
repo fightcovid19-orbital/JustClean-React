@@ -14,6 +14,7 @@ import Badge from '@material-ui/core/Badge'
 
 //icon
 import SmsIcon from '@material-ui/icons/Sms'
+import ChatIcon from '@material-ui/icons/Chat'
 
 //Redux
 import { connect } from 'react-redux'
@@ -69,16 +70,19 @@ class ChatNotifications extends Component {
                     const iconColor = not.read ? 'primary' : 'secondary'
 
                     return (
-                        <ChatDialog friendName={not.sender}>
+                        
                             <MenuItem key={not.createdAt} >
+                                <ChatDialog friendName={not.sender} base={true}>
+                                <ChatIcon color={iconColor} style={{ marginRight: 10 }} />
                                 <Typography
                                     color={iconColor}
                                     variant="body1"
                                 >
                                     {not.sender} send a message to you on {time}
                                 </Typography>
+                                </ChatDialog>
                             </MenuItem>
-                        </ChatDialog>
+                        
                     )
                 })
             ) : (
