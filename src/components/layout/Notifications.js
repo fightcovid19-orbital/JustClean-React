@@ -15,7 +15,7 @@ import Badge from '@material-ui/core/Badge'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import SatisfiedIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import ChatIcon from '@material-ui/icons/Chat'
+import AddCommentIcon from '@material-ui/icons/AddComment'
 
 //Redux
 import { connect } from 'react-redux'
@@ -75,10 +75,10 @@ class Notifications extends Component {
                         icon = (<SatisfiedIcon color={iconColor} style={{ marginRight: 10 }} />)
                     } else if (not.type === 'comment') {
                         verb = 'commented on'
-                        icon = (<ChatIcon color={iconColor} style={{ marginRight: 10 }} />)
+                        icon = (<AddCommentIcon color={iconColor} style={{ marginRight: 10 }} />)
                     } else if (not.type ==='reply') {
                         verb = 'replied on'
-                        icon = (<ChatIcon color={iconColor} style={{ marginRight: 10 }} />)
+                        icon = (<AddCommentIcon color={iconColor} style={{ marginRight: 10 }} />)
                     } else if (not.type === 'history'){
                         verb = 'accept(reservation)'
                         icon = (<AccountCircleIcon color={iconColor} style={{ marginRight: 10 }} />)

@@ -15,6 +15,7 @@ import {
     CANCEL_RESERVE,
     RECORD,
     DELETE_RECORD,
+    MARK_CHAT_NOTIFICATIONS_READ,
 } from '../types';
 
 const initialState = {
@@ -25,7 +26,8 @@ const initialState = {
     likes: [],
     unlikes: [],
     notifications: [],
-    reserve: {}
+    reserve: {},
+    chatNotifications: []
 };
 
 export default function (state = initialState, action) {
@@ -93,6 +95,11 @@ export default function (state = initialState, action) {
             }
         case MARK_NOTIFICATIONS_READ:
             state.notifications.forEach(not => (not.read = true));
+            return {
+                ...state
+            }
+        case MARK_CHAT_NOTIFICATIONS_READ:
+            state.chatNotifications.forEach(not => (not.read = true));
             return {
                 ...state
             }

@@ -6,6 +6,7 @@ import MyButton from '../../util/MyButton'
 import Notifications from './Notifications'
 import SearchBar from './SearchBar'
 import Records from './Records'
+import ChatNotifications from './ChatNotifications'
 
 // MUI stuff
 import AppBar from '@material-ui/core/AppBar'
@@ -37,6 +38,7 @@ class Navbar extends Component {
                                     </MyButton>
                                 </Link>
                                 <Notifications />
+                                <ChatNotifications />
                             </Grid>
                         </Grid>
                     ) : (

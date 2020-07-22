@@ -7,7 +7,8 @@ import {
     LOADING_USER,
     DELETE_CLEANER,
     MARK_NOTIFICATIONS_READ,
-    SET_EMPTY_DATA
+    SET_EMPTY_DATA,
+    MARK_CHAT_NOTIFICATIONS_READ,
 } from '../types';
 import axios from 'axios';
 import { getCleaners, getHistories, getReservations, getComments } from './dataActions'
@@ -170,6 +171,26 @@ export const markNotificationsRead = (type, notificationIds) => dispatch => {
             .then(res => {
                 dispatch({
                     type: MARK_NOTIFICATIONS_READ
+                })
+            })
+            .catch(err => console.log(err));
+    }
+}
+
+export const markChatNotificationsRead = (type, chatNotificationIds) => dispatch => {
+    if (type === 'cleaner') {
+        axios.post('/cleanerChatNotifications', chatNotificationIds)
+            .then(res => {
+                dispatch({
+                    type: MARK_CHAT_NOTIFICATIONS_READ
+                })
+            })
+            .catch(err => console.log(err));
+    } else {
+        axios.post('/custChatNotifications', chatNotificationIds)
+            .then(res => {
+                dispatch({
+                    type: MARK_CHAT_NOTIFICATIONS_READ
                 })
             })
             .catch(err => console.log(err));
