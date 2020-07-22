@@ -21,15 +21,13 @@ class Navbar extends Component {
     render() {
         const { authenticated, credentials: { type } } = this.props.user;
 
-        let addFeature = (type === 'customer') ? (<SearchBar />) : (<Records />)
-
         return (
             <AppBar>
                 <Toolbar className="nav-container" >
                     {authenticated ? (
                         <Grid container justify='center' alignItems='center'>
                             <Grid item >
-                                {addFeature}
+                                {(type === 'customer') ? (<SearchBar />) : null}
                             </Grid>
                             <Grid item >
                                 <Link to='/'>
@@ -37,6 +35,7 @@ class Navbar extends Component {
                                         <HomeIcon />
                                     </MyButton>
                                 </Link>
+                                {(type === 'cleaner') ? (<Records />) : null}
                                 <Notifications />
                                 <ChatNotifications />
                             </Grid>

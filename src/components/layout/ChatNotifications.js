@@ -71,15 +71,13 @@ class ChatNotifications extends Component {
 
                     return (
                         <MenuItem key={not.createdAt} onClick={this.handleClose}>
-                            <ChatIcon color={iconColor} style={{ marginRight: 10 }} />
-                            <Typography
-                                component={Link}
-                                color="default"
-                                variant="body1"
-                                to={''}
-                            >
-                                {not.sender} send a message to you on {time}
-                            </Typography>
+                                <ChatIcon color={iconColor} style={{ marginRight: 10 }} />
+                                <Typography
+                                    color="default"
+                                    variant="body1"
+                                >
+                                    {not.sender} send a message to you on {time}
+                                </Typography>
                         </MenuItem>
                     )
                 })
