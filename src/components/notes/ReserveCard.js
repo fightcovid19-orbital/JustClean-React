@@ -25,8 +25,8 @@ const style = {
         objectFit: 'cover',
         maxWidth: '100%',
         borderRadius: '50%',
-        margin: 15,
-        marginTop: 40
+        marginLeft: 15,
+        marginTop: 30
     },
     content: {
         padding: 25,
@@ -38,8 +38,8 @@ const style = {
 class ReserveCard extends Component {
 
     render() {
-        const { 
-            classes, 
+        const {
+            classes,
             reserve: { customerImage, customerName, createdAt, customerLocation },
         } = this.props
 
@@ -56,9 +56,9 @@ class ReserveCard extends Component {
                     <Typography variant="body2" >
                         location: {customerLocation}
                     </Typography>
-                    <ChatDialog friendName={customerName} />
                     <AcceptButton customerName={customerName} />
                     <RejectButton customerName={customerName} />
+                    <ChatDialog friendName={customerName} />
                 </CardContent>
             </Card>
         )

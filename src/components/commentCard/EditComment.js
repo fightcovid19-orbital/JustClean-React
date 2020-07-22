@@ -19,12 +19,12 @@ import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit'
 
 const styles = (theme) => ({
-    ...theme.spreadThis,
-    button: {
-        position: "absolute",
-        left: "83%",
-        top: "15%"
-    }
+    // ...theme.spreadThis,
+    // button: {
+    //     position: "absolute",
+    //     left: "83%",
+    //     top: "15%"
+    // }
 })
 
 class EditComment extends Component {
@@ -72,7 +72,7 @@ class EditComment extends Component {
                     <DialogContent>
                         <form>
                             <TextField name='body' type='text' label='Edit Comment'
-                                value={this.state.body} onChange={this.handleChange} fullWidth 
+                                value={this.state.body} onChange={this.handleChange} fullWidth
                                 className={classes.textField} />
                         </form>
                     </DialogContent>

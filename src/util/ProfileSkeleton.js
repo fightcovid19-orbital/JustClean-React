@@ -37,17 +37,17 @@ const styles = theme => ({
 const ProfileSkeleton = props => {
     const { classes } = props
     const profileDetail = (
-            <div className="profile-details">
-                <div className={classes.handle} />
-                <hr />
-                <div className={classes.fullLine} />
-                <div className={classes.fullLine} />
-                <hr />
-                <div className={classes.halfLine} />
-                <hr />
-                <div className={classes.halfLine} />
-            </div>
-        )
+        <div className="profile-details">
+            <div className={classes.handle} />
+            <hr />
+            <div className={classes.fullLine} />
+            <div className={classes.fullLine} />
+            <hr />
+            <div className={classes.halfLine} />
+            <hr />
+            <div className={classes.halfLine} />
+        </div>
+    )
 
     return (
         <Paper className={classes.paper}>

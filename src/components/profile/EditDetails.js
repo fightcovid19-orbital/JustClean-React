@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles'
-import MyButton from '../../util/MyButton';
 import { regions } from '../../util/Regions'
 
 // Redux
@@ -16,6 +15,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
+import Tooltip from '@material-ui/core/Tooltip'
+import IconButton from '@material-ui/core/IconButton'
 
 // Icons
 import EditIcon from '@material-ui/icons/Edit'
@@ -80,9 +81,11 @@ class EditDetails extends Component {
         const { classes } = this.props;
         return (
             <Fragment>
-                <MyButton tip='Edit details' onClick={this.handleOpen} btnClassName={classes.button}>
-                    <EditIcon color='primary' />
-                </MyButton>
+                <Tooltip title='Edit details' placement='left' >
+                    <IconButton onClick={this.handleOpen} className={classes.button} >
+                        <EditIcon color='primary' />
+                    </IconButton>
+                </Tooltip>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth='sm'>
                     <DialogTitle>Edit your details</DialogTitle>
                     <DialogContent>
@@ -93,11 +96,11 @@ class EditDetails extends Component {
                             <TextField name='location' type='text' label="Location, Region "
                                 className={classes.textField} select
                                 value={this.state.location} onChange={this.handleChange} fullWidth>
-                                    {regions.map((option) => (
-                                        <MenuItem key={option.regionName} value={option.regionName}>
-                                            {option.regionName}
-                                        </MenuItem>
-                                    ))}
+                                {regions.map((option) => (
+                                    <MenuItem key={option.regionName} value={option.regionName}>
+                                        {option.regionName}
+                                    </MenuItem>
+                                ))}
                             </TextField>
                         </form>
                     </DialogContent>
