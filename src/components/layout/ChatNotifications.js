@@ -6,11 +6,11 @@ import ChatDialog from '../chat/ChatDialog'
 
 //Mui
 import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import Badge from '@material-ui/core/Badge'
+import ListItem from '@material-ui/core/ListItem'
 
 //icon
 import SmsIcon from '@material-ui/icons/Sms'
@@ -70,25 +70,23 @@ class ChatNotifications extends Component {
                     const iconColor = not.read ? 'primary' : 'secondary'
 
                     return (
-                        
-                        <MenuItem key={not.createdAt} >
+
+                        <ListItem key={not.createdAt} button>
                             <ChatDialog friendName={not.sender} base={true}>
-                                <ChatIcon color={iconColor} style={{ marginRight: 10 }} />
+                                <ChatIcon color={iconColor} />
                                 <Typography
                                     color={iconColor}
-                                    variant="body1"
                                 >
                                     {not.sender} send a message to you {time}
                                 </Typography>
                             </ChatDialog>
-                        </MenuItem>
-
+                        </ListItem>
                     )
                 })
             ) : (
-                <MenuItem onClick={this.handleClose}>
+                <ListItem onClick={this.handleClose} button>
                     You have not receive any message yet
-                </MenuItem>
+                </ListItem>
             )
 
         return (

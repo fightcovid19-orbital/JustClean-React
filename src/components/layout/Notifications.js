@@ -5,11 +5,12 @@ import PropTypes from 'prop-types'
 
 //Mui
 import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import Badge from '@material-ui/core/Badge'
+import Grid from '@material-ui/core/Grid'
+import ListItem from '@material-ui/core/ListItem'
 
 //icon
 import NotificationsIcon from '@material-ui/icons/Notifications'
@@ -20,6 +21,7 @@ import AddCommentIcon from '@material-ui/icons/AddComment'
 //Redux
 import { connect } from 'react-redux'
 import { markNotificationsRead } from '../../redux/actions/userActions';
+
 
 class Notifications extends Component {
     state = {
@@ -71,38 +73,43 @@ class Notifications extends Component {
                     const iconColor = not.read ? 'primary' : 'secondary'
                     let verb, icon
                     if (not.type === 'like') {
-                        verb = 'liked'
+                        verb = 'liked on you'
                         icon = (<SatisfiedIcon color={iconColor} style={{ marginRight: 10 }} />)
                     } else if (not.type === 'comment') {
-                        verb = 'commented on'
+                        verb = 'commented on you'
                         icon = (<AddCommentIcon color={iconColor} style={{ marginRight: 10 }} />)
-                    } else if (not.type ==='reply') {
-                        verb = 'replied on'
+                    } else if (not.type === 'reply') {
+                        verb = 'replied on you'
                         icon = (<AddCommentIcon color={iconColor} style={{ marginRight: 10 }} />)
-                    } else if (not.type === 'history'){
-                        verb = 'accept(reservation)'
+                    } else if (not.type === 'history') {
+                        verb = 'accept your reservation'
                         icon = (<AccountCircleIcon color={iconColor} style={{ marginRight: 10 }} />)
                     } else {
-                        verb = 'reserve'
+                        verb = 'reserve you'
                         icon = (<AccountCircleIcon color={iconColor} style={{ marginRight: 10 }} />)
                     }
 
+                    let message = not.sender + ' ' + verb + ' ' + time
+
                     return (
-                        <MenuItem key={not.createdAt} onClick={this.handleClose}>
-                            {icon}
-                            <Typography
-                                color="default"
-                                variant="body1"
-                            >
-                                {not.sender} {verb} you {time}
-                            </Typography>
-                        </MenuItem>
+                        <ListItem key={not.createdAt} button>
+                            <Grid container alignItems='center' justify='flex-start'>
+                                <Grid item >
+                                    {icon}
+                                </Grid>
+                                <Grid item xs={10} >
+                                    <Typography >
+                                        {message}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </ListItem>
                     )
                 })
             ) : (
-                <MenuItem onClick={this.handleClose}>
+                <ListItem onClick={this.handleClose}>
                     You have no notifications yet
-                </MenuItem>
+                </ListItem>
             )
 
         return (
