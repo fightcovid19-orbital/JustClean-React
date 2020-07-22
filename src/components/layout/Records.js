@@ -15,6 +15,7 @@ import Grid from '@material-ui/core/Grid'
 
 // Icon
 import AssignmentIcon from '@material-ui/icons/AssignmentInd'
+import ChatIcon from '@material-ui/icons/Chat'
 
 //Redux
 import { connect } from 'react-redux'
@@ -88,7 +89,9 @@ class Records extends Component {
                                     <Typography variant="body2" >
                                         location: {location}
                                     </Typography>
-                                    <ChatDialog friendName={customerName} />
+                                    <ChatDialog friendName={customerName}>
+                                        <ChatIcon color='primary' />
+                                    </ChatDialog>
                                     <DeleteRecordButton recordId={recordId} />
                                 </Grid>
                             </Grid>

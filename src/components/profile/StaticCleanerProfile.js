@@ -14,23 +14,26 @@ import CalendarToday from '@material-ui/icons/CalendarToday'
 import SatisfiedIcon from '@material-ui/icons/SentimentSatisfiedAltOutlined'
 import DissatisfiedIcon from '@material-ui/icons/SentimentDissatisfiedOutlined'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import ChatIcon from '@material-ui/icons/Chat'
 
 const styles = theme => ({
     ...theme.spreadThis,
-    chatButton : {
+    chatButton: {
         left: "85%"
     }
 });
 
 // not saving this profile to state
 const StaticCleanerProfile = (props) => {
-    const { classes, 
-        profile: { cleanerName, imageUrl, createdAt, bio, location, likeCount, unlikeCount, hiredCount } 
+    const { classes,
+        profile: { cleanerName, imageUrl, createdAt, bio, location, likeCount, unlikeCount, hiredCount }
     } = props;
 
     return (
         <Paper className={classes.paper}>
-            <ChatDialog friendName={cleanerName} chatButtonClassName={classes.chatButton}/>
+            <ChatDialog friendName={cleanerName} chatButtonClassName={classes.chatButton}>
+                <ChatIcon color='primary' />
+            </ChatDialog>
             <div className={classes.profile}>
                 <div className="image-wrapper">
                     <hr />
