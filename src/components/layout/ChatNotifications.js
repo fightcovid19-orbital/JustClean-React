@@ -71,18 +71,18 @@ class ChatNotifications extends Component {
 
                     return (
                         
-                            <MenuItem key={not.createdAt} >
-                                <ChatDialog friendName={not.sender} base={true}>
+                        <MenuItem key={not.createdAt} >
+                            <ChatDialog friendName={not.sender} base={true}>
                                 <ChatIcon color={iconColor} style={{ marginRight: 10 }} />
                                 <Typography
                                     color={iconColor}
                                     variant="body1"
                                 >
-                                    {not.sender} send a message to you on {time}
+                                    {not.sender} send a message to you {time}
                                 </Typography>
-                                </ChatDialog>
-                            </MenuItem>
-                        
+                            </ChatDialog>
+                        </MenuItem>
+
                     )
                 })
             ) : (

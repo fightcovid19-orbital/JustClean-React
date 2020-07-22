@@ -94,7 +94,7 @@ class Notifications extends Component {
                                 color="default"
                                 variant="body1"
                             >
-                                {not.sender} {verb} you on {time}
+                                {not.sender} {verb} you {time}
                             </Typography>
                         </MenuItem>
                     )

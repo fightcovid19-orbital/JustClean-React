@@ -46,7 +46,7 @@ class ChatDialog extends Component {
     }
 
     render() {
-        const { classes, friendName } = this.props;
+        const { classes } = this.props;
         
         const button = (this.props.base) ? (
             <ButtonBase onClick={this.handleOpen}>
@@ -87,11 +87,11 @@ class ChatDialog extends Component {
                     </DialogTitle>
 
                     <DialogContent>
-                        <ChatView friend={friendName} />
+                        <ChatView friend={this.props.friendName} />
                     </DialogContent>
 
                     <DialogTitle >
-                        <ChatTextbox friend={friendName} />
+                        <ChatTextbox friend={this.props.friendName} />
                     </DialogTitle>
 
                 </Dialog>
@@ -103,6 +103,10 @@ class ChatDialog extends Component {
 ChatDialog.propTypes = {
     classes: PropTypes.object.isRequired,
     friendName: PropTypes.string.isRequired,
+    chatButtonClassName: PropTypes.object,
+    base: PropTypes.bool,
+    btnClassName: PropTypes.object,  
+    children: PropTypes.object.isRequired
 }
 
 export default withStyles(style)(ChatDialog)
