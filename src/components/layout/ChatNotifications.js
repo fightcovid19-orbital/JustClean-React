@@ -13,6 +13,7 @@ import Badge from '@material-ui/core/Badge'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemText from '@material-ui/core/ListItemText'
+import Popper from '@material-ui/core/Popper'
 
 //icon
 import SmsIcon from '@material-ui/icons/Sms'
@@ -72,7 +73,6 @@ class ChatNotifications extends Component {
                     const iconColor = not.read ? 'primary' : 'secondary'
 
                     return (
-
                         <ListItem key={not.createdAt} button disableGutters
                             style={{ paddingTop: 0, paddingBottom: 0 }}>
                             <ChatDialog friendName={not.sender} base={true} >
@@ -114,6 +114,8 @@ class ChatNotifications extends Component {
                     open={Boolean(anchorEl)}
                     onClose={this.handleClose}
                     onEntered={this.onMenuOpened}
+                    getContentAnchorEl={null}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 >
                     {chatNotificationsMarkup}
                 </Menu>

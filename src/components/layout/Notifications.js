@@ -128,6 +128,8 @@ class Notifications extends Component {
                     open={Boolean(anchorEl)}
                     onClose={this.handleClose}
                     onEntered={this.onMenuOpened}
+                    getContentAnchorEl={null}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 >
                     {notificationsMarkup}
                 </Menu>
