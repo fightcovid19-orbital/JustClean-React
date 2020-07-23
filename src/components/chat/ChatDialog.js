@@ -47,21 +47,21 @@ class ChatDialog extends Component {
 
     render() {
         const { classes } = this.props;
-        
+
         const button = (this.props.base) ? (
-            <ButtonBase onClick={this.handleOpen}>
+            <ButtonBase onClick={this.handleOpen} >
                 {this.props.children}
             </ButtonBase>
         ) : (
-            <MyButton
+                <MyButton
                     onClick={this.handleOpen}
                     tip={`Chat with ${this.props.friendName}`}
                     tipClassName={this.props.chatButtonClassName}
                     btnClassName={this.props.btnClassName}
                 >
                     {this.props.children}
-            </MyButton>
-        )
+                </MyButton>
+            )
 
         return (
             <Fragment>
@@ -105,7 +105,7 @@ ChatDialog.propTypes = {
     friendName: PropTypes.string.isRequired,
     chatButtonClassName: PropTypes.object,
     base: PropTypes.bool,
-    btnClassName: PropTypes.object,  
+    btnClassName: PropTypes.object,
     children: PropTypes.object.isRequired
 }
 

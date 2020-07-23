@@ -11,6 +11,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import Badge from '@material-ui/core/Badge'
 import ListItem from '@material-ui/core/ListItem'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import ListItemText from '@material-ui/core/ListItemText'
 
 //icon
 import SmsIcon from '@material-ui/icons/Sms'
@@ -71,18 +73,25 @@ class ChatNotifications extends Component {
 
                     return (
 
-                        <ListItem key={not.createdAt} button>
-                            <ChatDialog friendName={not.sender} base={true}>
-                                <ChatIcon color={iconColor} />
-                                <Typography
-                                    color={iconColor}
-                                >
-                                    {not.sender} send a message to you {time}
-                                </Typography>
+                        <ListItem key={not.createdAt} button disableGutters
+                            style={{ paddingTop: 0, paddingBottom: 0 }}>
+                            <ChatDialog friendName={not.sender} base={true} >
+                                <ListItemAvatar>
+                                    <ChatIcon color={iconColor} />
+                                </ListItemAvatar>
+                                <ListItemText>
+                                    <Typography
+                                        color={iconColor}
+                                        style={{ textAlign: 'left' }}
+                                    >
+                                        {not.sender} send a message to you {time}
+                                    </Typography>
+                                </ListItemText>
                             </ChatDialog>
                         </ListItem>
                     )
                 })
+
             ) : (
                 <ListItem onClick={this.handleClose} button>
                     You have not receive any message yet
