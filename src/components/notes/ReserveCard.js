@@ -64,7 +64,6 @@ class ReserveCard extends Component {
                     <ChatDialog friendName={customerName} >
                         <ChatIcon color='primary' />
                     </ChatDialog>
-
                 </CardContent>
             </Card>
         )

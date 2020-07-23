@@ -21,13 +21,13 @@ const style = {
         marginBottom: 20
     },
     image: {
-        width: 90,
-        height: 90,
+        width: 100,
+        height: 100,
         objectFit: 'cover',
         maxWidth: '100%',
         borderRadius: '50%',
-        margin: 15,
-        marginTop: 40
+        marginLeft: 15,
+        marginTop: 30
     },
     content: {
         padding: 25,
@@ -39,9 +39,9 @@ const style = {
 class HistoryCard extends Component {
 
     render() {
-        const { 
-            classes, 
-            history: { cleanerImage, cleanerName, createdAt, cleanerLocation},
+        const {
+            classes,
+            history: { cleanerImage, cleanerName, createdAt, cleanerLocation },
         } = this.props
 
         return (
@@ -51,14 +51,12 @@ class HistoryCard extends Component {
                     <Typography variant="h5" component={Link} to={`/cleaners/${cleanerName}`} color='primary'>
                         {cleanerName}
                     </Typography>
-                    <br />
                     <Typography variant="body2" color='textSecondary'>
                         {dayjs(createdAt).format('DD MMMM YYYY')}
                     </Typography>
                     <Typography variant="body2">
                         Location: {cleanerLocation}
                     </Typography>
-                    <br />
                     <LikeButton cleanerName={cleanerName} />
                     <UnlikeButton cleanerName={cleanerName} />
                     <CommentDialog cleanerName={cleanerName} />
