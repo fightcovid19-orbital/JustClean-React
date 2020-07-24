@@ -12,7 +12,7 @@ import { accept, record } from '../../redux/actions/dataActions'
 export class AcceptButton extends Component {
     accept = () => {
         this.props.accept(this.props.customerName);
-        this.props.record(this.props.customerName);
+        //this.props.record(this.props.customerName);
     };
 
     render() {

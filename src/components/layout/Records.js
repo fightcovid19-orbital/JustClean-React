@@ -78,7 +78,7 @@ class Records extends Component {
                     return (
                         <MenuItem key={customerName}>
                             <Grid container spacing={1}>
-                                <Grid item xs={6}>
+                                <Grid item xs>
                                     <img src={customerImage} alt="Profile" className={classes.image} />
                                 </Grid>
                                 <Grid item xs={6} sm>
