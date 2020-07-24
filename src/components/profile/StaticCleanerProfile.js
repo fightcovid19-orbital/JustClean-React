@@ -30,19 +30,17 @@ const StaticCleanerProfile = (props) => {
 
     return (
         <Paper className={classes.paper}>
-            <Grid container>
-                <Grid item xs></Grid>
-                <Grid item xs={4}>
-                <ChatDialog friendName={cleanerName} >
+            <Grid container justify='flex-end' spacing={1}>
+                <Grid item xs >
+                    <ChatDialog friendName={cleanerName} >
                         <ChatIcon color='primary' />
                     </ChatDialog>
-                    <CommentDialog cleanerName={cleanerName}/>
                 </Grid>
-            
+                <Grid item xs={2} >
+                    <CommentDialog cleanerName={cleanerName} />
+                </Grid>
             </Grid>
-                    
-                
-            
+
             <div className={classes.profile}>
                 <div className="image-wrapper">
                     <hr />
@@ -78,9 +76,7 @@ const StaticCleanerProfile = (props) => {
                     <hr />
 
                     <AccountCircleIcon color="primary" /><span>{" " + hiredCount + " hired"}</span>
-
                 </div>
-
             </div>
         </Paper>
     )
