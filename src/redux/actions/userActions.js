@@ -9,6 +9,8 @@ import {
     MARK_NOTIFICATIONS_READ,
     SET_EMPTY_DATA,
     MARK_CHAT_NOTIFICATIONS_READ,
+    RECORD,
+    DELETE_RECORD
 } from '../types';
 import axios from 'axios';
 import { getCleaners, getHistories, getReservations, getComments } from './dataActions'
@@ -195,4 +197,28 @@ export const markChatNotificationsRead = (type, chatNotificationIds) => dispatch
             })
             .catch(err => console.log(err));
     }
+}
+
+// record
+export const record = (customerName) => (dispatch) => {
+    axios.get(`/record/${customerName}`)
+        .then(res => {
+            dispatch({
+                type: RECORD,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
+}
+
+// delete record by Cleaner
+export const deleteRecord = (recordId) => (dispatch) => {
+    axios.delete(`/record/${recordId}`)
+        .then(res => {
+            dispatch({
+                type: DELETE_RECORD,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
 }

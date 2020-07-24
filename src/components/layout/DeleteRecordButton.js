@@ -13,7 +13,7 @@ import DeleteIcon from '@material-ui/icons/DeleteOutline'
 
 // Redux stuff
 import { connect } from 'react-redux'
-import { deleteRecord } from '../../redux/actions/dataActions'
+import { deleteRecord } from '../../redux/actions/userActions'
 
 export class DeleteRecordButton extends Component {
     state = {

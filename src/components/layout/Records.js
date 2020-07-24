@@ -19,8 +19,6 @@ import ChatIcon from '@material-ui/icons/Chat'
 
 //Redux
 import { connect } from 'react-redux'
-import { getRecords } from '../../redux/actions/dataActions';
-
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -48,10 +46,6 @@ class Records extends Component {
 
     handleClose = () => {
         this.setState({ anchorEl: null });
-    }
-
-    onMenuOpened = () => {
-        this.props.getRecords();
     }
 
     render() {
@@ -119,7 +113,8 @@ class Records extends Component {
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
                     onClose={this.handleClose}
-                    onEntered={this.onMenuOpened}
+                    getContentAnchorEl={null}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 >
                     {recordsMarkup}
                 </Menu>
@@ -130,7 +125,6 @@ class Records extends Component {
 
 Records.propTypes = {
     classes: PropTypes.object.isRequired,
-    getRecords: PropTypes.func.isRequired,
     records: PropTypes.array.isRequired,
     cleanerName: PropTypes.string.isRequired
 }
@@ -141,4 +135,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, { getRecords })(withStyles(styles)(Records))
+export default connect(mapStateToProps)(withStyles(styles)(Records))

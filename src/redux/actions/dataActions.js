@@ -14,9 +14,6 @@ import {
     CANCEL_RESERVE,
     ACCEPT,
     REJECT,
-    SET_RECORDS,
-    RECORD,
-    DELETE_RECORD,
     DELETE_COMMENT,
     SET_ERRORS,
     CLEAR_ERRORS,
@@ -26,6 +23,7 @@ import {
     SET_CLEANER_DATA
 } from '../types'
 import axios from 'axios'
+import { record } from './userActions'
 
 // Get all cleaners
 export const getCleaners = () => (dispatch) => {
@@ -281,6 +279,7 @@ export const accept = (customerName) => (dispatch) => {
     axios.get(`/history/${customerName}`)
         .then(res => {
             dispatch(record(customerName));
+            dispatch(reject(customerName));
             dispatch({
                 type: ACCEPT,
                 payload: res.data
@@ -296,50 +295,6 @@ export const reject = (customerName) => (dispatch) => {
             dispatch({
                 type: REJECT,
                 payload: customerName
-            })
-        })
-        .catch(err => console.log(err))
-}
-
-// Get all records for Cleaner
-export const getRecords = () => (dispatch) => {
-    axios.get('/records')
-        .then(res => {
-            dispatch({
-                type: SET_RECORDS,
-                payload: res.data
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: SET_RECORDS,
-                payload: []
-            })
-        })
-}
-
-// record
-export const record = (customerName) => (dispatch) => {
-    axios.get(`/record/${customerName}`)
-        .then(res => {
-            dispatch({
-                type: RECORD,
-                payload: res.data
-            })
-        })
-        .catch(err => console.log(err))
-}
-
-// delete record by Cleaner
-export const deleteRecord = (recordId) => (dispatch) => {
-    dispatch({ type: LOADING_DATA });
-    axios.delete(`/record/${recordId}`)
-        .then(res => {
-            dispatch(getRecords())
-            dispatch(getCleanerData())
-            dispatch({
-                type: DELETE_RECORD,
-                payload: res.data
             })
         })
         .catch(err => console.log(err))

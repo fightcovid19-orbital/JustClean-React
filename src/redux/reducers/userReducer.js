@@ -16,6 +16,7 @@ import {
     RECORD,
     DELETE_RECORD,
     MARK_CHAT_NOTIFICATIONS_READ,
+    STOP_LOADING_USER
 } from '../types';
 
 const initialState = {
@@ -27,7 +28,8 @@ const initialState = {
     unlikes: [],
     notifications: [],
     reserve: {},
-    chatNotifications: []
+    chatNotifications: [],
+    records: []
 };
 
 export default function (state = initialState, action) {
@@ -112,6 +114,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 reserve: {}
+            }
+        case STOP_LOADING_USER:
+            return {
+                ...state,
+                loadingUser: false
             }
         case RECORD:
             return {
