@@ -280,6 +280,7 @@ export const cancelReserve = (customerName) => (dispatch) => {
 export const accept = (customerName) => (dispatch) => {
     axios.get(`/history/${customerName}`)
         .then(res => {
+            dispatch(record(customerName));
             dispatch({
                 type: ACCEPT,
                 payload: res.data
