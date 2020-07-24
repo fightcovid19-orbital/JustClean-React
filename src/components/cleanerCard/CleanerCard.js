@@ -48,6 +48,9 @@ const style = {
     },
     gridCenter: {
         textAlign: 'center'
+    }, 
+    location: {
+        marginLeft: 15
     }
 }
 
@@ -57,7 +60,7 @@ class CleanerCard extends Component {
     render() {
         const {
             classes,
-            cleaner: { imageUrl, cleanerName, likeCount, unlikeCount, hiredCount },
+            cleaner: { imageUrl, cleanerName, likeCount, unlikeCount, hiredCount, location },
         } = this.props
 
         return (
@@ -73,6 +76,9 @@ class CleanerCard extends Component {
                                 {cleanerName}
                             </Typography>
                             <br />
+                            <Typography variant="body1" className={classes.location}>
+                                Location: {location}
+                            </Typography>
                             <Grid container >
                                 <Grid item lg={6} sm={12} xs={12}>
                                     <LikeButton cleanerName={cleanerName} />

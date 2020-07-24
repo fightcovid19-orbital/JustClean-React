@@ -7,10 +7,11 @@ import MyButton from '../../util/MyButton';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
+import DialogActions from '@material-ui/core/DialogActions'
 
 // Icons
-import CloseIcon from '@material-ui/icons/Close'
 import AddCommentIcon from '@material-ui/icons/AddComment'
 
 // Redux stuff
@@ -18,25 +19,7 @@ import { connect } from 'react-redux'
 import { submitComment, clearErrors } from '../../redux/actions/dataActions'
 
 const style = (theme) => ({
-    ...theme.spreadThis,
-
-    profileImage: {
-        maxWidth: 200,
-        height: 200,
-        borderRadius: '50%',
-        objectFit: 'cover'
-    },
-    dialogContent: {
-        padding: 20,
-        textAlign: 'center'
-    },
-    expandButton: {
-    },
-    spinnerDiv: {
-        textAlign: 'center',
-        marginTop: 50,
-        marginBottom: 50
-    }
+    ...theme.spreadThis
 })
 
 class CommentDialog extends Component {
@@ -74,7 +57,7 @@ class CommentDialog extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.submitComment(this.props.cleanerName, { body: this.state.body });
-        if (!this.props.UI.errors) {
+        if (this.props.UI.errors) {
             this.handleClose();
         }
     }
@@ -85,11 +68,10 @@ class CommentDialog extends Component {
 
         let dialogMarkup = authenticated ? (
             <Fragment>
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <TextField name='body' type='text' label='Leave a comment on this cleaner'
                         error={errors.body ? true : false} helperText={errors.body} value={this.state.body}
                         onChange={this.handleChange} fullWidth className={classes.textField} />
-                    <Button variant='contained' type='submit' color='primary' className={classes.button}>Submit</Button>
                 </form>
             </Fragment>
         ) : null;
@@ -100,12 +82,18 @@ class CommentDialog extends Component {
                     <AddCommentIcon color='primary' />
                 </MyButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth='sm'>
-                    <MyButton tip='Close' onClick={this.handleClose} tipClassName={classes.closeButton}>
-                        <CloseIcon />
-                    </MyButton>
+                    <DialogTitle>Comment</DialogTitle>
                     <DialogContent className={classes.dialogContent}>
                         {dialogMarkup}
                     </DialogContent>
+                    <DialogActions>
+                        <Button type='cancel' onClick={this.handleClose} color='primary'>
+                            Cancel
+                        </Button>
+                        <Button type='submit' onClick={this.handleSubmit} color='primary'>
+                            Submit
+                        </Button>
+                    </DialogActions>
                 </Dialog>
             </Fragment>
         )

@@ -71,6 +71,7 @@ export default {
         },
 
         paper: {
+            position: 'relative',
             padding: 20,
         },
 

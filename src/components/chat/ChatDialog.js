@@ -86,7 +86,7 @@ class ChatDialog extends Component {
                         </Paper>
                     </DialogTitle>
 
-                    <DialogContent>
+                    <DialogContent id='chatview-container'>
                         <ChatView friend={this.props.friendName} />
                     </DialogContent>
 
