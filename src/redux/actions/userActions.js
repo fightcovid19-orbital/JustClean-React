@@ -10,7 +10,9 @@ import {
     SET_EMPTY_DATA,
     MARK_CHAT_NOTIFICATIONS_READ,
     RECORD,
-    DELETE_RECORD
+    DELETE_RECORD,
+    EDIT_DETAILS,
+    STOP_LOADING_USER
 } from '../types';
 import axios from 'axios';
 import { getCleaners, getHistories, getReservations, getComments } from './dataActions'
@@ -133,8 +135,15 @@ export const uploadCleanerImage = (formData) => (dispatch) => {
 export const editCustomerDetails = (userDetails) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios.post('/customer', userDetails)
-        .then(() => {
-            dispatch(getCustomerData());
+        .then(res => {
+            console.log(res)
+            dispatch({
+                type: EDIT_DETAILS,
+                payload: userDetails
+            })
+            dispatch({
+                type: STOP_LOADING_USER
+            })
         })
         .catch(err => console.log(err));
 }
@@ -143,8 +152,15 @@ export const editCustomerDetails = (userDetails) => (dispatch) => {
 export const editCleanerDetails = (userDetails) => (dispatch) => {
     dispatch({ type: LOADING_USER });
     axios.post('/cleaner', userDetails)
-        .then(() => {
-            dispatch(getCleanerData());
+        .then(res => {
+            console.log(res)
+            dispatch({
+                type: EDIT_DETAILS,
+                payload: userDetails
+            })
+            dispatch({
+                type: STOP_LOADING_USER
+            })
         })
         .catch(err => console.log(err));
 }

@@ -16,7 +16,8 @@ import {
     RECORD,
     DELETE_RECORD,
     MARK_CHAT_NOTIFICATIONS_READ,
-    STOP_LOADING_USER
+    STOP_LOADING_USER,
+    EDIT_DETAILS
 } from '../types';
 
 const initialState = {
@@ -114,6 +115,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 reserve: {}
+            }
+        case EDIT_DETAILS: 
+            state.credentials.bio = action.payload.bio
+            state.credentials.location = action.payload.location
+            return {
+                ...state,
             }
         case STOP_LOADING_USER:
             return {
