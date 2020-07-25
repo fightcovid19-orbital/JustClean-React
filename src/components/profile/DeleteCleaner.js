@@ -15,7 +15,7 @@ import DeleteOutline from '@material-ui/icons/DeleteOutline'
 
 // Redux
 import { connect } from 'react-redux';
-import { logoutUser, deleteCleaner } from '../../redux/actions/userActions'
+import { deleteCleaner } from '../../redux/actions/userActions'
 
 const styles = {
     deleteButton: {
@@ -76,11 +76,10 @@ class DeleteCleaner extends Component {
 
 DeleteCleaner.propTypes = {
     deleteCleaner: PropTypes.func.isRequired,
-    logoutUser: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
     cleanerName: PropTypes.string.isRequired
 }
 
-const mapActionsToProps = { logoutUser, deleteCleaner }
+const mapActionsToProps = { deleteCleaner }
 
 export default connect(null, mapActionsToProps)(withStyles(styles)(DeleteCleaner))

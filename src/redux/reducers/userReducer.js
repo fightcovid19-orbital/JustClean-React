@@ -9,7 +9,6 @@ import {
     UNLIKE_CLEANER,
     LOADING_LIKE,
     STOP_LOADING_LIKE,
-    DELETE_CLEANER,
     MARK_NOTIFICATIONS_READ,
     RESERVE,
     CANCEL_RESERVE,
@@ -40,7 +39,6 @@ export default function (state = initialState, action) {
                 ...state,
                 authenticated: true
             };
-        case DELETE_CLEANER:
         case SET_UNAUTHENTICATED:
             return initialState;
         case SET_USER:

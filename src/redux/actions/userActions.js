@@ -5,7 +5,6 @@ import {
     LOADING_UI,
     SET_UNAUTHENTICATED,
     LOADING_USER,
-    DELETE_CLEANER,
     MARK_NOTIFICATIONS_READ,
     SET_EMPTY_DATA,
     MARK_CHAT_NOTIFICATIONS_READ,
@@ -169,7 +168,7 @@ export const editCleanerDetails = (userDetails) => (dispatch) => {
 export const deleteCleaner = () => dispatch => {
     axios.delete('/deleteCleaner')
         .then(() => {
-            dispatch({ type: DELETE_CLEANER })
+            dispatch(logoutUser())
         })
         .catch(err => console.log(err));
 }
