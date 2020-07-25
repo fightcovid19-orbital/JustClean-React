@@ -10,6 +10,7 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Icons
 import AddCommentIcon from '@material-ui/icons/AddComment'
@@ -19,14 +20,21 @@ import { connect } from 'react-redux'
 import { submitComment, clearErrors } from '../../redux/actions/dataActions'
 
 const style = (theme) => ({
-    ...theme.spreadThis
+    ...theme.spreadThis,
+    progressSpinner: {
+        position: 'absolute'
+    },
+    submitButton: {
+        position: 'relative'
+    }
 })
 
 class CommentDialog extends Component {
     state = {
         body: '',
         errors: {},
-        open: false
+        open: false,
+        first: true
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -35,11 +43,18 @@ class CommentDialog extends Component {
                 errors: props.UI.errors
             }
         }
-        if (!props.UI.errors && !props.UI.loadingUI) {
+        if(!props.UI.errors && state.first) {
             return {
                 errors: {}
             }
-        }
+        } else if (!props.UI.errors && !props.UI.loadingUI) {
+            return {
+                body: '',
+                errors: {},
+                open: false,
+                first: true
+            }
+        } 
         return null;
     }
 
@@ -57,10 +72,13 @@ class CommentDialog extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.submitComment(this.props.cleanerName, { body: this.state.body });
-        this.setState({ body: '' })
+        this.setState({ body: '', first: false })
     }
     render() {
-        const { classes, authenticated
+        const { 
+            classes, 
+            authenticated,
+            UI: { loadingUI }
         } = this.props;
         const errors = this.state.errors
 
@@ -88,8 +106,14 @@ class CommentDialog extends Component {
                         <Button type='button' onClick={this.handleClose} color='primary'>
                             Cancel
                         </Button>
-                        <Button type='submit' onClick={this.handleSubmit} color='primary'>
+                        <Button type='submit' onClick={this.handleSubmit} color='primary' disabled={loadingUI}
+                            className={classes.submitButton}>
                             Submit
+                            {
+                                loadingUI && (
+                                    <CircularProgress size={30} className={classes.progressSpinner}/>
+                                )
+                            }
                         </Button>
                     </DialogActions>
                 </Dialog>
