@@ -48,7 +48,7 @@ const style = {
     },
     gridCenter: {
         textAlign: 'center'
-    }, 
+    },
     location: {
         marginLeft: 15
     }
@@ -80,7 +80,7 @@ class CleanerCard extends Component {
                                 Location: {location}
                             </Typography>
                             <Grid container >
-                                <Grid item lg={6} sm={12} xs={12}>
+                                <Grid item lg={7} sm={12} xs={12}>
                                     <LikeButton cleanerName={cleanerName} />
                                     <span>{likeCount} Likes</span>
                                     <UnlikeButton cleanerName={cleanerName} />
