@@ -29,7 +29,6 @@ const theme = createMuiTheme(themeFile);
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token); //json token
-  console.log(decodedToken);
   if (decodedToken.exp * 1000 < Date.now()) { // inside decodedtoken has exp as expired time
     store.dispatch(logoutUser());
   } else {

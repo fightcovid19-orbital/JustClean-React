@@ -26,7 +26,8 @@ class ChatTextbox extends React.Component {
 
     submitMessage = () => {
         if (this.messageValid(this.state.chatText)) {
-            if(this.props.userCredentials.type === "customer") {
+
+            if (this.props.userCredentials.type === "customer") {
                 const chatText = {
                     txt: { message: this.state.chatText },
                     sender: this.props.userCredentials.customerName,
@@ -41,7 +42,6 @@ class ChatTextbox extends React.Component {
                 }
                 this.props.sendMessageToCustomer(this.props.friend, chatText)
             }
-            
 
             document.getElementById('chattextbox').value = '';
             this.setState({

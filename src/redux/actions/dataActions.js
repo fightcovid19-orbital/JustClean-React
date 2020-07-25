@@ -14,6 +14,7 @@ import {
     CANCEL_RESERVE,
     ACCEPT,
     REJECT,
+    SUBMIT_COMMENT,
     DELETE_COMMENT,
     SET_ERRORS,
     CLEAR_ERRORS,
@@ -179,8 +180,13 @@ export const cancelUnlikeCleaner = (cleanerName) => (dispatch) => {
 
 // submit a comment
 export const submitComment = (cleanerName, commentData) => (dispatch) => {
+    dispatch({ type: LOADING_UI })
     axios.post(`/comment/${cleanerName}`, commentData)
         .then(res => {
+            dispatch({
+                type: SUBMIT_COMMENT,
+                payload: res.data
+            })
             dispatch(clearErrors())
         })
         .catch(err => {

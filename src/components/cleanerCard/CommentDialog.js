@@ -40,14 +40,14 @@ class CommentDialog extends Component {
                 errors: {}
             }
         }
-        return null
+        return null;
     }
 
     handleOpen = () => {
         this.setState({ open: true })
     }
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({ open: false, body: '' });
         this.props.clearErrors();
         this.setState({ errors: {} })
     }
@@ -57,9 +57,7 @@ class CommentDialog extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.submitComment(this.props.cleanerName, { body: this.state.body });
-        if (this.props.UI.errors) {
-            this.handleClose();
-        }
+        this.setState({ body: '' })
     }
     render() {
         const { classes, authenticated
@@ -87,7 +85,7 @@ class CommentDialog extends Component {
                         {dialogMarkup}
                     </DialogContent>
                     <DialogActions>
-                        <Button type='cancel' onClick={this.handleClose} color='primary'>
+                        <Button type='button' onClick={this.handleClose} color='primary'>
                             Cancel
                         </Button>
                         <Button type='submit' onClick={this.handleSubmit} color='primary'>
@@ -104,7 +102,7 @@ CommentDialog.propTypes = {
     submitComment: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
     authenticated: PropTypes.bool.isRequired,
-    cleanerName: PropTypes.string.isRequired,
+    cleanerName: PropTypes.string,
     classes: PropTypes.object.isRequired,
     UI: PropTypes.object.isRequired
 }

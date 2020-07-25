@@ -102,7 +102,7 @@ class ChatDialog extends Component {
 
 ChatDialog.propTypes = {
     classes: PropTypes.object.isRequired,
-    friendName: PropTypes.string.isRequired,
+    friendName: PropTypes.string,
     chatButtonClassName: PropTypes.object,
     base: PropTypes.bool,
     btnClassName: PropTypes.object,

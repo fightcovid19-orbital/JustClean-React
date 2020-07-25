@@ -12,6 +12,7 @@ import {
     SET_HISTORIES,
     SET_RESERVATIONS,
     SET_EMPTY_DATA,
+    SUBMIT_COMMENT,
     DELETE_COMMENT,
     SET_CLEANER_DATA,
     ACCEPT,
@@ -120,6 +121,21 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 reservations: state.reservations.filter((reserve) => reserve.customerName !== action.payload)
+            }
+        case SUBMIT_COMMENT:
+            return {
+                ...state,
+                comments: [
+                    {
+                        body: action.payload.body,
+                        createdAt: action.payload.createdAt,
+                        userHandle: action.payload.userHandle,
+                        userImage: action.payload.userImage,
+                        commentId: action.payload.commentId,
+                        commentOn: action.payload.commentOn
+                    },
+                    ...state.comments,
+                ]
             }
         case DELETE_COMMENT:
             let commentIndex = state.comments.findIndex(comment => comment.commentId === action.payload);
