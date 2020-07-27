@@ -26,6 +26,8 @@ import searchPage from './pages/searchPage'
 
 const theme = createMuiTheme(themeFile);
 
+axios.defaults.baseURL = 'https://us-central1-justclean-4db3e.cloudfunctions.net/api';
+
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token); //json token
