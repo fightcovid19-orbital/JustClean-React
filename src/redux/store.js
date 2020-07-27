@@ -25,8 +25,6 @@ function loadFromLocalStorage() {
 }
 const persistedState = loadFromLocalStorage();
 
-// const initialState = {};
-
 const middleware = [thunk];
 
 const reducers = combineReducers({
@@ -35,8 +33,15 @@ const reducers = combineReducers({
     UI: uiReducer
 });
 
-const store = createStore(reducers, persistedState,
-    compose(applyMiddleware(...middleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+const composeEnhancers = typeof window === 'object' && window.__REconstDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    : compose;
+
+const enhancer = composeEnhancers(applyMiddleware(...middleware));
+
+const store = createStore(reducers, 
+    persistedState,
+    enhancer);
 
 store.subscribe(() => saveToLocalStorage(store.getState()))
 
